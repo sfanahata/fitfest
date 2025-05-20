@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -50,6 +49,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   profile       Profile?
+  activities    Activity[]
 }
 
 model VerificationToken {
@@ -68,4 +68,40 @@ model Profile {
   height      Float?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+enum ActivityType {
+  walking
+  running
+  cycling
+  swimming
+  weightlifting
+  aerobics
+  yoga
+  hiking
+  dancing
+  other
+}
+
+enum EffortLevel {
+  easy
+  moderate
+  hard
+}
+
+model Activity {
+  id        String      @id @default(cuid())
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  type      ActivityType
+  effort    EffortLevel?
+  date      DateTime
+  duration  Int         // in minutes
+  distance  Float?      // in kilometers (optional)
+  calories  Int?        // calculated
+  notes     String?     // optional
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([userId, date])
 }
