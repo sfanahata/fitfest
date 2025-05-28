@@ -5,7 +5,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+type RouteContext = {
+  params: { id: string };
+};
+
+export async function GET(request: NextRequest, context: RouteContext) {
   const session = await getServerSession(authOptions);
   if (!session || !session.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -20,7 +24,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 
   const activity = await prisma.activity.findUnique({
-    where: { id: params.id },
+    where: { id: context.params.id },
   });
 
   if (!activity || activity.userId !== user.id) {
