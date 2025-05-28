@@ -115,8 +115,8 @@ export default function DashboardPage() {
               {
                 label: "Minutes",
                 data: thisWeekDurations,
-                borderColor: "#2563eb",
-                backgroundColor: "#60a5fa",
+                borderColor: "#93c5fd",
+                backgroundColor: "#bfdbfe",
                 tension: 0.3,
                 fill: true,
               },
@@ -140,7 +140,7 @@ export default function DashboardPage() {
               {
                 label: "Calories",
                 data: thisWeekCalories,
-                backgroundColor: "#22c55e",
+                backgroundColor: "#86efac",
               },
             ],
           }}
@@ -162,12 +162,12 @@ export default function DashboardPage() {
               {
                 label: "This Week",
                 data: thisWeekDurations,
-                backgroundColor: "#2563eb",
+                backgroundColor: "#93c5fd",
               },
               {
                 label: "Last Week",
                 data: lastWeekDurations,
-                backgroundColor: "#f59e42",
+                backgroundColor: "#fcd34d",
               },
             ],
           }}
@@ -188,19 +188,19 @@ export default function DashboardPage() {
         <div className="text-gray-500 text-sm mb-4">Week of {weekRange}</div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-700">{data.thisWeek.totalCalories}</div>
+            <div className="text-3xl font-bold text-green-400">{data.thisWeek.totalCalories}</div>
             <div className="text-gray-600 text-sm">Total Calories</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-700">{data.thisWeek.avgDailyCalories}</div>
+            <div className="text-3xl font-bold text-blue-400">{data.thisWeek.avgDailyCalories}</div>
             <div className="text-gray-600 text-sm">Avg Daily Calories</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-indigo-700">{data.thisWeek.totalDuration}</div>
+            <div className="text-3xl font-bold text-indigo-400">{data.thisWeek.totalDuration}</div>
             <div className="text-gray-600 text-sm">Total Minutes</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-orange-700">{data.thisWeek.daysWithActivity}/7</div>
+            <div className="text-3xl font-bold text-orange-400">{data.thisWeek.daysWithActivity}/7</div>
             <div className="text-gray-600 text-sm">Days with Activity</div>
           </div>
         </div>
@@ -208,7 +208,7 @@ export default function DashboardPage() {
           {chartTabs.map((tabObj, i) => (
             <button
               key={tabObj.label}
-              className={`px-4 py-2 rounded-t font-semibold border-b-2 transition-colors ${tab === i ? "border-blue-600 text-blue-700 bg-blue-50" : "border-transparent text-gray-500 bg-gray-100 hover:bg-gray-200"}`}
+              className={`px-4 py-2 rounded-t font-semibold border-b-2 transition-colors ${tab === i ? "border-blue-400 text-blue-500 bg-blue-50" : "border-transparent text-gray-500 bg-gray-50 hover:bg-gray-100"}`}
               onClick={() => setTab(i)}
             >
               {tabObj.label}
