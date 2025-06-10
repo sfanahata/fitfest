@@ -62,12 +62,21 @@ export async function POST(req: NextRequest) {
   });
 
   // Save activity
+  // Parse date as local date to avoid timezone offset issues
+  let parsedDate: Date;
+  if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    const [year, month, day] = date.split("-").map(Number);
+    parsedDate = new Date(year, month - 1, day);
+  } else {
+    parsedDate = new Date(date);
+  }
+
   const activity = await prisma.activity.create({
     data: {
       userId: user.id,
       type,
       effort,
-      date: new Date(date),
+      date: parsedDate,
       duration: Number(duration),
       distance: distance ? Number(distance) : null,
       notes,
