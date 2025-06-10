@@ -3,10 +3,22 @@ import { useSession } from "next-auth/react";
 import Card from "@/components/Card";
 import Button from "@/components/Button";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+interface Profile {
+  weight: number | null;
+  height: number | null;
+  name: string | null;
+}
 
 export default function ProfilePage() {
   const { data: session } = useSession();
-  const [profile, setProfile] = useState({ weight: '', height: '' });
+  const router = useRouter();
+  const [profile, setProfile] = useState<Profile>({
+    weight: null,
+    height: null,
+    name: null,
+  });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -21,10 +33,7 @@ export default function ProfilePage() {
         return res.json();
       })
       .then((data) => {
-        setProfile({
-          weight: data?.weight?.toString() || '',
-          height: data?.height?.toString() || '',
-        });
+        setProfile(data.profile || { weight: null, height: null, name: null });
         setError('');
       })
       .catch(() => {
@@ -44,15 +53,13 @@ export default function ProfilePage() {
     setSuccess('');
     try {
       const res = await fetch("/api/profile", {
-        method: "PUT",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          weight: profile.weight,
-          height: profile.height,
-        }),
+        body: JSON.stringify(profile),
       });
       if (!res.ok) throw new Error(await res.text());
       setSuccess("Profile updated!");
+      router.refresh();
     } catch {
       setError("Failed to save changes.");
     } finally {
@@ -80,6 +87,19 @@ export default function ProfilePage() {
               <label className="block text-gray-700 font-semibold mb-1">Email</label>
               <div className="bg-gray-100 rounded px-3 py-2">{session.user?.email}</div>
             </div>
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-gray-700 font-semibold mb-1">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={profile.name || ""}
+                onChange={handleChange}
+                className="border rounded px-3 py-2 w-full"
+              />
+            </div>
             <div className="mb-4 flex gap-2">
               <div className="flex-1">
                 <label className="block text-gray-700 font-semibold mb-1" htmlFor="weight">Weight (kg)</label>
@@ -90,7 +110,7 @@ export default function ProfilePage() {
                   step="0.1"
                   className="border rounded px-3 py-2 w-full"
                   placeholder="Your weight"
-                  value={profile.weight}
+                  value={profile.weight || ""}
                   onChange={handleChange}
                   disabled={saving}
                 />
@@ -104,7 +124,7 @@ export default function ProfilePage() {
                   step="0.1"
                   className="border rounded px-3 py-2 w-full"
                   placeholder="Your height"
-                  value={profile.height}
+                  value={profile.height || ""}
                   onChange={handleChange}
                   disabled={saving}
                 />

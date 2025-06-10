@@ -25,7 +25,7 @@ export default function ActivitiesPage() {
       const res = await fetch("/api/activities");
       if (res.ok) {
         const data = await res.json();
-        setActivities(data.activities || []);
+        setActivities(data || []);
       }
       setLoading(false);
     }
