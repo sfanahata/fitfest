@@ -8,9 +8,9 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: "https://fe3b9c48f6054b7f0e19e933a59b1472@o4509006708867072.ingest.us.sentry.io/4509357885227008",
 
-  // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-  tracesSampleRate: 1,
+  // Enable error capturing with a reasonable sample rate (consistent with client/server configs)
+  tracesSampleRate: 0.1, // Capture 10% of transactions for performance monitoring
 
-  // Setting this option to true will print useful information to the console while you're setting up Sentry.
-  debug: false,
+  // Enable debug mode to see if Sentry is working (consistent with client/server configs)
+  debug: true,
 });
