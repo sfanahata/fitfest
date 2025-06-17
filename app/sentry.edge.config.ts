@@ -8,8 +8,8 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: "https://fe3b9c48f6054b7f0e19e933a59b1472@o4509006708867072.ingest.us.sentry.io/4509357885227008",
 
-  // Enable error capturing with a reasonable sample rate (consistent with client/server configs)
-  tracesSampleRate: 0.1, // Capture 10% of transactions for performance monitoring
+  // Enable error capturing with full sample rate (consistent with client/server configs)
+  tracesSampleRate: 1.0, // Capture 100% of transactions for performance monitoring
 
   // Enable debug mode to see if Sentry is working (consistent with client/server configs)
   debug: true,
