@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import DashboardPage from '../app/dashboard/page';
+import HomePage from '../app/page';
 
-describe('DashboardPage', () => {
+describe('HomePage (Dashboard)', () => {
   it('renders summary stats', () => {
     // TODO: Mock dashboard data and test summary
   });

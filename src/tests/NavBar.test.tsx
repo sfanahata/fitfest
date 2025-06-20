@@ -12,7 +12,6 @@ describe('NavBar', () => {
       </SessionProvider>
     );
     expect(screen.getByText(/Home/i)).toBeInTheDocument();
-    expect(screen.getByText(/Dashboard/i)).toBeInTheDocument();
     expect(screen.getByText(/Activities/i)).toBeInTheDocument();
     expect(screen.getByText(/Profile/i)).toBeInTheDocument();
   });
