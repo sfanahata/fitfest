@@ -36,7 +36,7 @@ export default function ActivityDetailPage() {
     if (id) fetchActivity();
   }, [id]);
 
-  const handleDelete = async () => {
+const handleDelete = async () => {
     setDeleting(true);
     try {
       const res = await fetch(`/api/activities/${id}`, {
@@ -44,15 +44,18 @@ export default function ActivityDetailPage() {
       });
       if (res.ok) {
         router.push("/activities");
+      } else if (res.status === 401) {
+        alert("You are not authorized to delete this activity.");
       } else {
-        alert("Failed to delete activity.");
+        alert("Failed to delete activity. Please try again.");
       }
     } catch (err) {
-      alert("Failed to delete activity.");
+      alert("Network error. Please check your connection and try again.");
     } finally {
       setDeleting(false);
       setShowDeleteConfirm(false);
     }
+  };
   };
 
   if (loading) {
