@@ -9,7 +9,7 @@ export default function SignInPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    await signIn("email", { email, callbackUrl: "/dashboard" });
+    await signIn("email", { email, callbackUrl: "/" });
   };
 
   return (
