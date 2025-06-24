@@ -44,7 +44,7 @@ export default function EditActivityPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-useEffect(() => {
+  useEffect(() => {
     async function fetchActivity() {
       setLoading(true);
       try {
@@ -76,9 +76,8 @@ useEffect(() => {
     }
     if (id) fetchActivity();
   }, [id]);
-    if (id) fetchActivity();
-  }, [id]);
-const handleSubmit = async (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     setError("");
@@ -120,7 +119,6 @@ const handleSubmit = async (e: React.FormEvent) => {
     } finally {
       setSaving(false);
     }
-  };
   };
 
   if (loading) {
