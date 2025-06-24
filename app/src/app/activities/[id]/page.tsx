@@ -19,6 +19,8 @@ export default function ActivityDetailPage() {
   const { id } = useParams<{ id: string }>();
   const [activity, setActivity] = useState<Activity | null>(null);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -33,6 +35,27 @@ export default function ActivityDetailPage() {
     }
     if (id) fetchActivity();
   }, [id]);
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/activities/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        router.push("/activities");
+      } else if (res.status === 401) {
+        alert("You are not authorized to delete this activity.");
+      } else {
+        alert("Failed to delete activity. Please try again.");
+      }
+    } catch (err) {
+      alert("Network error. Please check your connection and try again.");
+    } finally {
+      setDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -63,7 +86,34 @@ export default function ActivityDetailPage() {
         )}
         <div className="mb-2"><span className="font-semibold">Calories:</span> {activity.calories} kcal</div>
         {activity.notes && <div className="mb-2"><span className="font-semibold">Notes:</span> {activity.notes}</div>}
-        <Button className="w-full mt-4" onClick={() => router.push("/activities")}>Back to Activities</Button>
+        
+        {showDeleteConfirm ? (
+          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded">
+            <p className="text-red-800 mb-3">Are you sure you want to delete this activity?</p>
+            <div className="flex gap-2">
+              <Button 
+                className="flex-1 bg-gray-500 text-white hover:bg-gray-600" 
+                onClick={() => setShowDeleteConfirm(false)}
+                disabled={deleting}
+              >
+                Cancel
+              </Button>
+              <Button 
+                className="flex-1 bg-red-600 text-white hover:bg-red-700" 
+                onClick={handleDelete}
+                disabled={deleting}
+              >
+                {deleting ? "Deleting..." : "Delete"}
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex gap-2 mt-4">
+            <Button className="flex-1" onClick={() => router.push("/activities")}>Back to Activities</Button>
+            <Button className="flex-1 bg-blue-600 text-white hover:bg-blue-700" onClick={() => router.push(`/activities/${id}/edit`)}>Edit Activity</Button>
+            <Button className="flex-1 bg-red-600 text-white hover:bg-red-700" onClick={() => setShowDeleteConfirm(true)}>Delete</Button>
+          </div>
+        )}
       </Card>
     </div>
   );

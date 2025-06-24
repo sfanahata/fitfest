@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Activity {
   id: string;
@@ -18,6 +19,8 @@ interface Activity {
 export default function ActivitiesPage() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchActivities() {
@@ -31,6 +34,29 @@ export default function ActivitiesPage() {
     }
     fetchActivities();
   }, []);
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this activity?")) {
+      return;
+    }
+    
+    setDeletingId(id);
+    try {
+      const res = await fetch(`/api/activities/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        // Remove the activity from the list
+        setActivities(activities.filter(activity => activity.id !== id));
+      } else {
+        alert("Failed to delete activity.");
+      }
+    } catch (err) {
+      alert("Failed to delete activity.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-2">
@@ -49,8 +75,8 @@ export default function ActivitiesPage() {
           <Card className="text-center">No activities logged yet. Click &quot;Log Activity&quot; to add your first!</Card>
         ) : (
           activities.map((activity) => (
-            <Link key={activity.id} href={`/activities/${activity.id}`} className="block">
-              <Card className="flex flex-col md:flex-row md:items-center justify-between cursor-pointer hover:bg-blue-50 transition-colors">
+            <Card key={activity.id} className="flex flex-col md:flex-row md:items-center justify-between">
+              <Link href={`/activities/${activity.id}`} className="flex-1 cursor-pointer hover:bg-blue-50 transition-colors p-2 rounded">
                 <div>
                   <div className="font-semibold capitalize">{activity.type}</div>
                   <div className="text-gray-600 text-sm">{new Date(activity.date).toLocaleDateString()}</div>
@@ -62,8 +88,23 @@ export default function ActivitiesPage() {
                     <span className="text-green-700 font-semibold block">{activity.calories} kcal</span>
                   )}
                 </div>
-              </Card>
-            </Link>
+              </Link>
+              <div className="flex gap-2 mt-2 md:mt-0 md:ml-4">
+                <Button 
+                  className="bg-blue-600 text-white hover:bg-blue-700 px-3 py-1 text-sm"
+                  onClick={() => router.push(`/activities/${activity.id}/edit`)}
+                >
+                  Edit
+                </Button>
+                <Button 
+                  className="bg-red-600 text-white hover:bg-red-700 px-3 py-1 text-sm"
+                  onClick={() => handleDelete(activity.id)}
+                  disabled={deletingId === activity.id}
+                >
+                  {deletingId === activity.id ? "Deleting..." : "Delete"}
+                </Button>
+              </div>
+            </Card>
           ))
         )}
       </div>
