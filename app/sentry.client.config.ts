@@ -5,5 +5,14 @@ Sentry.init({
   debug: true, // Enable debug mode to see if Sentry is working
   // Enable error capturing with full sample rate
   tracesSampleRate: 1.0, // Capture 100% of transactions for performance monitoring
-  // Remove the empty integrations array to allow default integrations (including error capturing)
-}); 
+  // Add optional integrations for additional features
+  integrations: [
+    Sentry.replayIntegration(),
+  ],
+  // Define how likely Replay events are sampled.
+  // This sets the sample rate to be 10%. You may want this to be 100% while
+  // in development and sample at a lower rate in production
+  replaysSessionSampleRate: 0.1,
+  // Define how likely Replay events are sampled when an error occurs.
+  replaysOnErrorSampleRate: 1.0,
+});  
