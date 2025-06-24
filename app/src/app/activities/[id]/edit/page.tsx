@@ -44,27 +44,38 @@ export default function EditActivityPage() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  useEffect(() => {
+useEffect(() => {
     async function fetchActivity() {
       setLoading(true);
-      const res = await fetch(`/api/activities/${id}`);
-      if (res.ok) {
-        const data = await res.json();
-        const activityData = data.activity;
-        setActivity(activityData);
-        
-        // Pre-populate form fields
-        setType(activityData.type);
-        setEffort(activityData.effort || "");
-        setDate(new Date(activityData.date).toISOString().split('T')[0]);
-        setDuration(activityData.duration.toString());
-        setDistance(activityData.distance?.toString() || "");
-        setNotes(activityData.notes || "");
-      } else {
-        setError("Activity not found.");
+      try {
+        const res = await fetch(`/api/activities/${id}`);
+        if (res.ok) {
+          const data = await res.json();
+          const activityData = data.activity;
+          setActivity(activityData);
+          
+          // Pre-populate form fields
+          setType(activityData.type);
+          setEffort(activityData.effort || "");
+          setDate(new Date(activityData.date).toISOString().split('T')[0]);
+          setDuration(activityData.duration.toString());
+          setDistance(activityData.distance?.toString() || "");
+          setNotes(activityData.notes || "");
+        } else if (res.status === 404) {
+          setError("Activity not found.");
+        } else if (res.status === 401) {
+          setError("You are not authorized to edit this activity.");
+        } else {
+          setError("Failed to load activity. Please try again.");
+        }
+      } catch (err) {
+        setError("Network error. Please check your connection and try again.");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
+    if (id) fetchActivity();
+  }, [id]);
     if (id) fetchActivity();
   }, [id]);
 
