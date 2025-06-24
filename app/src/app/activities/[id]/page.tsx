@@ -36,7 +36,7 @@ export default function ActivityDetailPage() {
     if (id) fetchActivity();
   }, [id]);
 
-const handleDelete = async () => {
+  const handleDelete = async () => {
     setDeleting(true);
     try {
       const res = await fetch(`/api/activities/${id}`, {
@@ -55,7 +55,6 @@ const handleDelete = async () => {
       setDeleting(false);
       setShowDeleteConfirm(false);
     }
-  };
   };
 
   if (loading) {
