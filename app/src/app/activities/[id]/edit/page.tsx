@@ -78,11 +78,24 @@ useEffect(() => {
   }, [id]);
     if (id) fetchActivity();
   }, [id]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     setError("");
+    
+    // Client-side validation
+    if (parseInt(duration) <= 0) {
+      setError("Duration must be greater than 0");
+      setSaving(false);
+      return;
+    }
+    
+    if (distance && parseFloat(distance) < 0) {
+      setError("Distance cannot be negative");
+      setSaving(false);
+      return;
+    }
+    
     try {
       const res = await fetch(`/api/activities/${id}`, {
         method: "PUT",
@@ -91,8 +104,8 @@ useEffect(() => {
           type,
           effort: effort || null,
           date,
-          duration,
-          distance: distance || null,
+          duration: parseInt(duration),
+          distance: distance ? parseFloat(distance) : null,
           notes,
         }),
       });
@@ -107,6 +120,7 @@ useEffect(() => {
     } finally {
       setSaving(false);
     }
+  };
   };
 
   if (loading) {
