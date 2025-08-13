@@ -50,6 +50,7 @@ model User {
   sessions      Session[]
   profile       Profile?
   activities    Activity[]
+  meals         Meal[]
 }
 
 model VerificationToken {
@@ -102,6 +103,30 @@ model Activity {
   notes     String?     // optional
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
+
+  @@index([userId, date])
+}
+
+enum MealType {
+  breakfast
+  lunch
+  dinner
+  snack
+}
+
+model Meal {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  name      String
+  type      MealType
+  date      DateTime
+  calories  Int
+  protein   Float?
+  carbs     Float?
+  fat       Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId, date])
 }

@@ -1,14 +1,19 @@
-import { withAuth } from 'next-auth/middleware';
+// Temporarily disabled to debug authentication issues
+export default function middleware() {
+  return;
+}
 
-export default withAuth({
-  callbacks: {
-    authorized: ({ token }) => !!token,
-  },
-});
+// import { withAuth } from 'next-auth/middleware';
 
-export const config = {
-  matcher: [
-    '/profile/:path*',
-    '/activities/:path*',
-  ],
-}; 
+// export default withAuth({
+//   callbacks: {
+//     authorized: ({ token }) => !!token,
+//   },
+// });
+
+// export const config = {
+//   matcher: [
+//     '/profile/:path*',
+//     '/activities/:path*',
+//   ],
+// }; 

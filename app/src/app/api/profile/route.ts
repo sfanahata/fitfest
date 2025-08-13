@@ -25,7 +25,10 @@ export async function GET() {
     return NextResponse.json({ error: 'User not found' }, { status: 404 });
   }
   
-  return NextResponse.json({ profile: user.profile, name: user.name });
+  return NextResponse.json({ 
+    profile: user.profile, 
+    name: user.name 
+  });
 }
 
 // POST: Create profile (if not exists)
@@ -69,7 +72,8 @@ export async function POST(req: NextRequest) {
     },
   });
   
-  return NextResponse.json({ profile });
+  console.log('Profile saved successfully:', profile);
+  return NextResponse.json({ profile, success: true });
 }
 
 // PUT: Update current user's profile
