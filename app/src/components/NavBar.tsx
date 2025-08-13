@@ -10,34 +10,65 @@ interface Session {
   };
 }
 
+interface ProfileData {
+  name?: string;
+  email?: string;
+}
+
 export default function NavBar() {
   const pathname = usePathname();
   const [session, setSession] = useState<Session | null>(null);
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Get session data
+  // Get session and profile data
   useEffect(() => {
-    async function getSession() {
+    async function getSessionAndProfile() {
       try {
-        const response = await fetch('/api/auth/session', {
-          credentials: 'include',
-          headers: {
-            'Cache-Control': 'no-cache'
-          }
-        });
+        const [sessionResponse, profileResponse] = await Promise.all([
+          fetch('/api/auth/session', {
+            credentials: 'include',
+            headers: {
+              'Cache-Control': 'no-cache'
+            }
+          }),
+          fetch('/api/profile', {
+            credentials: 'include',
+            headers: {
+              'Cache-Control': 'no-cache'
+            }
+          })
+        ]);
         
-        if (response.ok) {
-          const sessionData = await response.json();
+        let sessionData = null;
+        if (sessionResponse.ok) {
+          sessionData = await sessionResponse.json();
           setSession(sessionData);
         }
+        
+        if (profileResponse.ok) {
+          const profileData = await profileResponse.json();
+          setProfileData({
+            name: profileData.name,
+            email: sessionData?.user?.email
+          });
+        } else {
+          // If profile fails, still set email from session
+          if (sessionData?.user?.email) {
+            setProfileData({
+              name: undefined,
+              email: sessionData.user.email
+            });
+          }
+        }
       } catch (error) {
-        console.log('Session fetch failed:', error);
+        console.log('Session/Profile fetch failed:', error);
       } finally {
         setLoading(false);
       }
     }
     
-    getSession();
+    getSessionAndProfile();
   }, []);
 
   return (
@@ -68,7 +99,7 @@ export default function NavBar() {
       <div className="flex items-center gap-4">
         <Link href="/profile">
           <Button className="bg-gray-400 text-gray-900 hover:bg-gray-500 px-3 py-2 rounded">
-            Profile
+            {profileData?.name || profileData?.email || 'Profile'}
           </Button>
         </Link>
         {session?.user ? (

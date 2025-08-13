@@ -7,7 +7,6 @@ export default function SessionProviderWrapper({ children }: { children: React.R
       refetchInterval={0} 
       refetchOnWindowFocus={false}
       refetchWhenOffline={false}
-      refetchInterval={false}
     >
       {children}
     </SessionProvider>
