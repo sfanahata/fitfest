@@ -48,13 +48,11 @@ export default function NavBar() {
         
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
-          console.log('Profile data received:', profileData);
           setProfileData({
             name: profileData.name,
             email: sessionData?.user?.email
           });
         } else {
-          console.log('Profile response not ok:', profileResponse.status);
           // If profile fails, still set email from session
           if (sessionData?.user?.email) {
             setProfileData({
@@ -101,11 +99,7 @@ export default function NavBar() {
       <div className="flex items-center gap-4">
         <Link href="/profile">
           <Button className="bg-gray-400 text-gray-900 hover:bg-gray-500 px-3 py-2 rounded">
-            {(() => {
-              const displayText = profileData?.name || profileData?.email || 'Profile';
-              console.log('Profile button display text:', displayText, 'profileData:', profileData);
-              return displayText;
-            })()}
+            {profileData?.name || profileData?.email || 'Profile'}
           </Button>
         </Link>
         {session?.user ? (
