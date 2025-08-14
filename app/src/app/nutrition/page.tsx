@@ -38,15 +38,14 @@ export default function NutritionPage() {
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState<any>(null);
   const [status, setStatus] = useState<'loading' | 'authenticated' | 'unauthenticated'>('loading');
-  
-  // Target values
-  const targetCalories = 2000;
-  
-  const macros: MacroData[] = [
+  const [macros, setMacros] = useState<MacroData[]>([
     { name: 'Protein', current: 0, target: 98, unit: 'g', color: 'bg-blue-500' },
     { name: 'Carbs', current: 0, target: 244, unit: 'g', color: 'bg-orange-500' },
     { name: 'Fat', current: 0, target: 68, unit: 'g', color: 'bg-green-500' },
-  ];
+  ]);
+  
+  // Target values
+  const targetCalories = 2000;
 
   const mealOptions: MealOption[] = [
     { name: 'Breakfast', calories: 0, icon: '🍳', logPath: '/nutrition/breakfast/log' },
@@ -143,9 +142,11 @@ export default function NutritionPage() {
   const updateMacros = () => {
     const { totalProtein, totalCarbs, totalFat } = calculateTotals();
     
-    macros[0].current = totalProtein;
-    macros[1].current = totalCarbs;
-    macros[2].current = totalFat;
+    setMacros([
+      { name: 'Protein', current: totalProtein, target: 98, unit: 'g', color: 'bg-blue-500' },
+      { name: 'Carbs', current: totalCarbs, target: 244, unit: 'g', color: 'bg-orange-500' },
+      { name: 'Fat', current: totalFat, target: 68, unit: 'g', color: 'bg-green-500' },
+    ]);
   };
 
   // Update meal options with real data
@@ -283,17 +284,16 @@ export default function NutritionPage() {
       </div>
 
       {/* Macros */}
-      <div className="bg-white mx-4 mt-4 rounded-lg p-6 shadow-sm">
-        <div className="space-y-4">
+      <div className="bg-white mx-4 mt-4 rounded-lg p-4 shadow-sm">
+        <div className="grid grid-cols-3 gap-4">
           {macros.map((macro) => {
             const percentage = Math.min((macro.current / macro.target) * 100, 100);
             return (
-              <div key={macro.name} className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="font-medium text-gray-700">{macro.name}</span>
-                  <span className="text-gray-600">
-                    {loading ? '...' : `${macro.current} / ${macro.target}${macro.unit}`}
-                  </span>
+              <div key={macro.name} className="text-center">
+                <div className="text-sm font-medium text-gray-700 mb-1">{macro.name}</div>
+                <div className="text-lg font-bold text-gray-900 mb-2">
+                  {loading ? '...' : Math.round(macro.current)}
+                  <span className="text-sm font-normal text-gray-600">/{macro.target}{macro.unit}</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
@@ -310,30 +310,76 @@ export default function NutritionPage() {
       {/* Meal Options */}
       <div className="mx-4 mt-4 mb-6">
         <div className="space-y-3">
-          {mealOptions.map((meal) => (
-            <div
-              key={meal.name}
-              className="bg-white rounded-lg p-4 shadow-sm border border-gray-100"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="text-2xl">{meal.icon}</div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">{meal.name}</h3>
-                    {meal.calories > 0 && (
-                      <p className="text-sm text-gray-600">{meal.calories} kcal</p>
-                    )}
+          {mealOptions.map((meal) => {
+            // Get meals for this category
+            const categoryMeals = meals.filter(m => {
+              const typeMap: { [key: string]: string } = {
+                'Breakfast': 'breakfast',
+                'Lunch': 'lunch', 
+                'Dinner': 'dinner',
+                'Snacks': 'snack'
+              };
+              return m.type === typeMap[meal.name];
+            });
+
+            return (
+              <div
+                key={meal.name}
+                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden"
+              >
+                {/* Category Header */}
+                <div className="flex items-center justify-between p-4 border-b border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <div className="text-2xl">{meal.icon}</div>
+                    <div>
+                      <h3 className="font-medium text-gray-900">{meal.name}</h3>
+                      {meal.calories > 0 && (
+                        <p className="text-sm text-gray-600">{meal.calories} kcal</p>
+                      )}
+                    </div>
                   </div>
+                  <Link href={meal.logPath}>
+                    <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                      <PlusIcon className="w-4 h-4" />
+                      <span className="text-sm font-medium">Log</span>
+                    </button>
+                  </Link>
                 </div>
-                <Link href={meal.logPath}>
-                  <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    <PlusIcon className="w-4 h-4" />
-                    <span className="text-sm font-medium">Log</span>
-                  </button>
-                </Link>
+
+                {/* Individual Meals */}
+                {categoryMeals.length > 0 ? (
+                  <div className="divide-y divide-gray-50">
+                    {categoryMeals.map((mealItem) => (
+                      <div key={mealItem.id} className="p-4 bg-gray-50">
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900">{mealItem.name}</h4>
+                            <div className="flex gap-4 text-sm text-gray-600 mt-1">
+                              <span>{mealItem.calories} kcal</span>
+                              {mealItem.protein && <span>{mealItem.protein}g protein</span>}
+                              {mealItem.carbs && <span>{mealItem.carbs}g carbs</span>}
+                              {mealItem.fat && <span>{mealItem.fat}g fat</span>}
+                            </div>
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {new Date(mealItem.date).toLocaleTimeString('en-US', { 
+                              hour: 'numeric', 
+                              minute: '2-digit',
+                              hour12: true 
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-4 text-center text-gray-500 text-sm">
+                    No meals logged yet
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
