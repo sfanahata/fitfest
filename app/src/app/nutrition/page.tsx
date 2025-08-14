@@ -39,9 +39,9 @@ export default function NutritionPage() {
   const [session, setSession] = useState<any>(null);
   const [status, setStatus] = useState<'loading' | 'authenticated' | 'unauthenticated'>('loading');
   const [macros, setMacros] = useState<MacroData[]>([
-    { name: 'Protein', current: 0, target: 98, unit: 'g', color: 'bg-blue-500' },
-    { name: 'Carbs', current: 0, target: 244, unit: 'g', color: 'bg-orange-500' },
-    { name: 'Fat', current: 0, target: 68, unit: 'g', color: 'bg-green-500' },
+    { name: 'Protein', current: 0, target: 98, unit: 'g', color: 'bg-fitfest-deep' },
+    { name: 'Carbs', current: 0, target: 244, unit: 'g', color: 'bg-fitfest-bright' },
+    { name: 'Fat', current: 0, target: 68, unit: 'g', color: 'bg-fitfest-success' },
   ]);
   
   // Target values - will be updated from profile
@@ -143,9 +143,9 @@ export default function NutritionPage() {
     const { totalProtein, totalCarbs, totalFat } = calculateTotals();
     
     setMacros([
-      { name: 'Protein', current: totalProtein, target: 98, unit: 'g', color: 'bg-blue-500' },
-      { name: 'Carbs', current: totalCarbs, target: 244, unit: 'g', color: 'bg-orange-500' },
-      { name: 'Fat', current: totalFat, target: 68, unit: 'g', color: 'bg-green-500' },
+      { name: 'Protein', current: totalProtein, target: 98, unit: 'g', color: 'bg-fitfest-deep' },
+      { name: 'Carbs', current: totalCarbs, target: 244, unit: 'g', color: 'bg-fitfest-bright' },
+      { name: 'Fat', current: totalFat, target: 68, unit: 'g', color: 'bg-fitfest-success' },
     ]);
   };
 
@@ -180,9 +180,9 @@ export default function NutritionPage() {
           
           // Update macro targets while preserving current values
           setMacros(prevMacros => [
-            { name: 'Protein', current: prevMacros[0]?.current || 0, target: profile?.targetProtein || 98, unit: 'g', color: 'bg-blue-500' },
-            { name: 'Carbs', current: prevMacros[1]?.current || 0, target: profile?.targetCarbs || 244, unit: 'g', color: 'bg-orange-500' },
-            { name: 'Fat', current: prevMacros[2]?.current || 0, target: profile?.targetFat || 68, unit: 'g', color: 'bg-green-500' },
+            { name: 'Protein', current: prevMacros[0]?.current || 0, target: profile?.targetProtein || 98, unit: 'g', color: 'bg-fitfest-deep' },
+            { name: 'Carbs', current: prevMacros[1]?.current || 0, target: profile?.targetCarbs || 244, unit: 'g', color: 'bg-fitfest-bright' },
+            { name: 'Fat', current: prevMacros[2]?.current || 0, target: profile?.targetFat || 68, unit: 'g', color: 'bg-fitfest-success' },
           ]);
         }
       } catch (error) {
@@ -263,21 +263,21 @@ export default function NutritionPage() {
   const { totalCalories } = calculateTotals();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-fitfest-light">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white shadow-sm border-b border-fitfest-subtle/20">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
-            <button className="p-2 hover:bg-gray-100 rounded-full">
-              <ChevronLeftIcon className="w-5 h-5 text-gray-600" />
+            <button className="p-2 hover:bg-fitfest-light rounded-full">
+              <ChevronLeftIcon className="w-5 h-5 text-fitfest-text" />
             </button>
-            <h1 className="text-xl font-bold text-gray-900">Food diary</h1>
+            <h1 className="text-xl font-bold text-fitfest-deep">Food diary</h1>
           </div>
         </div>
         
         {/* Date Display */}
         <div className="px-4 pb-4">
-          <p className="text-gray-600 text-sm">
+          <p className="text-fitfest-text text-sm">
             {getDayName(selectedDate)}, {selectedDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
           </p>
         </div>
@@ -291,8 +291,8 @@ export default function NutritionPage() {
                 onClick={() => setSelectedDate(date)}
                 className={`flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors ${
                   selectedDate.toDateString() === date.toDateString()
-                    ? 'bg-gray-800 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-fitfest-deep text-white'
+                    : 'bg-white text-fitfest-text hover:bg-fitfest-light border border-fitfest-subtle/20'
                 }`}
               >
                 <span className="text-xs opacity-70">
@@ -306,30 +306,30 @@ export default function NutritionPage() {
       </div>
 
       {/* Calorie Summary */}
-      <div className="bg-white mx-4 mt-4 rounded-lg p-6 shadow-sm">
+      <div className="bg-white mx-4 mt-4 rounded-lg p-6 shadow-sm border border-fitfest-subtle/20">
         <div className="text-center">
-          <div className="text-4xl font-bold text-gray-900 mb-1">
+          <div className="text-4xl font-bold text-fitfest-deep mb-1">
             {loading ? '...' : totalCalories}
           </div>
-          <div className="text-gray-600 text-sm">
+          <div className="text-fitfest-text text-sm">
             of {targetCalories.toLocaleString()} kcal
           </div>
         </div>
       </div>
 
       {/* Macros */}
-      <div className="bg-white mx-4 mt-4 rounded-lg p-4 shadow-sm">
+      <div className="bg-white mx-4 mt-4 rounded-lg p-4 shadow-sm border border-fitfest-subtle/20">
         <div className="grid grid-cols-3 gap-4">
           {macros.map((macro) => {
             const percentage = Math.min((macro.current / macro.target) * 100, 100);
             return (
               <div key={macro.name} className="text-center">
-                <div className="text-sm font-medium text-gray-700 mb-1">{macro.name}</div>
-                <div className="text-lg font-bold text-gray-900 mb-2">
+                <div className="text-sm font-medium text-fitfest-text mb-1">{macro.name}</div>
+                <div className="text-lg font-bold text-fitfest-deep mb-2">
                   {loading ? '...' : Math.round(macro.current)}
-                  <span className="text-sm font-normal text-gray-600">/{macro.target}{macro.unit}</span>
+                  <span className="text-sm font-normal text-fitfest-subtle">/{macro.target}{macro.unit}</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-fitfest-light rounded-full h-2">
                   <div
                     className={`h-2 rounded-full ${macro.color}`}
                     style={{ width: loading ? '0%' : `${percentage}%` }}
@@ -357,23 +357,23 @@ export default function NutritionPage() {
             });
 
             return (
-              <div
-                key={meal.name}
-                className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden"
-              >
-                {/* Category Header */}
-                <div className="flex items-center justify-between p-4 border-b border-gray-100">
+                              <div
+                  key={meal.name}
+                  className="bg-white rounded-lg shadow-sm border border-fitfest-subtle/20 overflow-hidden"
+                >
+                  {/* Category Header */}
+                  <div className="flex items-center justify-between p-4 border-b border-fitfest-subtle/20">
                   <div className="flex items-center gap-3">
                     <div className="text-2xl">{meal.icon}</div>
                     <div>
-                      <h3 className="font-medium text-gray-900">{meal.name}</h3>
+                      <h3 className="font-medium text-fitfest-deep">{meal.name}</h3>
                       {meal.calories > 0 && (
-                        <p className="text-sm text-gray-600">{meal.calories} kcal</p>
+                        <p className="text-sm text-fitfest-text">{meal.calories} kcal</p>
                       )}
                     </div>
                   </div>
                   <Link href={meal.logPath}>
-                    <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <button className="flex items-center gap-2 bg-fitfest-deep text-white px-4 py-2 rounded-lg hover:bg-fitfest-bright transition-colors">
                       <PlusIcon className="w-4 h-4" />
                       <span className="text-sm font-medium">Log</span>
                     </button>
@@ -382,20 +382,20 @@ export default function NutritionPage() {
 
                 {/* Individual Meals */}
                 {categoryMeals.length > 0 ? (
-                  <div className="divide-y divide-gray-50">
+                  <div className="divide-y divide-fitfest-light">
                     {categoryMeals.map((mealItem) => (
-                      <div key={mealItem.id} className="p-4 bg-gray-50">
+                      <div key={mealItem.id} className="p-4 bg-fitfest-light/50">
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900">{mealItem.name}</h4>
-                            <div className="flex gap-4 text-sm text-gray-600 mt-1">
+                            <h4 className="font-medium text-fitfest-deep">{mealItem.name}</h4>
+                            <div className="flex gap-4 text-sm text-fitfest-text mt-1">
                               <span>{mealItem.calories} kcal</span>
                               {mealItem.protein && <span>{mealItem.protein}g protein</span>}
                               {mealItem.carbs && <span>{mealItem.carbs}g carbs</span>}
                               {mealItem.fat && <span>{mealItem.fat}g fat</span>}
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-xs text-fitfest-subtle">
                             {new Date(mealItem.date).toLocaleTimeString('en-US', { 
                               hour: 'numeric', 
                               minute: '2-digit',
@@ -407,7 +407,7 @@ export default function NutritionPage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="p-4 text-center text-gray-500 text-sm">
+                  <div className="p-4 text-center text-fitfest-subtle text-sm">
                     No meals logged yet
                   </div>
                 )}
