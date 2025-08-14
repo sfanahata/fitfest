@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
   }
   
   const body = await req.json();
-  const { weight, height, name } = body;
+  const { weight, height, name, targetCalories, targetProtein, targetCarbs, targetFat } = body;
   
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
@@ -64,11 +64,19 @@ export async function POST(req: NextRequest) {
     update: {
       weight: weight ? parseFloat(weight) : null,
       height: height ? parseFloat(height) : null,
+      targetCalories: targetCalories ? parseInt(targetCalories) : null,
+      targetProtein: targetProtein ? parseInt(targetProtein) : null,
+      targetCarbs: targetCarbs ? parseInt(targetCarbs) : null,
+      targetFat: targetFat ? parseInt(targetFat) : null,
     },
     create: {
       userId: user.id,
       weight: weight ? parseFloat(weight) : null,
       height: height ? parseFloat(height) : null,
+      targetCalories: targetCalories ? parseInt(targetCalories) : null,
+      targetProtein: targetProtein ? parseInt(targetProtein) : null,
+      targetCarbs: targetCarbs ? parseInt(targetCarbs) : null,
+      targetFat: targetFat ? parseInt(targetFat) : null,
     },
   });
   

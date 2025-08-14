@@ -44,8 +44,8 @@ export default function NutritionPage() {
     { name: 'Fat', current: 0, target: 68, unit: 'g', color: 'bg-green-500' },
   ]);
   
-  // Target values
-  const targetCalories = 2000;
+  // Target values - will be updated from profile
+  const [targetCalories, setTargetCalories] = useState(2000);
 
   const mealOptions: MealOption[] = [
     { name: 'Breakfast', calories: 0, icon: '🍳', logPath: '/nutrition/breakfast/log' },
@@ -158,6 +158,40 @@ export default function NutritionPage() {
     mealOptions[2].calories = mealTotals.dinner;
     mealOptions[3].calories = mealTotals.snacks;
   };
+
+  // Fetch user profile data for targets
+  useEffect(() => {
+    if (!session) return;
+    
+    async function fetchProfile() {
+      try {
+        const response = await fetch('/api/profile', {
+          credentials: 'include'
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          const profile = data.profile;
+          
+          // Update targets from profile
+          if (profile?.targetCalories) {
+            setTargetCalories(profile.targetCalories);
+          }
+          
+          // Update macro targets
+          setMacros([
+            { name: 'Protein', current: 0, target: profile?.targetProtein || 98, unit: 'g', color: 'bg-blue-500' },
+            { name: 'Carbs', current: 0, target: profile?.targetCarbs || 244, unit: 'g', color: 'bg-orange-500' },
+            { name: 'Fat', current: 0, target: profile?.targetFat || 68, unit: 'g', color: 'bg-green-500' },
+          ]);
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    }
+    
+    fetchProfile();
+  }, [session]);
 
   // Fetch meals when date changes
   useEffect(() => {
