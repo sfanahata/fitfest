@@ -6,7 +6,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElem
     return (
       <button
         ref={ref}
-        className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors disabled:opacity-50 ${className}`}
+        className={`bg-fitfest-deep text-white px-4 py-2 rounded hover:bg-fitfest-bright transition-colors disabled:opacity-50 shadow-sm ${className}`}
         {...props}
       />
     );

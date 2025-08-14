@@ -6,6 +6,7 @@ import Card from "@/components/Card";
 import Link from "next/link";
 import Button from "@/components/Button";
 import NavBar from "@/components/NavBar";
+import Logo from "@/components/Logo";
 import { Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -300,8 +301,8 @@ export default function HomePage() {
       {
         label: 'Activity Duration (min)',
         data: dailyData.map(d => d.duration),
-        borderColor: 'rgb(59, 130, 246)',
-        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+        borderColor: '#005B6A',
+        backgroundColor: 'rgba(0, 91, 106, 0.2)',
         fill: true,
         tension: 0.4,
       },
@@ -314,8 +315,8 @@ export default function HomePage() {
       {
         label: 'Calories Burned',
         data: dailyData.map(d => d.caloriesBurned),
-        borderColor: 'rgb(34, 197, 94)',
-        backgroundColor: 'rgba(34, 197, 94, 0.2)',
+        borderColor: '#00A7B5',
+        backgroundColor: 'rgba(0, 167, 181, 0.2)',
         fill: true,
         tension: 0.4,
       },
@@ -328,8 +329,8 @@ export default function HomePage() {
       {
         label: 'Calories Consumed',
         data: dailyData.map(d => d.caloriesConsumed),
-        borderColor: 'rgb(239, 68, 68)',
-        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+        borderColor: '#FF6B6B',
+        backgroundColor: 'rgba(255, 107, 107, 0.2)',
         fill: true,
         tension: 0.4,
       },
@@ -342,12 +343,12 @@ export default function HomePage() {
       {
         label: 'This Week - Duration',
         data: dashboardData?.thisWeek?.daily?.map(d => d.duration) || [],
-        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+        backgroundColor: 'rgba(0, 91, 106, 0.8)',
       },
       {
         label: 'Last Week - Duration',
         data: dashboardData?.lastWeek?.daily?.map(d => d.duration) || [],
-        backgroundColor: 'rgba(156, 163, 175, 0.8)',
+        backgroundColor: 'rgba(160, 174, 192, 0.8)',
       },
     ],
   };
@@ -442,11 +443,13 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen px-2">
+      <div className="flex flex-col items-center justify-center min-h-screen px-2 bg-fitfest-light">
         <div className="w-full max-w-4xl flex flex-col gap-6">
           {/* Welcome Message */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-4 text-center">Welcome to FitFest</h1>
-          <p className="text-xl text-gray-600 mb-8 text-center">Your personal fitness journey starts here. Track, share, and achieve your fitness goals.</p>
+          <div className="text-center mb-8 flex flex-col items-center justify-center">
+            <Logo size="3xl" className="mb-4" variant="default" showText={true} />
+            <p className="text-xl text-fitfest-text">Your personal fitness journey starts here. Track, share, and achieve your fitness goals.</p>
+          </div>
           
           {/* Authentication Status */}
           {!isAuthenticated && (
@@ -488,28 +491,28 @@ export default function HomePage() {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-400">
+                    <div className="text-3xl font-bold text-fitfest-deep">
                       {dashboardData?.thisWeek?.totalCalories || 0}
                     </div>
-                    <div className="text-gray-600 text-sm">Calories Burned</div>
+                    <div className="text-fitfest-text text-sm">Calories Burned</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-red-400">
+                    <div className="text-3xl font-bold text-fitfest-coral">
                       {dailyData.reduce((sum, day) => sum + day.caloriesConsumed, 0)}
                     </div>
-                    <div className="text-gray-600 text-sm">Calories Consumed</div>
+                    <div className="text-fitfest-text text-sm">Calories Consumed</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-indigo-400">
+                    <div className="text-3xl font-bold text-fitfest-success">
                       {dashboardData?.thisWeek?.totalDuration || 0}
                     </div>
-                    <div className="text-gray-600 text-sm">Total Minutes</div>
+                    <div className="text-fitfest-text text-sm">Total Minutes</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-orange-400">
+                    <div className="text-3xl font-bold text-fitfest-gold">
                       {dashboardData?.thisWeek?.daysWithActivity || 0}/7
                     </div>
-                    <div className="text-gray-600 text-sm">Days with Activity</div>
+                    <div className="text-fitfest-text text-sm">Days with Activity</div>
                   </div>
                 </div>
               </Card>
@@ -579,12 +582,12 @@ export default function HomePage() {
                 <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
                 <div className="flex flex-wrap gap-4">
                   <Link href="/activities/new">
-                    <Button className="bg-blue-600 text-white hover:bg-blue-700">
+                    <Button className="bg-fitfest-deep text-white hover:bg-fitfest-bright">
                       Log Activity
                     </Button>
                   </Link>
                   <Link href="/nutrition">
-                    <Button className="bg-green-600 text-white hover:bg-green-700">
+                    <Button className="bg-fitfest-success text-white hover:bg-green-600">
                       Log Meal
                     </Button>
                   </Link>
