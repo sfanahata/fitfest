@@ -33,13 +33,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
+    // Parse date as local date to avoid timezone offset issues (same as activities)
+    let parsedDate: Date;
+    if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      const [year, month, day] = date.split("-").map(Number);
+      parsedDate = new Date(year, month - 1, day);
+    } else {
+      parsedDate = new Date(date);
+    }
+
     // Create meal
     const meal = await prisma.meal.create({
       data: {
         userId: user.id,
         name,
         type: type as any, // Type assertion for enum
-        date: new Date(date),
+        date: parsedDate,
         calories: parseInt(calories),
         protein: protein ? parseFloat(protein) : null,
         carbs: carbs ? parseFloat(carbs) : null,
@@ -68,13 +77,6 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const date = searchParams.get('date');
 
-    if (!date) {
-      return NextResponse.json(
-        { error: 'Date parameter is required' },
-        { status: 400 }
-      );
-    }
-
     // Get user
     const user = await prisma.user.findUnique({
       where: { email: session.user.email }
@@ -84,23 +86,37 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Get meals for the specified date
-    const startOfDay = new Date(date);
-    startOfDay.setHours(0, 0, 0, 0);
-    
-    const endOfDay = new Date(date);
-    endOfDay.setHours(23, 59, 59, 999);
+    // If date is provided, get meals for that specific date
+    if (date) {
+      const startOfDay = new Date(date);
+      startOfDay.setHours(0, 0, 0, 0);
+      
+      const endOfDay = new Date(date);
+      endOfDay.setHours(23, 59, 59, 999);
 
+      const meals = await prisma.meal.findMany({
+        where: {
+          userId: user.id,
+          date: {
+            gte: startOfDay,
+            lte: endOfDay,
+          }
+        },
+        orderBy: {
+          createdAt: 'asc'
+        }
+      });
+
+      return NextResponse.json({ success: true, meals });
+    }
+
+    // If no date is provided, get all meals for the user
     const meals = await prisma.meal.findMany({
       where: {
         userId: user.id,
-        date: {
-          gte: startOfDay,
-          lte: endOfDay,
-        }
       },
       orderBy: {
-        createdAt: 'asc'
+        date: 'desc'
       }
     });
 

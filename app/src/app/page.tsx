@@ -1,8 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
+// import { useSession } from "next-auth/react";
+// import { useRouter } from "next/navigation";
 import Card from "@/components/Card";
 import Link from "next/link";
 import Button from "@/components/Button";
+import NavBar from "@/components/NavBar";
 import { Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -76,6 +79,23 @@ interface DashboardData {
   };
 }
 
+interface DashboardData {
+  thisWeek: {
+    totalCalories: number;
+    avgDailyCalories: number;
+    totalDuration: number;
+    daysWithActivity: number;
+    daily: DailyStats[];
+  };
+  lastWeek: {
+    totalCalories: number;
+    avgDailyCalories: number;
+    totalDuration: number;
+    daysWithActivity: number;
+    daily: DailyStats[];
+  };
+}
+
 export default function HomePage() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [meals, setMeals] = useState<Meal[]>([]);
@@ -126,6 +146,18 @@ export default function HomePage() {
     checkAuth();
   }, []);
 
+  // Temporarily disabled all authentication
+  // useEffect(() => {
+  //   if (status === "loading") return;
+  //   const timer = setTimeout(() => {
+  //     if (!session) {
+  //       router.push("/auth/signin");
+  //     }
+  //     setAuthChecked(true);
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // }, [session, status, router]);
+
   // Fetch data when authenticated
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -133,51 +165,38 @@ export default function HomePage() {
     async function fetchData() {
       setLoading(true);
       try {
-        // Get current week's start date
-        const now = new Date();
-        const startOfWeek = new Date(now);
-        startOfWeek.setDate(now.getDate() - now.getDay());
-        startOfWeek.setHours(0, 0, 0, 0);
-
-        // Fetch activities, meals, and dashboard data
-        const [activitiesRes, dashboardRes] = await Promise.all([
+        const [activitiesRes, mealsRes, dashboardRes] = await Promise.all([
           fetch("/api/activities", { credentials: 'include' }),
+          fetch("/api/meals", { credentials: 'include' }),
           fetch("/api/dashboard", { credentials: 'include' }),
         ]);
         
         if (activitiesRes.ok) {
           const data = await activitiesRes.json();
+          const now = new Date();
+          const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
           const thisWeekActivities = data.filter((activity: Activity) => 
             new Date(activity.date) >= startOfWeek
           );
           setActivities(thisWeekActivities);
         }
         
+        if (mealsRes.ok) {
+          const data = await mealsRes.json();
+          console.log('Meals API response:', data);
+          const now = new Date();
+          const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+          const thisWeekMeals = data.meals.filter((meal: Meal) => 
+            new Date(meal.date) >= startOfWeek
+          );
+          console.log('This week meals:', thisWeekMeals);
+          setMeals(thisWeekMeals);
+        }
+        
         if (dashboardRes.ok) {
           const data = await dashboardRes.json();
           setDashboardData(data);
         }
-
-        // Fetch meals for the current week
-        const weekMeals: Meal[] = [];
-        for (let i = 0; i < 7; i++) {
-          const date = new Date(startOfWeek);
-          date.setDate(startOfWeek.getDate() + i);
-          const dateStr = date.toISOString().split('T')[0];
-          
-          try {
-            const mealsRes = await fetch(`/api/meals?date=${dateStr}`, { credentials: 'include' });
-            if (mealsRes.ok) {
-              const mealsData = await mealsRes.json();
-              if (mealsData.meals) {
-                weekMeals.push(...mealsData.meals);
-              }
-            }
-          } catch (error) {
-            console.error(`Error fetching meals for ${dateStr}:`, error);
-          }
-        }
-        setMeals(weekMeals);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -187,6 +206,19 @@ export default function HomePage() {
     
     fetchData();
   }, [isAuthenticated]);
+
+  // Temporarily disabled loading states
+  // if (status === "loading" || !authChecked) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center min-h-screen">
+  //       <Card className="w-full max-w-4xl">Loading...</Card>
+  //     </div>
+  //   );
+  // }
+
+  // if (!session) {
+  //   return null;
+  // }
 
   if (loading) {
     return (
@@ -230,17 +262,21 @@ export default function HomePage() {
     const dailyData = Array.from({ length: 7 }, (_, i) => {
       const date = new Date(startOfWeek);
       date.setDate(startOfWeek.getDate() + i);
-      const dateStr = date.toISOString().split('T')[0];
+      
+      // Use local date string instead of UTC to avoid timezone issues
+      const dateStr = date.toLocaleDateString('en-CA'); // YYYY-MM-DD format
       
       // Get activities for this day
-      const dayActivities = activities.filter(activity => 
-        activity.date.startsWith(dateStr)
-      );
+      const dayActivities = activities.filter(activity => {
+        const activityDate = new Date(activity.date);
+        return activityDate.toLocaleDateString('en-CA') === dateStr;
+      });
       
       // Get meals for this day
-      const dayMeals = meals.filter(meal => 
-        meal.date.startsWith(dateStr)
-      );
+      const dayMeals = meals.filter(meal => {
+        const mealDate = new Date(meal.date);
+        return mealDate.toLocaleDateString('en-CA') === dateStr;
+      });
       
       return {
         date: dateStr,
@@ -257,7 +293,7 @@ export default function HomePage() {
 
   const { dayLabels, dailyData } = getDailyData();
 
-  // Separate chart configurations for better clarity
+  // Chart configurations
   const activityDurationChartData = {
     labels: dayLabels,
     datasets: [
@@ -316,15 +352,6 @@ export default function HomePage() {
     ],
   };
 
-  // Calculate max values for individual chart scaling
-  const maxDuration = Math.max(...dailyData.map(d => d.duration), 1);
-  const maxCaloriesBurned = Math.max(...dailyData.map(d => d.caloriesBurned), 1);
-  const maxCaloriesConsumed = Math.max(...dailyData.map(d => d.caloriesConsumed), 1);
-  
-  const activityYAxisMax = Math.ceil(maxDuration * 1.5);
-  const caloriesBurnedYAxisMax = Math.ceil(maxCaloriesBurned * 1.5);
-  const caloriesConsumedYAxisMax = Math.ceil(maxCaloriesConsumed * 1.5);
-
   const activityChartOptions = {
     responsive: true,
     plugins: {
@@ -339,7 +366,7 @@ export default function HomePage() {
     scales: {
       y: {
         beginAtZero: true,
-        max: activityYAxisMax,
+        max: Math.ceil(Math.max(...dailyData.map(d => d.duration), 1) * 1.5),
         title: {
           display: true,
           text: 'Minutes',
@@ -362,7 +389,7 @@ export default function HomePage() {
     scales: {
       y: {
         beginAtZero: true,
-        max: caloriesBurnedYAxisMax,
+        max: Math.ceil(Math.max(...dailyData.map(d => d.caloriesBurned), 1) * 1.5),
         title: {
           display: true,
           text: 'Calories',
@@ -385,7 +412,7 @@ export default function HomePage() {
     scales: {
       y: {
         beginAtZero: true,
-        max: caloriesConsumedYAxisMax,
+        max: Math.ceil(Math.max(...dailyData.map(d => d.caloriesConsumed), 1) * 1.5),
         title: {
           display: true,
           text: 'Calories',
@@ -393,12 +420,6 @@ export default function HomePage() {
       },
     },
   };
-
-  // Calculate max values for comparison chart Y-axis scaling
-  const maxThisWeekDuration = Math.max(...(dashboardData?.thisWeek?.daily?.map(d => d.duration) || [0]), 1);
-  const maxLastWeekDuration = Math.max(...(dashboardData?.lastWeek?.daily?.map(d => d.duration) || [0]), 1);
-  const maxComparisonValue = Math.max(maxThisWeekDuration, maxLastWeekDuration);
-  const comparisonYAxisMax = Math.ceil(maxComparisonValue * 1.5); // 50% higher than the highest value
 
   const comparisonChartOptions = {
     responsive: true,
@@ -414,7 +435,7 @@ export default function HomePage() {
     scales: {
       y: {
         beginAtZero: true,
-        max: comparisonYAxisMax,
+        max: Math.ceil(Math.max(...(dashboardData?.thisWeek?.daily?.map(d => d.duration) || []), ...(dashboardData?.lastWeek?.daily?.map(d => d.duration) || []), 1) * 1.5),
       },
     },
   };
@@ -422,7 +443,7 @@ export default function HomePage() {
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen px-2">
-        <div className="w-full max-w-6xl flex flex-col gap-6">
+        <div className="w-full max-w-4xl flex flex-col gap-6">
           {/* Welcome Message */}
           <h1 className="text-4xl font-bold text-gray-900 mb-4 text-center">Welcome to FitFest</h1>
           <p className="text-xl text-gray-600 mb-8 text-center">Your personal fitness journey starts here. Track, share, and achieve your fitness goals.</p>

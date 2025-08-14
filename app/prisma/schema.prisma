@@ -67,6 +67,11 @@ model Profile {
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   weight      Float?
   height      Float?
+  // Nutritional settings
+  targetCalories Int?  @default(2000)
+  targetProtein  Int?  @default(98)
+  targetCarbs    Int?  @default(244)
+  targetFat      Int?  @default(68)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -111,7 +116,7 @@ enum MealType {
   breakfast
   lunch
   dinner
-  snack
+  snacks
 }
 
 model Meal {

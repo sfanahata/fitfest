@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
   }
   
   const body = await req.json();
-  const { weight, height, name } = body;
+  const { weight, height, name, targetCalories, targetProtein, targetCarbs, targetFat } = body;
   
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
@@ -52,28 +52,57 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'User not found' }, { status: 404 });
   }
   
-  // Update user name
-  await prisma.user.update({
-    where: { id: user.id },
-    data: { name },
-  });
-  
-  // Update or create profile
-  const profile = await prisma.profile.upsert({
-    where: { userId: user.id },
-    update: {
-      weight: weight ? parseFloat(weight) : null,
-      height: height ? parseFloat(height) : null,
-    },
-    create: {
-      userId: user.id,
-      weight: weight ? parseFloat(weight) : null,
-      height: height ? parseFloat(height) : null,
-    },
-  });
-  
-  console.log('Profile saved successfully:', profile);
-  return NextResponse.json({ profile, success: true });
+  try {
+    // Update user name
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { name },
+    });
+    
+    // Helper function to safely parse numbers
+    const safeParseFloat = (value: any) => {
+      if (!value || value === '') return null;
+      const parsed = parseFloat(value);
+      return isNaN(parsed) ? null : parsed;
+    };
+
+    const safeParseInt = (value: any) => {
+      if (!value || value === '') return null;
+      const parsed = parseInt(value);
+      return isNaN(parsed) ? null : parsed;
+    };
+
+    // Update or create profile
+    const profile = await prisma.profile.upsert({
+      where: { userId: user.id },
+      update: {
+        weight: safeParseFloat(weight),
+        height: safeParseFloat(height),
+        targetCalories: safeParseInt(targetCalories),
+        targetProtein: safeParseInt(targetProtein),
+        targetCarbs: safeParseInt(targetCarbs),
+        targetFat: safeParseInt(targetFat),
+      },
+      create: {
+        userId: user.id,
+        weight: safeParseFloat(weight),
+        height: safeParseFloat(height),
+        targetCalories: safeParseInt(targetCalories),
+        targetProtein: safeParseInt(targetProtein),
+        targetCarbs: safeParseInt(targetCarbs),
+        targetFat: safeParseInt(targetFat),
+      },
+    });
+    
+    console.log('Profile saved successfully:', profile);
+    return NextResponse.json({ profile, success: true });
+  } catch (error) {
+    console.error('Profile save error:', error);
+    return NextResponse.json(
+      { error: 'Failed to save profile', details: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 500 }
+    );
+  }
 }
 
 // PUT: Update current user's profile

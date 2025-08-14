@@ -12,7 +12,7 @@ interface Session {
 
 interface ProfileData {
   name?: string;
-  email?: string;
+  profile?: any;
 }
 
 export default function NavBar() {
@@ -40,26 +40,14 @@ export default function NavBar() {
           })
         ]);
         
-        let sessionData = null;
         if (sessionResponse.ok) {
-          sessionData = await sessionResponse.json();
+          const sessionData = await sessionResponse.json();
           setSession(sessionData);
         }
         
         if (profileResponse.ok) {
           const profileData = await profileResponse.json();
-          setProfileData({
-            name: profileData.name,
-            email: sessionData?.user?.email
-          });
-        } else {
-          // If profile fails, still set email from session
-          if (sessionData?.user?.email) {
-            setProfileData({
-              name: undefined,
-              email: sessionData.user.email
-            });
-          }
+          setProfileData(profileData);
         }
       } catch (error) {
         console.log('Session/Profile fetch failed:', error);
@@ -99,7 +87,7 @@ export default function NavBar() {
       <div className="flex items-center gap-4">
         <Link href="/profile">
           <Button className="bg-gray-400 text-gray-900 hover:bg-gray-500 px-3 py-2 rounded">
-            {profileData?.name || profileData?.email || 'Profile'}
+            {profileData?.name || session?.user?.email || 'Profile'}
           </Button>
         </Link>
         {session?.user ? (
