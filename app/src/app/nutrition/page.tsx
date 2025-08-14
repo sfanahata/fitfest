@@ -178,11 +178,11 @@ export default function NutritionPage() {
             setTargetCalories(profile.targetCalories);
           }
           
-          // Update macro targets
-          setMacros([
-            { name: 'Protein', current: 0, target: profile?.targetProtein || 98, unit: 'g', color: 'bg-blue-500' },
-            { name: 'Carbs', current: 0, target: profile?.targetCarbs || 244, unit: 'g', color: 'bg-orange-500' },
-            { name: 'Fat', current: 0, target: profile?.targetFat || 68, unit: 'g', color: 'bg-green-500' },
+          // Update macro targets while preserving current values
+          setMacros(prevMacros => [
+            { name: 'Protein', current: prevMacros[0]?.current || 0, target: profile?.targetProtein || 98, unit: 'g', color: 'bg-blue-500' },
+            { name: 'Carbs', current: prevMacros[1]?.current || 0, target: profile?.targetCarbs || 244, unit: 'g', color: 'bg-orange-500' },
+            { name: 'Fat', current: prevMacros[2]?.current || 0, target: profile?.targetFat || 68, unit: 'g', color: 'bg-green-500' },
           ]);
         }
       } catch (error) {
