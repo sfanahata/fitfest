@@ -165,8 +165,9 @@ export default function HomePage() {
     async function fetchData() {
       setLoading(true);
       try {
-        const [activitiesRes, dashboardRes] = await Promise.all([
+        const [activitiesRes, mealsRes, dashboardRes] = await Promise.all([
           fetch("/api/activities", { credentials: 'include' }),
+          fetch("/api/meals", { credentials: 'include' }),
           fetch("/api/dashboard", { credentials: 'include' }),
         ]);
         
@@ -178,6 +179,18 @@ export default function HomePage() {
             new Date(activity.date) >= startOfWeek
           );
           setActivities(thisWeekActivities);
+        }
+        
+        if (mealsRes.ok) {
+          const data = await mealsRes.json();
+          console.log('Meals API response:', data);
+          const now = new Date();
+          const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+          const thisWeekMeals = data.meals.filter((meal: Meal) => 
+            new Date(meal.date) >= startOfWeek
+          );
+          console.log('This week meals:', thisWeekMeals);
+          setMeals(thisWeekMeals);
         }
         
         if (dashboardRes.ok) {

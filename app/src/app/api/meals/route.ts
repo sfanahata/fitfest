@@ -68,13 +68,6 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const date = searchParams.get('date');
 
-    if (!date) {
-      return NextResponse.json(
-        { error: 'Date parameter is required' },
-        { status: 400 }
-      );
-    }
-
     // Get user
     const user = await prisma.user.findUnique({
       where: { email: session.user.email }
@@ -84,23 +77,37 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Get meals for the specified date
-    const startOfDay = new Date(date);
-    startOfDay.setHours(0, 0, 0, 0);
-    
-    const endOfDay = new Date(date);
-    endOfDay.setHours(23, 59, 59, 999);
+    // If date is provided, get meals for that specific date
+    if (date) {
+      const startOfDay = new Date(date);
+      startOfDay.setHours(0, 0, 0, 0);
+      
+      const endOfDay = new Date(date);
+      endOfDay.setHours(23, 59, 59, 999);
 
+      const meals = await prisma.meal.findMany({
+        where: {
+          userId: user.id,
+          date: {
+            gte: startOfDay,
+            lte: endOfDay,
+          }
+        },
+        orderBy: {
+          createdAt: 'asc'
+        }
+      });
+
+      return NextResponse.json({ success: true, meals });
+    }
+
+    // If no date is provided, get all meals for the user
     const meals = await prisma.meal.findMany({
       where: {
         userId: user.id,
-        date: {
-          gte: startOfDay,
-          lte: endOfDay,
-        }
       },
       orderBy: {
-        createdAt: 'asc'
+        date: 'desc'
       }
     });
 
