@@ -262,17 +262,21 @@ export default function HomePage() {
     const dailyData = Array.from({ length: 7 }, (_, i) => {
       const date = new Date(startOfWeek);
       date.setDate(startOfWeek.getDate() + i);
-      const dateStr = date.toISOString().split('T')[0];
+      
+      // Use local date string instead of UTC to avoid timezone issues
+      const dateStr = date.toLocaleDateString('en-CA'); // YYYY-MM-DD format
       
       // Get activities for this day
-      const dayActivities = activities.filter(activity => 
-        activity.date.startsWith(dateStr)
-      );
+      const dayActivities = activities.filter(activity => {
+        const activityDate = new Date(activity.date);
+        return activityDate.toLocaleDateString('en-CA') === dateStr;
+      });
       
       // Get meals for this day
-      const dayMeals = meals.filter(meal => 
-        meal.date.startsWith(dateStr)
-      );
+      const dayMeals = meals.filter(meal => {
+        const mealDate = new Date(meal.date);
+        return mealDate.toLocaleDateString('en-CA') === dateStr;
+      });
       
       return {
         date: dateStr,

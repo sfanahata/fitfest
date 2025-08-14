@@ -33,13 +33,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
+    // Parse date as local date to avoid timezone offset issues (same as activities)
+    let parsedDate: Date;
+    if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      const [year, month, day] = date.split("-").map(Number);
+      parsedDate = new Date(year, month - 1, day);
+    } else {
+      parsedDate = new Date(date);
+    }
+
     // Create meal
     const meal = await prisma.meal.create({
       data: {
         userId: user.id,
         name,
         type: type as any, // Type assertion for enum
-        date: new Date(date),
+        date: parsedDate,
         calories: parseInt(calories),
         protein: protein ? parseFloat(protein) : null,
         carbs: carbs ? parseFloat(carbs) : null,
