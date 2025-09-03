@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Button from "@/components/Button";
 import Logo from "@/components/Logo";
+import ThemeToggle from "@/components/ThemeToggle";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -61,30 +62,30 @@ export default function NavBar() {
   }, []);
 
   return (
-    <nav className="w-full flex items-center justify-between p-4 bg-fitfest-light shadow-sm sticky top-0 z-50 border-b border-fitfest-subtle/20">
+    <nav className="w-full flex items-center justify-between p-4 bg-fitfest-light dark:bg-fitfest-dark shadow-sm sticky top-0 z-50 border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10">
       <div className="flex gap-6 items-center">
         <Link href="/" className="flex items-center gap-3">
           <Logo size="lg" showText={false} variant="default" />
-          <span className="font-bold text-fitfest-deep text-lg">fitfest</span>
+          <span className="font-bold text-fitfest-deep dark:text-fitfest-bright text-lg">fitfest</span>
         </Link>
         <div className="flex gap-4 items-center">
           <Link href="/">
             <span className={`font-semibold text-lg hover:underline transition-colors ${
-              pathname === "/" ? "text-fitfest-bright underline" : "text-fitfest-text hover:text-fitfest-bright"
+              pathname === "/" ? "text-fitfest-bright underline" : "text-fitfest-text dark:text-fitfest-subtle hover:text-fitfest-bright dark:hover:text-fitfest-bright"
             }`}>
               Home
             </span>
           </Link>
           <Link href="/activities">
             <span className={`hover:underline transition-colors ${
-              pathname.startsWith("/activities") ? "text-fitfest-bright underline" : "text-fitfest-text hover:text-fitfest-bright"
+              pathname.startsWith("/activities") ? "text-fitfest-bright underline" : "text-fitfest-text dark:text-fitfest-subtle hover:text-fitfest-bright dark:hover:text-fitfest-bright"
             }`}>
               Activities
             </span>
           </Link>
           <Link href="/nutrition">
             <span className={`hover:underline transition-colors ${
-              pathname.startsWith("/nutrition") ? "text-fitfest-bright underline" : "text-fitfest-text hover:text-fitfest-bright"
+              pathname.startsWith("/nutrition") ? "text-fitfest-bright underline" : "text-fitfest-text dark:text-fitfest-subtle hover:text-fitfest-bright dark:hover:text-fitfest-bright"
             }`}>
               Nutrition
             </span>
@@ -92,6 +93,7 @@ export default function NavBar() {
         </div>
       </div>
       <div className="flex items-center gap-4">
+        <ThemeToggle />
         <Link href="/profile">
           <Button className="bg-fitfest-bright text-white hover:bg-fitfest-deep px-3 py-2 rounded transition-colors">
             {profileData?.name || session?.user?.email || 'Profile'}
