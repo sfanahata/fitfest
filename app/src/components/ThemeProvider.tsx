@@ -16,7 +16,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Check localStorage and system preference on mount
-    const savedTheme = localStorage.getItem("theme") as Theme;
+    let savedTheme: Theme | null = null;
+    
+    try {
+      savedTheme = localStorage.getItem("theme") as Theme;
+    } catch (error) {
+      console.warn("localStorage not available:", error);
+    }
+    
     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     const initialTheme = savedTheme || systemTheme;
     
@@ -28,7 +35,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(newTheme);
-    localStorage.setItem("theme", newTheme);
+    
+    try {
+      localStorage.setItem("theme", newTheme);
+    } catch (error) {
+      console.warn("Could not save theme preference to localStorage:", error);
+    }
   };
 
   const toggleTheme = () => {

@@ -16,24 +16,13 @@ module.exports = {
           gold: '#FFD700',
           light: '#F0F2F5',
           dark: '#1A202C',
+          'dark-primary': '#0f172a',
+          'dark-secondary': '#1e293b',
+          'dark-tertiary': '#334155',
           text: '#2D3748',
           subtle: '#A0AEC0',
           success: '#48BB78',
           warning: '#F6E05E',
-        }
-      },
-      backgroundColor: {
-        'dark': {
-          primary: '#0f172a',
-          secondary: '#1e293b',
-          tertiary: '#334155',
-        }
-      },
-      textColor: {
-        'dark': {
-          primary: '#f8fafc',
-          secondary: '#cbd5e1',
-          tertiary: '#94a3b8',
         }
       }
     },
