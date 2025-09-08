@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import Card from "@/components/Card";
 import Link from "next/link";
 import Button from "@/components/Button";
-import NavBar from "@/components/NavBar";
 import Logo from "@/components/Logo";
 import { Line, Bar } from "react-chartjs-2";
 import {
@@ -443,23 +442,23 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen px-2 bg-fitfest-light">
+      <div className="flex flex-col items-center justify-center min-h-screen px-2 bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200">
         <div className="w-full max-w-4xl flex flex-col gap-6">
           {/* Welcome Message */}
           <div className="text-center mb-8 flex flex-col items-center justify-center">
             <Logo size="3xl" className="mb-4" variant="default" showText={true} />
-            <p className="text-xl text-fitfest-text">Your personal fitness journey starts here. Track, share, and achieve your fitness goals.</p>
+            <p className="text-xl text-fitfest-text dark:text-fitfest-subtle">Your personal fitness journey starts here. Track, share, and achieve your fitness goals.</p>
           </div>
           
           {/* Authentication Status */}
           {!isAuthenticated && (
             <Card className="text-center p-6">
-              <h2 className="text-2xl font-bold text-blue-600 mb-2">🔐 Sign In Required</h2>
-              <p className="text-gray-600 mb-4">Please sign in to access your fitness dashboard and track your activities.</p>
+              <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">🔐 Sign In Required</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">Please sign in to access your fitness dashboard and track your activities.</p>
               <div className="space-y-2">
                 <a 
                   href="/api/auth/signin" 
-                  className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
                 >
                   Sign In with Magic Link
                 </a>
@@ -472,7 +471,7 @@ export default function HomePage() {
             <>
               {/* Summary Stats */}
               <Card className="p-6">
-                <h2 className="text-xl font-bold mb-4">
+                <h2 className="text-xl font-bold mb-4 text-fitfest-text dark:text-fitfest-subtle">
                   Week: {(() => {
                     const today = new Date();
                     const startOfWeek = new Date(today);
@@ -491,28 +490,28 @@ export default function HomePage() {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-fitfest-deep">
+                    <div className="text-3xl font-bold text-fitfest-deep dark:text-fitfest-bright">
                       {dashboardData?.thisWeek?.totalCalories || 0}
                     </div>
-                    <div className="text-fitfest-text text-sm">Calories Burned</div>
+                    <div className="text-fitfest-text dark:text-fitfest-subtle text-sm">Calories Burned</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-fitfest-coral">
+                    <div className="text-3xl font-bold text-fitfest-coral dark:text-fitfest-coral">
                       {dailyData.reduce((sum, day) => sum + day.caloriesConsumed, 0)}
                     </div>
-                    <div className="text-fitfest-text text-sm">Calories Consumed</div>
+                    <div className="text-fitfest-text dark:text-fitfest-subtle text-sm">Calories Consumed</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-fitfest-success">
+                    <div className="text-3xl font-bold text-fitfest-success dark:text-fitfest-success">
                       {dashboardData?.thisWeek?.totalDuration || 0}
                     </div>
-                    <div className="text-fitfest-text text-sm">Total Minutes</div>
+                    <div className="text-fitfest-text dark:text-fitfest-subtle text-sm">Total Minutes</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-fitfest-gold">
+                    <div className="text-3xl font-bold text-fitfest-gold dark:text-fitfest-gold">
                       {dashboardData?.thisWeek?.daysWithActivity || 0}/7
                     </div>
-                    <div className="text-fitfest-text text-sm">Days with Activity</div>
+                    <div className="text-fitfest-text dark:text-fitfest-subtle text-sm">Days with Activity</div>
                   </div>
                 </div>
               </Card>
@@ -522,13 +521,13 @@ export default function HomePage() {
                 {/* Daily Progress Chart - Tabbed Widget */}
                 <Card className="p-4">
                   <div className="mb-3">
-                    <div className="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+                    <div className="flex space-x-1 bg-gray-100 dark:bg-fitfest-dark-tertiary p-1 rounded-lg">
                       <button
                         onClick={() => setActiveChart('activity')}
                         className={`flex-1 py-1 px-2 rounded text-xs font-medium transition-colors ${
                           activeChart === 'activity'
-                            ? 'bg-white text-blue-600 shadow-sm'
-                            : 'text-gray-600 hover:text-gray-900'
+                            ? 'bg-white dark:bg-fitfest-dark-secondary text-blue-600 dark:text-blue-400 shadow-sm'
+                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
                         }`}
                       >
                         Duration
@@ -537,8 +536,8 @@ export default function HomePage() {
                         onClick={() => setActiveChart('burned')}
                         className={`flex-1 py-1 px-2 rounded text-xs font-medium transition-colors ${
                           activeChart === 'burned'
-                            ? 'bg-white text-green-600 shadow-sm'
-                            : 'text-gray-600 hover:text-gray-900'
+                            ? 'bg-white dark:bg-fitfest-dark-secondary text-green-600 dark:text-green-400 shadow-sm'
+                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
                         }`}
                       >
                         Burned
@@ -547,8 +546,8 @@ export default function HomePage() {
                         onClick={() => setActiveChart('consumed')}
                         className={`flex-1 py-1 px-2 rounded text-xs font-medium transition-colors ${
                           activeChart === 'consumed'
-                            ? 'bg-white text-red-600 shadow-sm'
-                            : 'text-gray-600 hover:text-gray-900'
+                            ? 'bg-white dark:bg-fitfest-dark-secondary text-red-600 dark:text-red-400 shadow-sm'
+                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
                         }`}
                       >
                         Consumed
@@ -579,7 +578,7 @@ export default function HomePage() {
 
               {/* Quick Actions */}
               <Card className="p-6">
-                <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
+                <h2 className="text-xl font-bold mb-4 text-fitfest-text dark:text-fitfest-subtle">Quick Actions</h2>
                 <div className="flex flex-wrap gap-4">
                   <Link href="/activities/new">
                     <Button className="bg-fitfest-deep text-white hover:bg-fitfest-bright">
@@ -597,7 +596,7 @@ export default function HomePage() {
               {/* Recent Activities */}
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-bold">Recent Activities</h2>
+                  <h2 className="text-xl font-bold text-fitfest-text dark:text-fitfest-subtle">Recent Activities</h2>
                   <Link href="/activities">
                     <Button className="bg-blue-600 text-white hover:bg-blue-700">
                       View All
@@ -610,21 +609,21 @@ export default function HomePage() {
                       <Card key={activity.id} className="p-4">
                         <div className="flex justify-between items-center">
                           <div>
-                            <h3 className="font-semibold capitalize">{activity.type}</h3>
-                            <p className="text-sm text-gray-600">
+                            <h3 className="font-semibold capitalize text-fitfest-text dark:text-fitfest-subtle">{activity.type}</h3>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
                               {new Date(activity.date).toLocaleDateString()} • {activity.duration} minutes
                               {activity.calories && ` • ${activity.calories} calories`}
                             </p>
                           </div>
                           <div className="text-right">
-                            <span className="text-sm text-gray-500 capitalize">{activity.effort || 'No effort level'}</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-500 capitalize">{activity.effort || 'No effort level'}</span>
                           </div>
                         </div>
                       </Card>
                     ))}
                   </div>
                 ) : (
-                  <Card className="text-center">No activities logged this week. Start by logging your first activity!</Card>
+                  <Card className="text-center text-fitfest-text dark:text-fitfest-subtle">No activities logged this week. Start by logging your first activity!</Card>
                 )}
               </div>
             </>

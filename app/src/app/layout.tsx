@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 import NavBar from "@/components/NavBar";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <SessionProviderWrapper> */}
-          <NavBar />
-          <main className="min-h-screen bg-gray-50">
-            {children}
-          </main>
-        {/* </SessionProviderWrapper> */}
+        <ThemeProvider>
+          {/* <SessionProviderWrapper> */}
+            <NavBar />
+            <main className="min-h-screen bg-gray-50 dark:bg-fitfest-dark dark:text-fitfest-subtle transition-colors duration-200">
+              {children}
+            </main>
+          {/* </SessionProviderWrapper> */}
+        </ThemeProvider>
       </body>
     </html>
   );

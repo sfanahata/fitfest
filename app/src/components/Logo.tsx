@@ -40,7 +40,7 @@ export default function Logo({ size = 'md', className = '', showText = true, var
       
       {/* Logo Text */}
       {showText && (
-        <div className={`font-bold ${textSizes[size]} text-fitfest-deep`}>
+        <div className={`font-bold ${textSizes[size]} text-fitfest-deep dark:text-fitfest-bright`}>
           fitfest
         </div>
       )}
