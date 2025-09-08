@@ -59,12 +59,12 @@ export default function ActivitiesPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-2">
+    <div className="flex flex-col items-center justify-center min-h-screen px-2 bg-gray-50 dark:bg-fitfest-dark transition-colors duration-200">
       <div className="w-full max-w-2xl flex flex-col gap-6">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Your Activities</h1>
+          <h1 className="text-2xl font-bold text-fitfest-text dark:text-fitfest-subtle">Your Activities</h1>
           <Link href="/activities/new" passHref legacyBehavior>
-            <Button className="bg-blue-600 text-white hover:bg-blue-700">
+            <Button className="bg-fitfest-deep text-white hover:bg-fitfest-bright dark:bg-fitfest-bright dark:hover:bg-fitfest-deep">
               Log Activity
             </Button>
           </Link>
@@ -76,28 +76,28 @@ export default function ActivitiesPage() {
         ) : (
           activities.map((activity) => (
             <Card key={activity.id} className="flex flex-col md:flex-row md:items-center justify-between">
-              <Link href={`/activities/${activity.id}`} className="flex-1 cursor-pointer hover:bg-blue-50 transition-colors p-2 rounded">
+              <Link href={`/activities/${activity.id}`} className="flex-1 cursor-pointer hover:bg-blue-50 dark:hover:bg-fitfest-dark-tertiary transition-colors p-2 rounded">
                 <div>
-                  <div className="font-semibold capitalize">{activity.type}</div>
-                  <div className="text-gray-600 text-sm">{new Date(activity.date).toLocaleDateString()}</div>
-                  {activity.notes && <div className="text-gray-500 text-xs mt-1">{activity.notes}</div>}
+                  <div className="font-semibold capitalize text-fitfest-text dark:text-fitfest-subtle">{activity.type}</div>
+                  <div className="text-gray-600 dark:text-fitfest-subtle text-sm">{new Date(activity.date).toLocaleDateString()}</div>
+                  {activity.notes && <div className="text-gray-500 dark:text-fitfest-subtle/70 text-xs mt-1">{activity.notes}</div>}
                 </div>
                 <div className="text-right mt-2 md:mt-0">
-                  <span className="text-gray-700 block">{activity.duration} min</span>
+                  <span className="text-gray-700 dark:text-fitfest-subtle block">{activity.duration} min</span>
                   {activity.calories !== undefined && (
-                    <span className="text-green-700 font-semibold block">{activity.calories} kcal</span>
+                    <span className="text-green-700 dark:text-fitfest-success font-semibold block">{activity.calories} kcal</span>
                   )}
                 </div>
               </Link>
               <div className="flex gap-2 mt-2 md:mt-0 md:ml-4">
                 <Button 
-                  className="bg-blue-600 text-white hover:bg-blue-700 px-3 py-1 text-sm"
+                  className="bg-fitfest-deep text-white hover:bg-fitfest-bright dark:bg-fitfest-bright dark:hover:bg-fitfest-deep px-3 py-1 text-sm"
                   onClick={() => router.push(`/activities/${activity.id}/edit`)}
                 >
                   Edit
                 </Button>
                 <Button 
-                  className="bg-red-600 text-white hover:bg-red-700 px-3 py-1 text-sm"
+                  className="bg-fitfest-coral text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-fitfest-coral px-3 py-1 text-sm"
                   onClick={() => handleDelete(activity.id)}
                   disabled={deletingId === activity.id}
                 >
