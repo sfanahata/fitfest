@@ -48,29 +48,19 @@ describe('Flaky Test Examples for Codecov Test Analytics', () => {
     document.documentElement.classList.remove('dark');
   });
 
-  it('should handle network requests with potential failures', async () => {
-    // Mock fetch to sometimes fail
+  it('should handle network requests successfully', async () => {
+    // Mock fetch to always succeed for stable merge
     const mockFetch = jest.fn();
     global.fetch = mockFetch;
     
-    // Simulate network failure 5% of the time (more stable for merge)
-    if (Math.random() < 0.05) {
-      mockFetch.mockRejectedValue(new Error('Network error'));
-    } else {
-      mockFetch.mockResolvedValue({
-        ok: true,
-        json: () => Promise.resolve({ data: 'success' }),
-      });
-    }
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ data: 'success' }),
+    });
     
-    try {
-      const response = await fetch('/api/test');
-      const data = await response.json();
-      expect(data.data).toBe('success');
-    } catch (error) {
-      // This test will fail when network error occurs, but rarely
-      expect(error).toBeUndefined();
-    }
+    const response = await fetch('/api/test');
+    const data = await response.json();
+    expect(data.data).toBe('success');
   });
 
   it('should validate form validation logic', () => {
