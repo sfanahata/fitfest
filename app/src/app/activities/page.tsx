@@ -63,6 +63,7 @@ export default function ActivitiesPage() {
       <div className="w-full max-w-2xl flex flex-col gap-6">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold text-fitfest-text dark:text-fitfest-subtle">Your Activities</h1>
+          <span className="text-sm text-fitfest-subtle dark:text-fitfest-subtle/70 ml-2">({activities.length} total)</span>
           <Link href="/activities/new" passHref legacyBehavior>
             <Button className="bg-fitfest-deep text-white hover:bg-fitfest-bright dark:bg-fitfest-bright dark:hover:bg-fitfest-deep">
               Log Activity
