@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent, act } from '@testing-library/react';
 import { useRouter } from 'next/navigation';
-import ActivitiesPage, { simulateNetworkDelay } from '../app/activities/page';
+import ActivitiesPage from '../app/activities/page';
+import { simulateNetworkDelay } from '../utils/testUtils';
 
 // Mock Next.js modules
 jest.mock('next/navigation', () => ({
