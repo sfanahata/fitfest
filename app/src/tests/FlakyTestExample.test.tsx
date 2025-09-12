@@ -5,8 +5,8 @@ import Button from '@/components/Button';
 describe('Flaky Test Examples for Codecov Test Analytics', () => {
   it('should sometimes fail due to timing issues', () => {
     const random = Math.random();
-    // This test will pass consistently but demonstrates timing variability
-    expect(random).toBeGreaterThan(0);
+    // This test will fail approximately 20% of the time for flaky detection
+    expect(random).toBeGreaterThan(0.8);
   });
 
   it('should fail when environment variables are missing', () => {
@@ -48,19 +48,29 @@ describe('Flaky Test Examples for Codecov Test Analytics', () => {
     document.documentElement.classList.remove('dark');
   });
 
-  it('should handle network requests successfully', async () => {
-    // Mock fetch to always succeed for stable merge
+  it('should be flaky due to network issues', async () => {
+    // Mock fetch to sometimes fail for flaky behavior
     const mockFetch = jest.fn();
     global.fetch = mockFetch;
     
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({ data: 'success' }),
-    });
+    // Simulate network failure 15% of the time
+    if (Math.random() < 0.15) {
+      mockFetch.mockRejectedValue(new Error('Network timeout'));
+    } else {
+      mockFetch.mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ data: 'success' }),
+      });
+    }
     
-    const response = await fetch('/api/test');
-    const data = await response.json();
-    expect(data.data).toBe('success');
+    try {
+      const response = await fetch('/api/test');
+      const data = await response.json();
+      expect(data.data).toBe('success');
+    } catch (error) {
+      // This will fail when network error occurs
+      expect(error).toBeUndefined();
+    }
   });
 
   it('should validate form validation logic', () => {

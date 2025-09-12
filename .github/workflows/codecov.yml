@@ -20,17 +20,15 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm ci
-      - name: Run tests with coverage
-        run: npm run test:coverage
+      - name: Install jest-junit for JUnit XML output
+        run: npm install --save-dev jest-junit
+      - name: Run tests with coverage and JUnit output
+        run: |
+          # Generate JUnit XML file for Test Analytics
+          JEST_JUNIT_CLASSNAME="{filepath}" npx jest --reporters=jest-junit --coverage --outputFile=junit.xml
         env:
           NODE_ENV: test
-      - name: Generate test results in JUnit format
-        run: |
-          # Install jest-junit if not already available
-          npm install --save-dev jest-junit
-          # Run tests with JUnit output for better test analytics
-          npx jest --coverage --testResultsProcessor=jest-junit --outputFile=test-results.xml
-        continue-on-error: true  # Allow flaky tests to not fail the build
+        # Remove continue-on-error to let tests fail and trigger Test Analytics
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
@@ -41,13 +39,7 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: false  # Don't fail CI if coverage upload fails
       - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5
-        if: always()  # Run even if tests fail
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./
-          slug: sfanahata/fitfest
-          files: ./test-results.xml
-          flags: test-results
-          name: test-results
-          fail_ci_if_error: false
