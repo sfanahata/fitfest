@@ -1,0 +1,49 @@
+# Codecov configuration for Test Analytics
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: 0%
+        base: auto
+        informational: false
+    patch:
+      default:
+        target: auto
+        threshold: 0%
+        base: auto
+        informational: false
+
+comment:
+  layout: "diff, flags, files, footer"
+  behavior: default
+  require_changes: false
+  require_base: false
+  require_head: true
+  hide_project_coverage: false
+
+# Enable Test Analytics
+test_analytics:
+  enabled: true
+
+# Flags for different types of tests
+flags:
+  unittests:
+    paths:
+      - "src/tests/"
+  test-results:
+    paths:
+      - "test-results.xml"
+
+# Ignore certain files from coverage
+ignore:
+  - "node_modules/"
+  - ".next/"
+  - "coverage/"
+  - "src/generated/"
+
+# Notifications
+notifications:
+  slack:
+    default:
+      url: null  # Add your Slack webhook if desired

@@ -5,6 +5,13 @@ import Card from "@/components/Card";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+// Add a test utility function that might be flaky
+export const simulateNetworkDelay = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, Math.random() * 100); // Random delay 0-100ms
+  });
+};
+
 interface Activity {
   id: string;
   type: string;
