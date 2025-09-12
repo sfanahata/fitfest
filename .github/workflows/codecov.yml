@@ -20,17 +20,15 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm ci
-      - name: Run tests with coverage
-        run: npm run test:coverage
-        env:
-          NODE_ENV: test
-      - name: Generate test results in JUnit format
+      - name: Run tests with coverage and JUnit output
         run: |
           # Install jest-junit if not already available
           npm install --save-dev jest-junit
           # Run tests with JUnit output for better test analytics
           npx jest --coverage --testResultsProcessor=jest-junit --outputFile=test-results.xml
-        continue-on-error: true  # Allow flaky tests to not fail the build
+        env:
+          NODE_ENV: test
+        # Remove continue-on-error to let tests fail and trigger Test Analytics
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
