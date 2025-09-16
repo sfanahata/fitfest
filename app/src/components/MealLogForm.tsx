@@ -91,7 +91,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
         'Breakfast': 'breakfast',
         'Lunch': 'lunch',
         'Dinner': 'dinner',
-        'Snacks': 'snack' // Note: enum uses 'snack' not 'snacks'
+        'Snacks': 'snacks' // Fixed: enum uses 'snacks' (plural)
       };
 
       const response = await fetch('/api/meals', {
