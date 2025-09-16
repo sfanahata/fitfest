@@ -44,8 +44,8 @@ The GitHub Actions workflow will now:
 ## How It Works
 
 ### Test Execution Flow
-1. **Tests Run**: Jest executes all tests in your test suite
-2. **JUnit Output**: `jest-junit` generates `test-results.xml` with test results
+1. **Tests Run**: Jest executes all tests in your test suite with coverage and JUnit output
+2. **JUnit Output**: `jest-junit` generates `test-results.junit.xml` with test results
 3. **Sentry Upload**: `getsentry/prevent-action` uploads the XML to Sentry
 4. **Analytics**: Sentry processes the data and provides insights
 
@@ -87,7 +87,7 @@ The configuration generates JUnit XML with:
 ### Debug Steps
 
 1. Check GitHub Actions logs for upload step
-2. Verify `test-results.xml` is created in the workflow
+2. Verify `test-results.junit.xml` is created in the workflow
 3. Test locally: `npm test` should generate the XML file
 4. Check Sentry organization settings for token permissions
 

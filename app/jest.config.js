@@ -25,7 +25,7 @@ const customJestConfig = {
     'default',
     ['jest-junit', {
       outputDirectory: '.',
-      outputName: 'test-results.xml',
+      outputName: 'test-results.junit.xml',
       classNameTemplate: '{classname}',
       titleTemplate: '{title}',
       ancestorSeparator: ' › ',
