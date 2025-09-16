@@ -396,10 +396,9 @@ export default function NutritionPage() {
                             </div>
                           </div>
                           <div className="text-xs text-fitfest-subtle dark:text-fitfest-subtle/70">
-                            {new Date(mealItem.date).toLocaleTimeString('en-US', { 
-                              hour: 'numeric', 
-                              minute: '2-digit',
-                              hour12: true 
+                            {new Date(mealItem.date).toLocaleDateString('en-US', { 
+                              month: 'short', 
+                              day: 'numeric'
                             })}
                           </div>
                         </div>
