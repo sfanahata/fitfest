@@ -1,4 +1,4 @@
-name: Codecov Coverage & Test Analytics
+name: Codecov Coverage & Sentry Test Analytics
 
 on:
   push:
@@ -31,6 +31,11 @@ jobs:
           # Run tests with JUnit output for better test analytics
           npx jest --coverage --testResultsProcessor=jest-junit --outputFile=test-results.xml
         continue-on-error: true  # Allow flaky tests to not fail the build
+      - name: Upload test results to Sentry Test Analytics
+        if: ${{ !cancelled() }}
+        uses: getsentry/prevent-action@v1
+        with:
+          token: ${{ secrets.SENTRY_PREVENT_TOKEN }}
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
