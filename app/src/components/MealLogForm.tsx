@@ -25,7 +25,8 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
     calories: '',
     protein: '',
     carbs: '',
-    fat: ''
+    fat: '',
+    date: new Date().toISOString().split('T')[0] // Default to today's date
   });
 
   // Check authentication status
@@ -61,8 +62,8 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
   // Show loading while checking authentication
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">Loading...</div>
+      <div className="min-h-screen bg-gray-50 dark:bg-fitfest-dark flex items-center justify-center transition-colors duration-200">
+        <div className="text-center text-gray-900 dark:text-fitfest-subtle">Loading...</div>
       </div>
     );
   }
@@ -90,7 +91,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
         'Breakfast': 'breakfast',
         'Lunch': 'lunch',
         'Dinner': 'dinner',
-        'Snacks': 'snack' // Note: enum uses 'snack' not 'snacks'
+        'Snacks': 'snacks' // Fixed: enum uses 'snacks' (plural)
       };
 
       const response = await fetch('/api/meals', {
@@ -101,7 +102,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
         body: JSON.stringify({
           name: formData.name,
           type: typeMap[mealType],
-          date: new Date().toISOString(),
+          date: formData.date, // Use selected date instead of current timestamp
           calories: formData.calories,
           protein: formData.protein || null,
           carbs: formData.carbs || null,
@@ -132,20 +133,20 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-fitfest-dark transition-colors duration-200">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center gap-3">
             <button 
               onClick={handleBack}
-              className="p-2 hover:bg-gray-100 rounded-full"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200"
             >
-              <ArrowLeftIcon className="w-5 h-5 text-gray-600" />
+              <ArrowLeftIcon className="w-5 h-5 text-gray-600 dark:text-fitfest-subtle" />
             </button>
             <div className="flex items-center gap-2">
               <span className="text-2xl">{mealIcon}</span>
-              <h1 className="text-xl font-bold text-gray-900">Log {mealType}</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-fitfest-subtle">Log {mealType}</h1>
             </div>
           </div>
         </div>
@@ -153,9 +154,24 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
 
       {/* Form */}
       <div className="max-w-md mx-auto mt-8 px-4">
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-sm p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-fitfest-dark-secondary rounded-lg shadow-sm p-6 space-y-4 transition-colors duration-200">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="date" className="block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1">
+              Date
+            </label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle transition-colors duration-200"
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1">
               Meal Name
             </label>
             <input
@@ -164,14 +180,14 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200"
               placeholder="e.g., Oatmeal with berries"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="calories" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="calories" className="block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1">
               Calories
             </label>
             <input
@@ -180,7 +196,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
               name="calories"
               value={formData.calories}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200"
               placeholder="e.g., 300"
               min="0"
               required
@@ -189,7 +205,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label htmlFor="protein" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="protein" className="block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1">
                 Protein (g)
               </label>
               <input
@@ -198,7 +214,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
                 name="protein"
                 value={formData.protein}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200"
                 placeholder="0"
                 min="0"
                 step="0.1"
@@ -206,7 +222,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
             </div>
 
             <div>
-              <label htmlFor="carbs" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="carbs" className="block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1">
                 Carbs (g)
               </label>
               <input
@@ -215,7 +231,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
                 name="carbs"
                 value={formData.carbs}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200"
                 placeholder="0"
                 min="0"
                 step="0.1"
@@ -223,7 +239,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
             </div>
 
             <div>
-              <label htmlFor="fat" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="fat" className="block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1">
                 Fat (g)
               </label>
               <input
@@ -232,7 +248,7 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
                 name="fat"
                 value={formData.fat}
                 onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200"
                 placeholder="0"
                 min="0"
                 step="0.1"
@@ -244,14 +260,14 @@ export default function MealLogForm({ mealType, mealIcon }: MealLogFormProps) {
             <button
               type="button"
               onClick={handleBack}
-              className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors"
+              className="flex-1 px-4 py-2 text-gray-700 dark:text-fitfest-subtle bg-gray-100 dark:bg-fitfest-dark-tertiary border border-gray-300 dark:border-fitfest-subtle/20 rounded-md hover:bg-gray-200 dark:hover:bg-fitfest-dark-tertiary/80 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors duration-200"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 px-4 py-2 text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-4 py-2 text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Saving...' : 'Save Meal'}
             </button>

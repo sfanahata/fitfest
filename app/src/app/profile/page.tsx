@@ -192,7 +192,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="name" className="block text-gray-700 font-semibold mb-1">
+                    <label htmlFor="name" className="block text-gray-700 dark:text-fitfest-subtle font-semibold mb-1">
                       Name
                     </label>
                     <input
@@ -201,18 +201,18 @@ export default function ProfilePage() {
                       name="name"
                       value={profile.name || ""}
                       onChange={handleChange}
-                      className="border rounded px-3 py-2 w-full"
+                      className="border border-gray-300 dark:border-fitfest-subtle/20 rounded px-3 py-2 w-full bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                     />
                   </div>
                   <div className="mb-4 flex gap-2">
                     <div className="flex-1">
-                      <label className="block text-gray-700 font-semibold mb-1" htmlFor="weight">Weight (kg)</label>
+                      <label className="block text-gray-700 dark:text-fitfest-subtle font-semibold mb-1" htmlFor="weight">Weight (kg)</label>
                       <input
                         id="weight"
                         name="weight"
                         type="number"
                         step="0.1"
-                        className="border rounded px-3 py-2 w-full"
+                        className="border border-gray-300 dark:border-fitfest-subtle/20 rounded px-3 py-2 w-full bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                         placeholder="Your weight"
                         value={profile.weight || ""}
                         onChange={handleChange}
@@ -220,13 +220,13 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div className="flex-1">
-                      <label className="block text-gray-700 font-semibold mb-1" htmlFor="height">Height (cm)</label>
+                      <label className="block text-gray-700 dark:text-fitfest-subtle font-semibold mb-1" htmlFor="height">Height (cm)</label>
                       <input
                         id="height"
                         name="height"
                         type="number"
                         step="0.1"
-                        className="border rounded px-3 py-2 w-full"
+                        className="border border-gray-300 dark:border-fitfest-subtle/20 rounded px-3 py-2 w-full bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                         placeholder="Your height"
                         value={profile.height || ""}
                         onChange={handleChange}
@@ -240,7 +240,7 @@ export default function ProfilePage() {
               {activeTab === 'nutrition' && (
                 <>
                   <div className="mb-4">
-                    <label htmlFor="targetCalories" className="block text-gray-700 font-semibold mb-1">
+                    <label htmlFor="targetCalories" className="block text-gray-700 dark:text-fitfest-subtle font-semibold mb-1">
                       Daily Calorie Target
                     </label>
                     <input
@@ -249,14 +249,14 @@ export default function ProfilePage() {
                       name="targetCalories"
                       value={profile.targetCalories || ""}
                       onChange={handleChange}
-                      className="border rounded px-3 py-2 w-full"
+                      className="border border-gray-300 dark:border-fitfest-subtle/20 rounded px-3 py-2 w-full bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                       placeholder="2000"
                       disabled={saving}
                     />
                   </div>
                   <div className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <label htmlFor="targetProtein" className="block text-gray-700 font-semibold mb-1">
+                      <label htmlFor="targetProtein" className="block text-gray-700 dark:text-fitfest-subtle font-semibold mb-1">
                         Protein Target (g)
                       </label>
                       <input
@@ -265,13 +265,13 @@ export default function ProfilePage() {
                         name="targetProtein"
                         value={profile.targetProtein || ""}
                         onChange={handleChange}
-                        className="border rounded px-3 py-2 w-full"
+                        className="border border-gray-300 dark:border-fitfest-subtle/20 rounded px-3 py-2 w-full bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                         placeholder="98"
                         disabled={saving}
                       />
                     </div>
                     <div>
-                      <label htmlFor="targetCarbs" className="block text-gray-700 font-semibold mb-1">
+                      <label htmlFor="targetCarbs" className="block text-gray-700 dark:text-fitfest-subtle font-semibold mb-1">
                         Carbs Target (g)
                       </label>
                       <input
@@ -280,13 +280,13 @@ export default function ProfilePage() {
                         name="targetCarbs"
                         value={profile.targetCarbs || ""}
                         onChange={handleChange}
-                        className="border rounded px-3 py-2 w-full"
+                        className="border border-gray-300 dark:border-fitfest-subtle/20 rounded px-3 py-2 w-full bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                         placeholder="244"
                         disabled={saving}
                       />
                     </div>
                     <div>
-                      <label htmlFor="targetFat" className="block text-gray-700 font-semibold mb-1">
+                      <label htmlFor="targetFat" className="block text-gray-700 dark:text-fitfest-subtle font-semibold mb-1">
                         Fat Target (g)
                       </label>
                       <input
@@ -295,7 +295,7 @@ export default function ProfilePage() {
                         name="targetFat"
                         value={profile.targetFat || ""}
                         onChange={handleChange}
-                        className="border rounded px-3 py-2 w-full"
+                        className="border border-gray-300 dark:border-fitfest-subtle/20 rounded px-3 py-2 w-full bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                         placeholder="68"
                         disabled={saving}
                       />
@@ -304,8 +304,8 @@ export default function ProfilePage() {
                 </>
               )}
 
-              {error && <div className="mb-2 text-red-600 text-sm">{error}</div>}
-              {success && <div className="mb-2 text-green-600 text-sm">{success}</div>}
+              {error && <div className="mb-2 text-red-600 dark:text-red-400 text-sm">{error}</div>}
+              {success && <div className="mb-2 text-green-600 dark:text-green-400 text-sm">{success}</div>}
               <Button className="w-full mt-4" type="submit" disabled={saving}>{saving ? "Saving..." : "Save Changes"}</Button>
             </form>
           </>

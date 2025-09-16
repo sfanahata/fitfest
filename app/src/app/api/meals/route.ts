@@ -88,10 +88,19 @@ export async function GET(request: NextRequest) {
 
     // If date is provided, get meals for that specific date
     if (date) {
-      const startOfDay = new Date(date);
+      // Parse date as local date to match how we save meals
+      let parsedDate: Date;
+      if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        const [year, month, day] = date.split("-").map(Number);
+        parsedDate = new Date(year, month - 1, day);
+      } else {
+        parsedDate = new Date(date);
+      }
+      
+      const startOfDay = new Date(parsedDate);
       startOfDay.setHours(0, 0, 0, 0);
       
-      const endOfDay = new Date(date);
+      const endOfDay = new Date(parsedDate);
       endOfDay.setHours(23, 59, 59, 999);
 
       const meals = await prisma.meal.findMany({
