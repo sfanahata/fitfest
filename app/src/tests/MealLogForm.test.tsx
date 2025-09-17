@@ -298,7 +298,7 @@ describe('MealLogForm', () => {
 
       await waitFor(() => {
         expect(fetch).toHaveBeenCalledWith('/api/meals', expect.objectContaining({
-          body: expect.stringContaining('"type":"snack"'), // Note: 'snack' not 'snacks'
+          body: expect.stringContaining('"type":"snacks"'), // Note: 'snacks' (plural) to match Prisma enum
         }));
       });
     });
