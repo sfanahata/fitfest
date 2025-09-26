@@ -31,9 +31,11 @@ jobs:
         continue-on-error: true  # Allow flaky tests to not fail the build
       - name: Upload test results to Sentry
         if: ${{ !cancelled() }}
-        uses: getsentry/prevent-action
+        uses: getsentry/prevent-action@v1
         with:
           token: ${{ secrets.SENTRY_PREVENT_TOKEN }}
+          report-type: test-results
+          files: ./test-results.junit.xml
       # - name: Upload coverage reports to Codecov
       #   uses: codecov/codecov-action@v5
       #   with:
