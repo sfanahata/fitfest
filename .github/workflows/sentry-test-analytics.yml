@@ -42,4 +42,4 @@ jobs:
       
       - name: Upload test results to Sentry
         if: ${{ !cancelled() }}
-        uses: getsentry/prevent-action
+        uses: getsentry/prevent-action@v0
