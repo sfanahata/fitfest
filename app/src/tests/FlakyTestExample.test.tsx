@@ -2,16 +2,28 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Button from '@/components/Button';
 
-describe('Flaky Test Examples for Codecov Test Analytics', () => {
+describe('Flaky Test Examples for Sentry Test Analytics', () => {
   it('should sometimes fail due to timing issues', () => {
     const random = Math.random();
-    // This test will pass consistently but demonstrates timing variability
-    expect(random).toBeGreaterThan(0);
+    // This test will fail ~20% of the time to demonstrate flakiness
+    expect(random).toBeGreaterThan(0.2);
   });
 
   it('should fail when environment variables are missing', () => {
     // This test will fail if NODE_ENV is not set to 'test'
     expect(process.env.NODE_ENV).toBe('test');
+  });
+
+  it('should fail due to incorrect API endpoint', async () => {
+    // This test will always fail to demonstrate failure tracking
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      status: 404,
+      statusText: 'Not Found'
+    });
+
+    const response = await fetch('/api/non-existent-endpoint');
+    expect(response.ok).toBe(true); // This will fail
   });
 
   it('should handle async operations that might timeout', async () => {

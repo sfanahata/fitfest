@@ -38,14 +38,11 @@ export default function NutritionPage() {
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState<any>(null);
   const [status, setStatus] = useState<'loading' | 'authenticated' | 'unauthenticated'>('loading');
-  const [macros, setMacros] = useState<MacroData[]>([
-    { name: 'Protein', current: 0, target: 98, unit: 'g', color: 'bg-fitfest-deep' },
-    { name: 'Carbs', current: 0, target: 244, unit: 'g', color: 'bg-fitfest-bright' },
-    { name: 'Fat', current: 0, target: 68, unit: 'g', color: 'bg-fitfest-success' },
-  ]);
+  const [macros, setMacros] = useState<MacroData[]>([]);
+  const [profileLoaded, setProfileLoaded] = useState(false);
   
   // Target values - will be updated from profile
-  const [targetCalories, setTargetCalories] = useState(2000);
+  const [targetCalories, setTargetCalories] = useState(0);
 
   const mealOptions: MealOption[] = [
     { name: 'Breakfast', calories: 0, icon: '🍳', logPath: '/nutrition/breakfast/log' },
@@ -142,10 +139,10 @@ export default function NutritionPage() {
   const updateMacros = () => {
     const { totalProtein, totalCarbs, totalFat } = calculateTotals();
     
-    setMacros([
-      { name: 'Protein', current: totalProtein, target: 98, unit: 'g', color: 'bg-fitfest-deep' },
-      { name: 'Carbs', current: totalCarbs, target: 244, unit: 'g', color: 'bg-fitfest-bright' },
-      { name: 'Fat', current: totalFat, target: 68, unit: 'g', color: 'bg-fitfest-success' },
+    setMacros(prevMacros => [
+      { name: 'Protein', current: totalProtein, target: prevMacros[0]?.target || 98, unit: 'g', color: 'bg-fitfest-deep' },
+      { name: 'Carbs', current: totalCarbs, target: prevMacros[1]?.target || 244, unit: 'g', color: 'bg-fitfest-bright' },
+      { name: 'Fat', current: totalFat, target: prevMacros[2]?.target || 68, unit: 'g', color: 'bg-fitfest-success' },
     ]);
   };
 
@@ -178,15 +175,25 @@ export default function NutritionPage() {
             setTargetCalories(profile.targetCalories);
           }
           
-          // Update macro targets while preserving current values
-          setMacros(prevMacros => [
-            { name: 'Protein', current: prevMacros[0]?.current || 0, target: profile?.targetProtein || 98, unit: 'g', color: 'bg-fitfest-deep' },
-            { name: 'Carbs', current: prevMacros[1]?.current || 0, target: profile?.targetCarbs || 244, unit: 'g', color: 'bg-fitfest-bright' },
-            { name: 'Fat', current: prevMacros[2]?.current || 0, target: profile?.targetFat || 68, unit: 'g', color: 'bg-fitfest-success' },
+          // Initialize macro targets with profile data (or defaults if no profile)
+          setMacros([
+            { name: 'Protein', current: 0, target: profile?.targetProtein || 98, unit: 'g', color: 'bg-fitfest-deep' },
+            { name: 'Carbs', current: 0, target: profile?.targetCarbs || 244, unit: 'g', color: 'bg-fitfest-bright' },
+            { name: 'Fat', current: 0, target: profile?.targetFat || 68, unit: 'g', color: 'bg-fitfest-success' },
           ]);
+          
+          setProfileLoaded(true);
         }
       } catch (error) {
         console.error('Error fetching profile:', error);
+        // Set defaults if profile fetch fails
+        setMacros([
+          { name: 'Protein', current: 0, target: 98, unit: 'g', color: 'bg-fitfest-deep' },
+          { name: 'Carbs', current: 0, target: 244, unit: 'g', color: 'bg-fitfest-bright' },
+          { name: 'Fat', current: 0, target: 68, unit: 'g', color: 'bg-fitfest-success' },
+        ]);
+        setTargetCalories(2000);
+        setProfileLoaded(true);
       }
     }
     
@@ -218,8 +225,8 @@ export default function NutritionPage() {
     };
   }, [selectedDate, session]);
 
-  // Show loading while checking authentication
-  if (status === "loading") {
+  // Show loading while checking authentication or loading profile
+  if (status === "loading" || !profileLoaded) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-fitfest-dark flex items-center justify-center transition-colors duration-200">
         <div className="text-center text-fitfest-text dark:text-fitfest-subtle">Loading...</div>
@@ -312,7 +319,7 @@ export default function NutritionPage() {
             {loading ? '...' : totalCalories}
           </div>
           <div className="text-fitfest-text dark:text-fitfest-subtle text-sm">
-            of {targetCalories.toLocaleString()} kcal
+            of {targetCalories > 0 ? targetCalories.toLocaleString() : '...'} kcal
           </div>
         </div>
       </div>
