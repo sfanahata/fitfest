@@ -75,13 +75,13 @@ export default function ProfilePage() {
       .then((data) => {
         console.log('Profile data loaded:', data);
         setProfile({
-          weight: data.profile?.weight || null,
-          height: data.profile?.height || null,
-          name: data.name || data.profile?.name || null,
-          targetCalories: data.profile?.targetCalories || null,
-          targetProtein: data.profile?.targetProtein || null,
-          targetCarbs: data.profile?.targetCarbs || null,
-          targetFat: data.profile?.targetFat || null,
+          weight: data.profile?.weight ?? null,
+          height: data.profile?.height ?? null,
+          name: data.name ?? data.profile?.name ?? null,
+          targetCalories: data.profile?.targetCalories ?? null,
+          targetProtein: data.profile?.targetProtein ?? null,
+          targetCarbs: data.profile?.targetCarbs ?? null,
+          targetFat: data.profile?.targetFat ?? null,
         });
         setError('');
       })
@@ -127,13 +127,13 @@ export default function ProfilePage() {
         const data = await profileRes.json();
         console.log('Reloaded profile data:', data);
         setProfile({
-          weight: data.profile?.weight || null,
-          height: data.profile?.height || null,
-          name: data.name || data.profile?.name || null,
-          targetCalories: data.profile?.targetCalories || null,
-          targetProtein: data.profile?.targetProtein || null,
-          targetCarbs: data.profile?.targetCarbs || null,
-          targetFat: data.profile?.targetFat || null,
+          weight: data.profile?.weight ?? null,
+          height: data.profile?.height ?? null,
+          name: data.name ?? data.profile?.name ?? null,
+          targetCalories: data.profile?.targetCalories ?? null,
+          targetProtein: data.profile?.targetProtein ?? null,
+          targetCarbs: data.profile?.targetCarbs ?? null,
+          targetFat: data.profile?.targetFat ?? null,
         });
       }
     } catch (error) {

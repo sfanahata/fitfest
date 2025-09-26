@@ -34,23 +34,23 @@ jobs:
         uses: getsentry/prevent-action
         with:
           token: ${{ secrets.SENTRY_PREVENT_TOKEN }}
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./coverage
-          slug: sfanahata/fitfest
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: false  # Don't fail CI if coverage upload fails
-      - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5
-        if: always()  # Run even if tests fail
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./
-          slug: sfanahata/fitfest
-          files: ./test-results.junit.xml
-          flags: test-results
-          name: test-results
-          fail_ci_if_error: false
+      # - name: Upload coverage reports to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     directory: ./coverage
+      #     slug: sfanahata/fitfest
+      #     flags: unittests
+      #     name: codecov-umbrella
+      #     fail_ci_if_error: false  # Don't fail CI if coverage upload fails
+      # - name: Upload test results to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   if: always()  # Run even if tests fail
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     directory: ./
+      #     slug: sfanahata/fitfest
+      #     files: ./test-results.junit.xml
+      #     flags: test-results
+      #     name: test-results
+      #     fail_ci_if_error: false
