@@ -1,0 +1,45 @@
+name: Sentry Test Analytics
+
+on:
+  push:
+    branches: ['**']  # Run on all branches
+  pull_request:
+    branches: ['**']  # Run on PRs to any branch
+
+permissions:
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app  # This ensures all commands run in the /app directory
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: app/package-lock.json
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests with JUnit output
+        run: |
+          # Install jest-junit if not already available
+          npm install --save-dev jest-junit
+          # Run tests with JUnit output for Sentry Test Analytics
+          npx jest --testResultsProcessor=jest-junit --outputFile=test-results.junit.xml
+        env:
+          NODE_ENV: test
+        continue-on-error: true  # Allow flaky tests to not fail the build
+      
+      - name: Upload test results to Sentry
+        if: ${{ !cancelled() }}
+        uses: getsentry/prevent-action
