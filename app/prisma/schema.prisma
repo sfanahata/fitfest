@@ -51,6 +51,7 @@ model User {
   profile       Profile?
   activities    Activity[]
   meals         Meal[]
+  achievements  Achievement[]
 }
 
 model VerificationToken {
@@ -134,4 +135,29 @@ model Meal {
   updatedAt DateTime @updatedAt
 
   @@index([userId, date])
+}
+
+enum AchievementType {
+  STREAK_3_DAYS
+  STREAK_5_DAYS
+  STREAK_7_DAYS
+  STREAK_14_DAYS
+  STREAK_30_DAYS
+  FIRST_WORKOUT
+  WORKOUT_MARATHON
+  CONSISTENCY_CHAMPION
+}
+
+model Achievement {
+  id        String          @id @default(cuid())
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  type      AchievementType
+  count     Int             @default(1)
+  earnedAt  DateTime        @default(now())
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  @@unique([userId, type])
+  @@index([userId, earnedAt])
 }

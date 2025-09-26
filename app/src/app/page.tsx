@@ -7,6 +7,7 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Logo from "@/components/Logo";
 import StreakBanner from "@/components/StreakBanner";
+import AchievementsSection, { Achievement } from "@/components/AchievementsSection";
 import { Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -103,6 +104,7 @@ export default function HomePage() {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [streakData, setStreakData] = useState<StreakData | null>(null);
+  const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [loading, setLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [activeChart, setActiveChart] = useState<'activity' | 'burned' | 'consumed'>('activity');
@@ -168,11 +170,12 @@ export default function HomePage() {
     async function fetchData() {
       setLoading(true);
       try {
-        const [activitiesRes, mealsRes, dashboardRes, streakRes] = await Promise.all([
+        const [activitiesRes, mealsRes, dashboardRes, streakRes, achievementsRes] = await Promise.all([
           fetch("/api/activities", { credentials: 'include' }),
           fetch("/api/meals", { credentials: 'include' }),
           fetch("/api/dashboard", { credentials: 'include' }),
           fetch("/api/streak", { credentials: 'include' }),
+          fetch("/api/achievements", { credentials: 'include' }),
         ]);
         
         if (activitiesRes.ok) {
@@ -205,6 +208,11 @@ export default function HomePage() {
         if (streakRes.ok) {
           const data = await streakRes.json();
           setStreakData(data.streak);
+        }
+        
+        if (achievementsRes.ok) {
+          const data = await achievementsRes.json();
+          setAchievements(data.achievements);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -489,6 +497,9 @@ export default function HomePage() {
                   totalCalories={streakData.currentWeek.totalCalories}
                 />
               )}
+              
+              {/* Achievements Section */}
+              <AchievementsSection achievements={achievements} />
               
               {/* Summary Stats */}
               <Card className="p-6">
