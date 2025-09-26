@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth.config";
 import { PrismaClient, ActivityType, EffortLevel } from "@prisma/client";
+import { AchievementService } from "@/lib/achievementService";
 
 const prisma = new PrismaClient();
 
@@ -83,6 +84,14 @@ export async function POST(req: NextRequest) {
       calories,
     },
   });
+
+  // Check for achievements after creating the activity
+  try {
+    await AchievementService.checkAllAchievements(user.id);
+  } catch (error) {
+    console.error('Error checking achievements:', error);
+    // Don't fail the activity creation if achievement checking fails
+  }
 
   return NextResponse.json({ activity });
 }

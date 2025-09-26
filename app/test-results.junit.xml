@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="6" failures="0" errors="0" time="0.564">
-  <testsuite name="Streak Logic" errors="0" failures="0" skipped="0" timestamp="2025-09-26T19:35:21" time="0.209" tests="6">
-    <testcase classname="Streak Logic" name="should calculate streak correctly for 5 days (streak achieved)" time="0.003">
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="0.61">
+  <testsuite name="Achievement System" errors="0" failures="0" skipped="0" timestamp="2025-09-26T20:09:51" time="0.196" tests="5">
+    <testcase classname="Achievement System › Achievement Types" name="should have all required achievement types" time="0.003">
     </testcase>
-    <testcase classname="Streak Logic" name="should calculate streak correctly for 3 days (no streak)" time="0">
+    <testcase classname="Achievement System › Achievement Logic" name="should calculate streak correctly for consecutive days" time="0">
     </testcase>
-    <testcase classname="Streak Logic" name="should calculate streak correctly for 1 day" time="0">
+    <testcase classname="Achievement System › Achievement Logic" name="should handle broken streaks correctly" time="0">
     </testcase>
-    <testcase classname="Streak Logic" name="should calculate streak correctly for 0 days" time="0">
+    <testcase classname="Achievement System › Achievement Logic" name="should calculate weekly consistency correctly" time="0.001">
     </testcase>
-    <testcase classname="Streak Logic" name="should handle multiple activities on the same day" time="0">
-    </testcase>
-    <testcase classname="Streak Logic" name="should handle exactly 4 days (streak threshold)" time="0.001">
+    <testcase classname="Achievement System › Achievement Definitions" name="should have proper achievement metadata structure" time="0">
     </testcase>
   </testsuite>
 </testsuites>
