@@ -351,7 +351,7 @@ export default function NutritionPage() {
                 'Breakfast': 'breakfast',
                 'Lunch': 'lunch', 
                 'Dinner': 'dinner',
-                'Snacks': 'snack'
+                'Snacks': 'snacks'
               };
               return m.type === typeMap[meal.name];
             });

@@ -1,0 +1,1879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="58" failures="12" errors="0" time="9.715">
+  <testsuite name="Button" errors="0" failures="0" skipped="0" timestamp="2025-09-17T18:28:34" time="0.581" tests="3">
+    <testcase classname="Button renders with text" name="Button renders with text" time="0.016">
+    </testcase>
+    <testcase classname="Button calls onClick when clicked" name="Button calls onClick when clicked" time="0.004">
+    </testcase>
+    <testcase classname="Button is disabled when disabled prop is set" name="Button is disabled when disabled prop is set" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="Flaky Test Examples for Codecov Test Analytics" errors="0" failures="0" skipped="0" timestamp="2025-09-17T18:28:34" time="0.631" tests="7">
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should sometimes fail due to timing issues" name="Flaky Test Examples for Codecov Test Analytics should sometimes fail due to timing issues" time="0.002">
+    </testcase>
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should fail when environment variables are missing" name="Flaky Test Examples for Codecov Test Analytics should fail when environment variables are missing" time="0">
+    </testcase>
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should handle async operations that might timeout" name="Flaky Test Examples for Codecov Test Analytics should handle async operations that might timeout" time="0.044">
+    </testcase>
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should validate button component with strict assertions" name="Flaky Test Examples for Codecov Test Analytics should validate button component with strict assertions" time="0.022">
+    </testcase>
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should test dark mode functionality" name="Flaky Test Examples for Codecov Test Analytics should test dark mode functionality" time="0.002">
+    </testcase>
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should handle network requests successfully" name="Flaky Test Examples for Codecov Test Analytics should handle network requests successfully" time="0.001">
+    </testcase>
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should validate form validation logic" name="Flaky Test Examples for Codecov Test Analytics should validate form validation logic" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="ActivitiesPage" errors="0" failures="0" skipped="0" timestamp="2025-09-17T18:28:34" time="0.878" tests="9">
+    <testcase classname="ActivitiesPage renders loading state initially" name="ActivitiesPage renders loading state initially" time="0.033">
+    </testcase>
+    <testcase classname="ActivitiesPage renders empty state when no activities" name="ActivitiesPage renders empty state when no activities" time="0.017">
+    </testcase>
+    <testcase classname="ActivitiesPage renders activities list" name="ActivitiesPage renders activities list" time="0.037">
+    </testcase>
+    <testcase classname="ActivitiesPage handles delete activity" name="ActivitiesPage handles delete activity" time="0.014">
+    </testcase>
+    <testcase classname="ActivitiesPage handles network errors gracefully" name="ActivitiesPage handles network errors gracefully" time="0.01">
+    </testcase>
+    <testcase classname="ActivitiesPage navigates to edit page when edit button is clicked" name="ActivitiesPage navigates to edit page when edit button is clicked" time="0.006">
+    </testcase>
+    <testcase classname="ActivitiesPage displays activity details correctly" name="ActivitiesPage displays activity details correctly" time="0.006">
+    </testcase>
+    <testcase classname="simulateNetworkDelay utility resolves after a random delay" name="simulateNetworkDelay utility resolves after a random delay" time="0.077">
+    </testcase>
+    <testcase classname="simulateNetworkDelay utility can be flaky due to random timing" name="simulateNetworkDelay utility can be flaky due to random timing" time="0.101">
+    </testcase>
+  </testsuite>
+  <testsuite name="MealLogForm" errors="0" failures="4" skipped="0" timestamp="2025-09-17T18:28:34" time="3.965" tests="20">
+    <testcase classname="MealLogForm Authentication should redirect to sign-in when not authenticated" name="MealLogForm Authentication should redirect to sign-in when not authenticated" time="0.013">
+    </testcase>
+    <testcase classname="MealLogForm Authentication should show loading state initially" name="MealLogForm Authentication should show loading state initially" time="0.008">
+    </testcase>
+    <testcase classname="MealLogForm Authentication should render form when authenticated" name="MealLogForm Authentication should render form when authenticated" time="0.02">
+    </testcase>
+    <testcase classname="MealLogForm Form Fields should have all required form fields" name="MealLogForm Form Fields should have all required form fields" time="0.009">
+    </testcase>
+    <testcase classname="MealLogForm Form Fields should default to today&apos;s date" name="MealLogForm Form Fields should default to today&apos;s date" time="0.007">
+    </testcase>
+    <testcase classname="MealLogForm Form Fields should allow date selection" name="MealLogForm Form Fields should allow date selection" time="0.008">
+    </testcase>
+    <testcase classname="MealLogForm Form Fields should handle input changes correctly" name="MealLogForm Form Fields should handle input changes correctly" time="0.008">
+    </testcase>
+    <testcase classname="MealLogForm Form Submission should submit form with correct data" name="MealLogForm Form Submission should submit form with correct data" time="1.013">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: &quot;/api/meals&quot;, {&quot;body&quot;: &quot;{\&quot;name\&quot;:\&quot;Chicken Salad\&quot;,\&quot;type\&quot;:\&quot;lunch\&quot;,\&quot;date\&quot;:{\&quot;inverse\&quot;:false},\&quot;calories\&quot;:\&quot;350\&quot;,\&quot;protein\&quot;:\&quot;\&quot;,\&quot;carbs\&quot;:\&quot;\&quot;,\&quot;fat\&quot;:\&quot;\&quot;}&quot;, &quot;headers&quot;: {&quot;Content-Type&quot;: &quot;application/json&quot;}, &quot;method&quot;: &quot;POST&quot;}
+Received
+       1
+          &quot;/api/auth/session&quot;,
+          Object {
+        -   &quot;body&quot;: &quot;{\&quot;name\&quot;:\&quot;Chicken Salad\&quot;,\&quot;type\&quot;:\&quot;lunch\&quot;,\&quot;date\&quot;:{\&quot;inverse\&quot;:false},\&quot;calories\&quot;:\&quot;350\&quot;,\&quot;protein\&quot;:\&quot;\&quot;,\&quot;carbs\&quot;:\&quot;\&quot;,\&quot;fat\&quot;:\&quot;\&quot;}&quot;,
+        +   &quot;credentials&quot;: &quot;include&quot;,
+            &quot;headers&quot;: Object {
+        -     &quot;Content-Type&quot;: &quot;application/json&quot;,
+        +     &quot;Cache-Control&quot;: &quot;no-cache&quot;,
+            },
+        -   &quot;method&quot;: &quot;POST&quot;,
+          },
+       2
+          &quot;/api/meals&quot;,
+          Object {
+        -   &quot;body&quot;: &quot;{\&quot;name\&quot;:\&quot;Chicken Salad\&quot;,\&quot;type\&quot;:\&quot;lunch\&quot;,\&quot;date\&quot;:{\&quot;inverse\&quot;:false},\&quot;calories\&quot;:\&quot;350\&quot;,\&quot;protein\&quot;:\&quot;\&quot;,\&quot;carbs\&quot;:\&quot;\&quot;,\&quot;fat\&quot;:\&quot;\&quot;}&quot;,
+        +   &quot;body&quot;: &quot;{\&quot;name\&quot;:\&quot;Chicken Salad\&quot;,\&quot;type\&quot;:\&quot;lunch\&quot;,\&quot;date\&quot;:\&quot;2025-09-17\&quot;,\&quot;calories\&quot;:\&quot;350\&quot;,\&quot;protein\&quot;:null,\&quot;carbs\&quot;:null,\&quot;fat\&quot;:null}&quot;,
+            &quot;headers&quot;: Object {
+              &quot;Content-Type&quot;: &quot;application/json&quot;,
+            },
+            &quot;method&quot;: &quot;POST&quot;,
+          },
+
+Number of calls: 2
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;div
+        class=&quot;min-h-screen bg-gray-50 dark:bg-fitfest-dark transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center justify-between p-4&quot;
+          &gt;
+            &lt;div
+              class=&quot;flex items-center gap-3&quot;
+            &gt;
+              &lt;button
+                class=&quot;p-2 hover:bg-gray-100 dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;w-5 h-5 text-gray-600 dark:text-fitfest-subtle&quot;
+                  data-slot=&quot;icon&quot;
+                  fill=&quot;none&quot;
+                  stroke=&quot;currentColor&quot;
+                  stroke-width=&quot;1.5&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                  xmlns=&quot;http://www.w3.org/2000/svg&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18&quot;
+                    stroke-linecap=&quot;round&quot;
+                    stroke-linejoin=&quot;round&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+              &lt;div
+                class=&quot;flex items-center gap-2&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-2xl&quot;
+                &gt;
+                  🥗
+                &lt;/span&gt;
+                &lt;h1
+                  class=&quot;text-xl font-bold text-gray-900 dark:text-fitfest-subtle&quot;
+                &gt;
+                  Log 
+                  Lunch
+                &lt;/h1&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;max-w-md mx-auto mt-8 px-4&quot;
+        &gt;
+          &lt;form
+            class=&quot;bg-white dark:bg-fitfest-dark-secondary rounded-lg shadow-sm p-6 space-y-4 transition-colors duration-200&quot;
+          &gt;
+            &lt;div&gt;
+              &lt;label
+                class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                for=&quot;date&quot;
+              &gt;
+                Date
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle transition-colors duration-200&quot;
+                id=&quot;date&quot;
+                name=&quot;date&quot;
+                required=&quot;&quot;
+                type=&quot;date&quot;
+                value=&quot;2025-09-17&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;label
+                class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                for=&quot;name&quot;
+              &gt;
+                Meal Name
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                id=&quot;name&quot;
+                name=&quot;name&quot;
+                placeholder=&quot;e.g., Oatmeal with berries&quot;
+                required=&quot;&quot;
+                type=&quot;text&quot;
+                value=&quot;Chicken Salad&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;label
+                class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                for=&quot;calories&quot;
+              &gt;
+                Calories
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                id=&quot;calories&quot;
+                min=&quot;0&quot;
+                name=&quot;calories&quot;
+                placeholder=&quot;e.g., 300&quot;
+                required=&quot;&quot;
+                type=&quot;number&quot;
+                value=&quot;350&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;grid grid-cols-3 gap-3&quot;
+            &gt;
+              &lt;div&gt;
+                &lt;label
+                  class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                  for=&quot;protein&quot;
+                &gt;
+                  Protein (g)
+                &lt;/label&gt;
+                &lt;input
+                  class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                  id=&quot;protein&quot;
+                  min=&quot;0&quot;
+                  name=&quot;protein&quot;
+                  placeholder=&quot;0&quot;
+                  step=&quot;0.1&quot;
+                  type=&quot;number&quot;
+                  value=&quot;&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;label
+                  class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                  for=&quot;carbs&quot;
+                &gt;
+                  Carbs (g)
+                &lt;/label&gt;
+                &lt;input
+                  class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                  id=&quot;carbs&quot;
+                  min=&quot;0&quot;
+                  name=&quot;carbs&quot;
+                  placeholder=&quot;0&quot;
+                  step=&quot;0.1&quot;
+                  type=&quot;number&quot;
+                  value=&quot;&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;label
+                  class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                  for=&quot;fat&quot;
+                &gt;
+                  Fat (g)
+                &lt;/label&gt;
+                &lt;input
+                  class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                  id=&quot;fat&quot;
+                  min=&quot;0&quot;
+                  name=&quot;fat&quot;
+                  placeholder=&quot;0&quot;
+                  step=&quot;0.1&quot;
+                  type=&quot;number&quot;
+                  value=&quot;&quot;
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;flex gap-3 pt-4&quot;
+            &gt;
+              &lt;button
+                class=&quot;flex-1 px-4 py-2 text-gray-700 dark:text-fitfest-subtle bg-gray-100 dark:bg-fitfest-dark-tertiary border border-gray-300 dark:border-fitfest-subtle/20 rounded-md hover:bg-gray-200 dark:hover:bg-fitfest-dark-tertiary/80 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors duration-200&quot;
+                type=&quot;button&quot;
+              &gt;
+                Cancel
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex-1 px-4 py-2 text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+                type=&quot;submit&quot;
+              &gt;
+                Save Meal
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at toHaveBeenCalledWith (/Users/shannonanahata/fitfest/app/src/tests/MealLogForm.test.tsx:156:23)
+    at runWithExpensiveErrorDiagnosticsDisabled (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Users/shannonanahata/fitfest/app/node_modules/jsdom/lib/jsdom/browser/Window.js:520:19)
+    at listOnTimeout (node:internal/timers:611:17)
+    at processTimers (node:internal/timers:546:7)</failure>
+    </testcase>
+    <testcase classname="MealLogForm Form Submission should handle submission errors gracefully" name="MealLogForm Form Submission should handle submission errors gracefully" time="0.013">
+    </testcase>
+    <testcase classname="MealLogForm Form Submission should show loading state during submission" name="MealLogForm Form Submission should show loading state during submission" time="0.008">
+    </testcase>
+    <testcase classname="MealLogForm Navigation should navigate back when cancel button is clicked" name="MealLogForm Navigation should navigate back when cancel button is clicked" time="0.006">
+    </testcase>
+    <testcase classname="MealLogForm Navigation should navigate back when back arrow is clicked" name="MealLogForm Navigation should navigate back when back arrow is clicked" time="0.023">
+    </testcase>
+    <testcase classname="MealLogForm Meal Type Handling should handle different meal types correctly" name="MealLogForm Meal Type Handling should handle different meal types correctly" time="0.006">
+    </testcase>
+    <testcase classname="MealLogForm Meal Type Handling should map meal types to correct database values" name="MealLogForm Meal Type Handling should map meal types to correct database values" time="0.007">
+    </testcase>
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should sometimes fail due to race conditions" name="MealLogForm Flaky Tests for Analytics Demo should sometimes fail due to race conditions" time="0.046">
+      <failure>Error: Race condition detected in form handling
+    at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/MealLogForm.test.tsx:335:15)</failure>
+    </testcase>
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should fail when form validation is too strict" name="MealLogForm Flaky Tests for Analytics Demo should fail when form validation is too strict" time="1.004">
+      <failure>Error: Form validation too strict for short names
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;div
+        class=&quot;min-h-screen bg-gray-50 dark:bg-fitfest-dark transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center justify-between p-4&quot;
+          &gt;
+            &lt;div
+              class=&quot;flex items-center gap-3&quot;
+            &gt;
+              &lt;button
+                class=&quot;p-2 hover:bg-gray-100 dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;w-5 h-5 text-gray-600 dark:text-fitfest-subtle&quot;
+                  data-slot=&quot;icon&quot;
+                  fill=&quot;none&quot;
+                  stroke=&quot;currentColor&quot;
+                  stroke-width=&quot;1.5&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                  xmlns=&quot;http://www.w3.org/2000/svg&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18&quot;
+                    stroke-linecap=&quot;round&quot;
+                    stroke-linejoin=&quot;round&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+              &lt;div
+                class=&quot;flex items-center gap-2&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-2xl&quot;
+                &gt;
+                  🥗
+                &lt;/span&gt;
+                &lt;h1
+                  class=&quot;text-xl font-bold text-gray-900 dark:text-fitfest-subtle&quot;
+                &gt;
+                  Log 
+                  Lunch
+                &lt;/h1&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;max-w-md mx-auto mt-8 px-4&quot;
+        &gt;
+          &lt;form
+            class=&quot;bg-white dark:bg-fitfest-dark-secondary rounded-lg shadow-sm p-6 space-y-4 transition-colors duration-200&quot;
+          &gt;
+            &lt;div&gt;
+              &lt;label
+                class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                for=&quot;date&quot;
+              &gt;
+                Date
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle transition-colors duration-200&quot;
+                id=&quot;date&quot;
+                name=&quot;date&quot;
+                required=&quot;&quot;
+                type=&quot;date&quot;
+                value=&quot;2025-09-17&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;label
+                class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                for=&quot;name&quot;
+              &gt;
+                Meal Name
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                id=&quot;name&quot;
+                name=&quot;name&quot;
+                placeholder=&quot;e.g., Oatmeal with berries&quot;
+                required=&quot;&quot;
+                type=&quot;text&quot;
+                value=&quot;a&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;label
+                class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                for=&quot;calories&quot;
+              &gt;
+                Calories
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                id=&quot;calories&quot;
+                min=&quot;0&quot;
+                name=&quot;calories&quot;
+                placeholder=&quot;e.g., 300&quot;
+                required=&quot;&quot;
+                type=&quot;number&quot;
+                value=&quot;&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;grid grid-cols-3 gap-3&quot;
+            &gt;
+              &lt;div&gt;
+                &lt;label
+                  class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                  for=&quot;protein&quot;
+                &gt;
+                  Protein (g)
+                &lt;/label&gt;
+                &lt;input
+                  class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                  id=&quot;protein&quot;
+                  min=&quot;0&quot;
+                  name=&quot;protein&quot;
+                  placeholder=&quot;0&quot;
+                  step=&quot;0.1&quot;
+                  type=&quot;number&quot;
+                  value=&quot;&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;label
+                  class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                  for=&quot;carbs&quot;
+                &gt;
+                  Carbs (g)
+                &lt;/label&gt;
+                &lt;input
+                  class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                  id=&quot;carbs&quot;
+                  min=&quot;0&quot;
+                  name=&quot;carbs&quot;
+                  placeholder=&quot;0&quot;
+                  step=&quot;0.1&quot;
+                  type=&quot;number&quot;
+                  value=&quot;&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;label
+                  class=&quot;block text-sm font-medium text-gray-700 dark:text-fitfest-subtle mb-1&quot;
+                  for=&quot;fat&quot;
+                &gt;
+                  Fat (g)
+                &lt;/label&gt;
+                &lt;input
+                  class=&quot;w-full px-3 py-2 border border-gray-300 dark:border-fitfest-subtle/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-fitfest-dark-tertiary text-gray-900 dark:text-fitfest-subtle placeholder-gray-500 dark:placeholder-fitfest-subtle/50 transition-colors duration-200&quot;
+                  id=&quot;fat&quot;
+                  min=&quot;0&quot;
+                  name=&quot;fat&quot;
+                  placeholder=&quot;0&quot;
+                  step=&quot;0.1&quot;
+                  type=&quot;number&quot;
+                  value=&quot;&quot;
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;flex gap-3 pt-4&quot;
+            &gt;
+              &lt;button
+                class=&quot;flex-1 px-4 py-2 text-gray-700 dark:text-fitfest-subtle bg-gray-100 dark:bg-fitfest-dark-tertiary border border-gray-300 dark:border-fitfest-subtle/20 rounded-md hover:bg-gray-200 dark:hover:bg-fitfest-dark-tertiary/80 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-colors duration-200&quot;
+                type=&quot;button&quot;
+              &gt;
+                Cancel
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex-1 px-4 py-2 text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+                type=&quot;submit&quot;
+              &gt;
+                Save Meal
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at /Users/shannonanahata/fitfest/app/src/tests/MealLogForm.test.tsx:352:17
+    at runWithExpensiveErrorDiagnosticsDisabled (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Users/shannonanahata/fitfest/app/node_modules/jsdom/lib/jsdom/browser/Window.js:520:19)
+    at listOnTimeout (node:internal/timers:611:17)
+    at processTimers (node:internal/timers:546:7)</failure>
+    </testcase>
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should handle network timeouts gracefully" name="MealLogForm Flaky Tests for Analytics Demo should handle network timeouts gracefully" time="0.011">
+    </testcase>
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should validate numeric inputs correctly" name="MealLogForm Flaky Tests for Analytics Demo should validate numeric inputs correctly" time="1.004">
+      <failure>Error: Unable to find a label with the text of: Calories
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div /&gt;
+&lt;/body&gt;
+    at waitForWrapper (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+    at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/MealLogForm.test.tsx:397:20)
+    at Promise.then.completed (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should handle concurrent form submissions" name="MealLogForm Flaky Tests for Analytics Demo should handle concurrent form submissions" time="0.01">
+    </testcase>
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should maintain form state during navigation" name="MealLogForm Flaky Tests for Analytics Demo should maintain form state during navigation" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="NutritionPage" errors="0" failures="8" skipped="0" timestamp="2025-09-17T18:28:34" time="9.099" tests="19">
+    <testcase classname="NutritionPage Authentication should redirect to sign-in when not authenticated" name="NutritionPage Authentication should redirect to sign-in when not authenticated" time="0.015">
+    </testcase>
+    <testcase classname="NutritionPage Authentication should show loading state initially" name="NutritionPage Authentication should show loading state initially" time="0.009">
+    </testcase>
+    <testcase classname="NutritionPage Authentication should render nutrition page when authenticated" name="NutritionPage Authentication should render nutrition page when authenticated" time="0.033">
+    </testcase>
+    <testcase classname="NutritionPage Date Selection should display current date by default" name="NutritionPage Date Selection should display current date by default" time="1.014">
+      <failure>Error: Unable to find an element with the text: Wednesday. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200&quot;
+    &gt;
+      &lt;div
+        class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;flex items-center justify-between p-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center gap-3&quot;
+          &gt;
+            &lt;button
+              class=&quot;p-2 hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+            &gt;
+              &lt;svg
+                aria-hidden=&quot;true&quot;
+                class=&quot;w-5 h-5 text-fitfest-text dark:text-fitfest-subtle&quot;
+                data-slot=&quot;icon&quot;
+                fill=&quot;none&quot;
+                stroke=&quot;currentColor&quot;
+                stroke-width=&quot;1.5&quot;
+                viewBox=&quot;0 0 24 24&quot;
+                xmlns=&quot;http://www.w3.org/2000/svg&quot;
+              &gt;
+                &lt;path
+                  d=&quot;M15.75 19.5 8.25 12l7.5-7.5&quot;
+                  stroke-linecap=&quot;round&quot;
+                  stroke-linejoin=&quot;round&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+            &lt;h1
+              class=&quot;text-xl font-bold text-fitfest-deep dark:text-fitfest-subtle&quot;
+            &gt;
+              Food diary
+            &lt;/h1&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;p
+            class=&quot;text-fitfest-text dark:text-fitfest-subtle text-sm&quot;
+          &gt;
+            Wednesday
+            , 
+            September 17
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex gap-2 overflow-x-auto&quot;
+          &gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Mon
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                15
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Tue
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                16
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-fitfest-deep text-white dark:bg-fitfest-bright dark:text-fitfest-dark&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Today
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                17
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Thu
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                18
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Fri
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                19
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Sat
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;te...
+    at waitForWrapper (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+    at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/NutritionPage.test.tsx:94:20)
+    at Promise.then.completed (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:316:40)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:572:9)
+    at processTimers (node:internal/timers:546:7)
+    at _runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="NutritionPage Date Selection should allow date selection from week view" name="NutritionPage Date Selection should allow date selection from week view" time="0.046">
+    </testcase>
+    <testcase classname="NutritionPage Date Selection should fetch meals for selected date" name="NutritionPage Date Selection should fetch meals for selected date" time="1.009">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: StringContaining &quot;/api/meals?date=&quot;, Any&lt;Object&gt;
+Received
+       1: &quot;/api/auth/session&quot;, {&quot;credentials&quot;: &quot;include&quot;, &quot;headers&quot;: {&quot;Cache-Control&quot;: &quot;no-cache&quot;}}
+       2: &quot;/api/profile&quot;, {&quot;credentials&quot;: &quot;include&quot;}
+       3: &quot;/api/meals?date=2025-09-17&quot;
+
+Number of calls: 3
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;div
+        class=&quot;min-h-screen bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center justify-between p-4&quot;
+          &gt;
+            &lt;div
+              class=&quot;flex items-center gap-3&quot;
+            &gt;
+              &lt;button
+                class=&quot;p-2 hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;w-5 h-5 text-fitfest-text dark:text-fitfest-subtle&quot;
+                  data-slot=&quot;icon&quot;
+                  fill=&quot;none&quot;
+                  stroke=&quot;currentColor&quot;
+                  stroke-width=&quot;1.5&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                  xmlns=&quot;http://www.w3.org/2000/svg&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M15.75 19.5 8.25 12l7.5-7.5&quot;
+                    stroke-linecap=&quot;round&quot;
+                    stroke-linejoin=&quot;round&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+              &lt;h1
+                class=&quot;text-xl font-bold text-fitfest-deep dark:text-fitfest-subtle&quot;
+              &gt;
+                Food diary
+              &lt;/h1&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div
+            class=&quot;px-4 pb-4&quot;
+          &gt;
+            &lt;p
+              class=&quot;text-fitfest-text dark:text-fitfest-subtle text-sm&quot;
+            &gt;
+              Wednesday
+              , 
+              September 17
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div
+            class=&quot;px-4 pb-4&quot;
+          &gt;
+            &lt;div
+              class=&quot;flex gap-2 overflow-x-auto&quot;
+            &gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Mon
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  15
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Tue
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  16
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-fitfest-deep text-white dark:bg-fitfest-bright dark:text-fitfest-dark&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Today
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  17
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Thu
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  18
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Fri
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  19
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border...
+    at toHaveBeenCalledWith (/Users/shannonanahata/fitfest/app/src/tests/NutritionPage.test.tsx:115:23)
+    at runWithExpensiveErrorDiagnosticsDisabled (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Users/shannonanahata/fitfest/app/node_modules/jsdom/lib/jsdom/browser/Window.js:520:19)
+    at listOnTimeout (node:internal/timers:611:17)
+    at processTimers (node:internal/timers:546:7)</failure>
+    </testcase>
+    <testcase classname="NutritionPage Meal Display should display total calories correctly" name="NutritionPage Meal Display should display total calories correctly" time="1.005">
+      <failure>Error: Unable to find an element with the text: 550. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200&quot;
+    &gt;
+      &lt;div
+        class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;flex items-center justify-between p-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center gap-3&quot;
+          &gt;
+            &lt;button
+              class=&quot;p-2 hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+            &gt;
+              &lt;svg
+                aria-hidden=&quot;true&quot;
+                class=&quot;w-5 h-5 text-fitfest-text dark:text-fitfest-subtle&quot;
+                data-slot=&quot;icon&quot;
+                fill=&quot;none&quot;
+                stroke=&quot;currentColor&quot;
+                stroke-width=&quot;1.5&quot;
+                viewBox=&quot;0 0 24 24&quot;
+                xmlns=&quot;http://www.w3.org/2000/svg&quot;
+              &gt;
+                &lt;path
+                  d=&quot;M15.75 19.5 8.25 12l7.5-7.5&quot;
+                  stroke-linecap=&quot;round&quot;
+                  stroke-linejoin=&quot;round&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+            &lt;h1
+              class=&quot;text-xl font-bold text-fitfest-deep dark:text-fitfest-subtle&quot;
+            &gt;
+              Food diary
+            &lt;/h1&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;p
+            class=&quot;text-fitfest-text dark:text-fitfest-subtle text-sm&quot;
+          &gt;
+            Wednesday
+            , 
+            September 17
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex gap-2 overflow-x-auto&quot;
+          &gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Mon
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                15
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Tue
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                16
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-fitfest-deep text-white dark:bg-fitfest-bright dark:text-fitfest-dark&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Today
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                17
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Thu
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                18
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Fri
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                19
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Sat
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;te...
+    at waitForWrapper (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+    at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/NutritionPage.test.tsx:167:20)
+    at Promise.then.completed (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="NutritionPage Meal Display should display macro totals correctly" name="NutritionPage Meal Display should display macro totals correctly" time="1.005">
+      <failure>Error: Unable to find an element with the text: 33. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200&quot;
+    &gt;
+      &lt;div
+        class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;flex items-center justify-between p-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center gap-3&quot;
+          &gt;
+            &lt;button
+              class=&quot;p-2 hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+            &gt;
+              &lt;svg
+                aria-hidden=&quot;true&quot;
+                class=&quot;w-5 h-5 text-fitfest-text dark:text-fitfest-subtle&quot;
+                data-slot=&quot;icon&quot;
+                fill=&quot;none&quot;
+                stroke=&quot;currentColor&quot;
+                stroke-width=&quot;1.5&quot;
+                viewBox=&quot;0 0 24 24&quot;
+                xmlns=&quot;http://www.w3.org/2000/svg&quot;
+              &gt;
+                &lt;path
+                  d=&quot;M15.75 19.5 8.25 12l7.5-7.5&quot;
+                  stroke-linecap=&quot;round&quot;
+                  stroke-linejoin=&quot;round&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+            &lt;h1
+              class=&quot;text-xl font-bold text-fitfest-deep dark:text-fitfest-subtle&quot;
+            &gt;
+              Food diary
+            &lt;/h1&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;p
+            class=&quot;text-fitfest-text dark:text-fitfest-subtle text-sm&quot;
+          &gt;
+            Wednesday
+            , 
+            September 17
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex gap-2 overflow-x-auto&quot;
+          &gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Mon
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                15
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Tue
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                16
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-fitfest-deep text-white dark:bg-fitfest-bright dark:text-fitfest-dark&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Today
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                17
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Thu
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                18
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Fri
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                19
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Sat
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;te...
+    at waitForWrapper (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+    at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/NutritionPage.test.tsx:176:20)
+    at Promise.then.completed (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="NutritionPage Meal Display should display individual meals in correct categories" name="NutritionPage Meal Display should display individual meals in correct categories" time="1.005">
+      <failure>Error: Unable to find an element with the text: Chicken Salad. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200&quot;
+    &gt;
+      &lt;div
+        class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;flex items-center justify-between p-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center gap-3&quot;
+          &gt;
+            &lt;button
+              class=&quot;p-2 hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+            &gt;
+              &lt;svg
+                aria-hidden=&quot;true&quot;
+                class=&quot;w-5 h-5 text-fitfest-text dark:text-fitfest-subtle&quot;
+                data-slot=&quot;icon&quot;
+                fill=&quot;none&quot;
+                stroke=&quot;currentColor&quot;
+                stroke-width=&quot;1.5&quot;
+                viewBox=&quot;0 0 24 24&quot;
+                xmlns=&quot;http://www.w3.org/2000/svg&quot;
+              &gt;
+                &lt;path
+                  d=&quot;M15.75 19.5 8.25 12l7.5-7.5&quot;
+                  stroke-linecap=&quot;round&quot;
+                  stroke-linejoin=&quot;round&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+            &lt;h1
+              class=&quot;text-xl font-bold text-fitfest-deep dark:text-fitfest-subtle&quot;
+            &gt;
+              Food diary
+            &lt;/h1&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;p
+            class=&quot;text-fitfest-text dark:text-fitfest-subtle text-sm&quot;
+          &gt;
+            Wednesday
+            , 
+            September 17
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex gap-2 overflow-x-auto&quot;
+          &gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Mon
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                15
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Tue
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                16
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-fitfest-deep text-white dark:bg-fitfest-bright dark:text-fitfest-dark&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Today
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                17
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Thu
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                18
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Fri
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                19
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Sat
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;te...
+    at waitForWrapper (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+    at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/NutritionPage.test.tsx:186:20)
+    at Promise.then.completed (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="NutritionPage Meal Display should display snacks in the Snacks section" name="NutritionPage Meal Display should display snacks in the Snacks section" time="1.008">
+      <failure>Error: Unable to find an element with the text: Apple. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200&quot;
+    &gt;
+      &lt;div
+        class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;flex items-center justify-between p-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center gap-3&quot;
+          &gt;
+            &lt;button
+              class=&quot;p-2 hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+            &gt;
+              &lt;svg
+                aria-hidden=&quot;true&quot;
+                class=&quot;w-5 h-5 text-fitfest-text dark:text-fitfest-subtle&quot;
+                data-slot=&quot;icon&quot;
+                fill=&quot;none&quot;
+                stroke=&quot;currentColor&quot;
+                stroke-width=&quot;1.5&quot;
+                viewBox=&quot;0 0 24 24&quot;
+                xmlns=&quot;http://www.w3.org/2000/svg&quot;
+              &gt;
+                &lt;path
+                  d=&quot;M15.75 19.5 8.25 12l7.5-7.5&quot;
+                  stroke-linecap=&quot;round&quot;
+                  stroke-linejoin=&quot;round&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+            &lt;h1
+              class=&quot;text-xl font-bold text-fitfest-deep dark:text-fitfest-subtle&quot;
+            &gt;
+              Food diary
+            &lt;/h1&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;p
+            class=&quot;text-fitfest-text dark:text-fitfest-subtle text-sm&quot;
+          &gt;
+            Wednesday
+            , 
+            September 17
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex gap-2 overflow-x-auto&quot;
+          &gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Mon
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                15
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Tue
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                16
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-fitfest-deep text-white dark:bg-fitfest-bright dark:text-fitfest-dark&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Today
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                17
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Thu
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                18
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Fri
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                19
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Sat
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;te...
+    at waitForWrapper (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+    at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/NutritionPage.test.tsx:235:20)
+    at Promise.then.completed (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="NutritionPage Navigation should have log buttons for each meal type" name="NutritionPage Navigation should have log buttons for each meal type" time="0.012">
+    </testcase>
+    <testcase classname="NutritionPage Navigation should navigate to correct meal log pages" name="NutritionPage Navigation should navigate to correct meal log pages" time="0.01">
+    </testcase>
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should sometimes fail due to timing issues" name="NutritionPage Flaky Tests for Analytics Demo should sometimes fail due to timing issues" time="0.07">
+    </testcase>
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should fail when environment variables are missing" name="NutritionPage Flaky Tests for Analytics Demo should fail when environment variables are missing" time="0.001">
+    </testcase>
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should handle async operations that might timeout" name="NutritionPage Flaky Tests for Analytics Demo should handle async operations that might timeout" time="0.01">
+    </testcase>
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should validate button component with strict assertions" name="NutritionPage Flaky Tests for Analytics Demo should validate button component with strict assertions" time="0.09">
+    </testcase>
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should test dark mode functionality" name="NutritionPage Flaky Tests for Analytics Demo should test dark mode functionality" time="1.004">
+      <failure>Error: expect(element).toHaveClass(&quot;dark:bg-fitfest-dark-secondary&quot;)
+
+Expected the element to have class:
+  dark:bg-fitfest-dark-secondary
+Received:
+  flex items-center gap-3
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;div
+        class=&quot;min-h-screen bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center justify-between p-4&quot;
+          &gt;
+            &lt;div
+              class=&quot;flex items-center gap-3&quot;
+            &gt;
+              &lt;button
+                class=&quot;p-2 hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;w-5 h-5 text-fitfest-text dark:text-fitfest-subtle&quot;
+                  data-slot=&quot;icon&quot;
+                  fill=&quot;none&quot;
+                  stroke=&quot;currentColor&quot;
+                  stroke-width=&quot;1.5&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                  xmlns=&quot;http://www.w3.org/2000/svg&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M15.75 19.5 8.25 12l7.5-7.5&quot;
+                    stroke-linecap=&quot;round&quot;
+                    stroke-linejoin=&quot;round&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+              &lt;h1
+                class=&quot;text-xl font-bold text-fitfest-deep dark:text-fitfest-subtle&quot;
+              &gt;
+                Food diary
+              &lt;/h1&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div
+            class=&quot;px-4 pb-4&quot;
+          &gt;
+            &lt;p
+              class=&quot;text-fitfest-text dark:text-fitfest-subtle text-sm&quot;
+            &gt;
+              Wednesday
+              , 
+              September 17
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div
+            class=&quot;px-4 pb-4&quot;
+          &gt;
+            &lt;div
+              class=&quot;flex gap-2 overflow-x-auto&quot;
+            &gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Mon
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  15
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Tue
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  16
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-fitfest-deep text-white dark:bg-fitfest-bright dark:text-fitfest-dark&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Today
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  17
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Thu
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  18
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+              &gt;
+                &lt;span
+                  class=&quot;text-xs opacity-70&quot;
+                &gt;
+                  Fri
+                &lt;/span&gt;
+                &lt;span
+                  class=&quot;text-lg&quot;
+                &gt;
+                  19
+                &lt;/span&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border...
+    at toHaveClass (/Users/shannonanahata/fitfest/app/src/tests/NutritionPage.test.tsx:360:27)
+    at runWithExpensiveErrorDiagnosticsDisabled (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Users/shannonanahata/fitfest/app/node_modules/jsdom/lib/jsdom/browser/Window.js:520:19)
+    at listOnTimeout (node:internal/timers:611:17)
+    at processTimers (node:internal/timers:546:7)</failure>
+    </testcase>
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should handle network requests successfully" name="NutritionPage Flaky Tests for Analytics Demo should handle network requests successfully" time="0.004">
+    </testcase>
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should validate form validation logic" name="NutritionPage Flaky Tests for Analytics Demo should validate form validation logic" time="1.006">
+      <failure>Error: Found multiple elements with the text: 0
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;div
+  class=&quot;text-4xl font-bold text-fitfest-deep dark:text-fitfest-subtle mb-1&quot;
+&gt;
+  0
+&lt;/div&gt;
+
+Ignored nodes: comments, script, style
+&lt;div
+  class=&quot;text-lg font-bold text-fitfest-deep dark:text-fitfest-subtle mb-2&quot;
+&gt;
+  0
+  &lt;span
+    class=&quot;text-sm font-normal text-fitfest-subtle dark:text-fitfest-subtle/70&quot;
+  &gt;
+    /
+    98
+    g
+  &lt;/span&gt;
+&lt;/div&gt;
+
+Ignored nodes: comments, script, style
+&lt;div
+  class=&quot;text-lg font-bold text-fitfest-deep dark:text-fitfest-subtle mb-2&quot;
+&gt;
+  0
+  &lt;span
+    class=&quot;text-sm font-normal text-fitfest-subtle dark:text-fitfest-subtle/70&quot;
+  &gt;
+    /
+    244
+    g
+  &lt;/span&gt;
+&lt;/div&gt;
+
+Ignored nodes: comments, script, style
+&lt;div
+  class=&quot;text-lg font-bold text-fitfest-deep dark:text-fitfest-subtle mb-2&quot;
+&gt;
+  0
+  &lt;span
+    class=&quot;text-sm font-normal text-fitfest-subtle dark:text-fitfest-subtle/70&quot;
+  &gt;
+    /
+    68
+    g
+  &lt;/span&gt;
+&lt;/div&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-fitfest-light dark:bg-fitfest-dark transition-colors duration-200&quot;
+    &gt;
+      &lt;div
+        class=&quot;bg-white dark:bg-fitfest-dark-secondary shadow-sm border-b border-fitfest-subtle/20 dark:border-fitfest-subtle/10 transition-colors duration-200&quot;
+      &gt;
+        &lt;div
+          class=&quot;flex items-center justify-between p-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex items-center gap-3&quot;
+          &gt;
+            &lt;button
+              class=&quot;p-2 hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary rounded-full transition-colors duration-200&quot;
+            &gt;
+              &lt;svg
+                aria-hidden=&quot;true&quot;
+                class=&quot;w-5 h-5 text-fitfest-text dark:text-fitfest-subtle&quot;
+                data-slot=&quot;icon&quot;
+                fill=&quot;none&quot;
+                stroke=&quot;currentColor&quot;
+                stroke-width=&quot;1.5&quot;
+                viewBox=&quot;0 0 24 24&quot;
+                xmlns=&quot;http://www.w3.org/2000/svg&quot;
+              &gt;
+                &lt;path
+                  d=&quot;M15.75 19.5 8.25 12l7.5-7.5&quot;
+                  stroke-linecap=&quot;round&quot;
+                  stroke-linejoin=&quot;round&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+            &lt;h1
+              class=&quot;text-xl font-bold text-fitfest-deep dark:text-fitfest-subtle&quot;
+            &gt;
+              Food diary
+            &lt;/h1&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;p
+            class=&quot;text-fitfest-text dark:text-fitfest-subtle text-sm&quot;
+          &gt;
+            Wednesday
+            , 
+            September 17
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;px-4 pb-4&quot;
+        &gt;
+          &lt;div
+            class=&quot;flex gap-2 overflow-x-auto&quot;
+          &gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Mon
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                15
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Tue
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                16
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-fitfest-deep text-white dark:bg-fitfest-bright dark:text-fitfest-dark&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Today
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                17
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Thu
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                18
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Fri
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;text-lg&quot;
+              &gt;
+                19
+              &lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;flex flex-col items-center justify-center min-w-[60px] h-16 rounded-lg text-sm font-medium transition-colors bg-white dark:bg-fitfest-dark-secondary text-fitfest-text dark:text-fitfest-subtle hover:bg-fitfest-light dark:hover:bg-fitfest-dark-tertiary border border-fitfest-subtle/20 dark:border-fitfest-subtle/10&quot;
+            &gt;
+              &lt;span
+                class=&quot;text-xs opacity-70&quot;
+              &gt;
+                Sat
+              &lt;/span&gt;
+              &lt;span
+                class=&quot;te...
+    at waitForWrapper (/Users/shannonanahata/fitfest/app/node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+    at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/NutritionPage.test.tsx:413:20)
+    at Promise.then.completed (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:316:40)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at listOnTimeout (node:internal/timers:572:9)
+    at processTimers (node:internal/timers:546:7)
+    at _runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Users/shannonanahata/fitfest/app/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

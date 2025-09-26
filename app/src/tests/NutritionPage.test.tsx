@@ -190,6 +190,57 @@ describe('NutritionPage', () => {
         expect(screen.getByText('200 kcal')).toBeInTheDocument();
       });
     });
+
+    it('should display snacks in the Snacks section', async () => {
+      const mockMealsWithSnacks = [
+        {
+          id: '1',
+          name: 'Apple',
+          type: 'snacks',
+          calories: 50,
+          protein: 0,
+          carbs: 13,
+          fat: 0,
+          date: '2024-09-16'
+        },
+        {
+          id: '2',
+          name: 'Chicken Salad',
+          type: 'lunch',
+          calories: 350,
+          protein: 25,
+          carbs: 15,
+          fat: 20,
+          date: '2024-09-16'
+        }
+      ];
+
+      const mockSession = { user: { email: 'test@example.com' } };
+      (fetch as jest.Mock)
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve(mockSession),
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve({ meals: mockMealsWithSnacks }),
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve({ profile: { targetCalories: 2000 } }),
+        });
+
+      render(<NutritionPage />);
+
+      await waitFor(() => {
+        // Should show the snack in the Snacks section
+        expect(screen.getByText('Apple')).toBeInTheDocument();
+        expect(screen.getByText('50 kcal')).toBeInTheDocument();
+        // Should also show the lunch meal
+        expect(screen.getByText('Chicken Salad')).toBeInTheDocument();
+        expect(screen.getByText('350 kcal')).toBeInTheDocument();
+      });
+    });
   });
 
   describe('Navigation', () => {
