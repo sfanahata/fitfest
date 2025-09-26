@@ -6,6 +6,7 @@ import Card from "@/components/Card";
 import Link from "next/link";
 import Button from "@/components/Button";
 import Logo from "@/components/Logo";
+import StreakBanner from "@/components/StreakBanner";
 import { Line, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -79,20 +80,21 @@ interface DashboardData {
   };
 }
 
-interface DashboardData {
-  thisWeek: {
-    totalCalories: number;
-    avgDailyCalories: number;
-    totalDuration: number;
+interface StreakData {
+  currentWeek: {
     daysWithActivity: number;
-    daily: DailyStats[];
+    totalActivities: number;
+    totalDuration: number;
+    totalCalories: number;
+    hasStreak: boolean;
+    streakMessage: string;
+    activitiesByDay: Record<string, Activity[]>;
   };
   lastWeek: {
-    totalCalories: number;
-    avgDailyCalories: number;
-    totalDuration: number;
     daysWithActivity: number;
-    daily: DailyStats[];
+    totalActivities: number;
+    totalDuration: number;
+    totalCalories: number;
   };
 }
 
@@ -100,6 +102,7 @@ export default function HomePage() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [meals, setMeals] = useState<Meal[]>([]);
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
+  const [streakData, setStreakData] = useState<StreakData | null>(null);
   const [loading, setLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [activeChart, setActiveChart] = useState<'activity' | 'burned' | 'consumed'>('activity');
@@ -165,10 +168,11 @@ export default function HomePage() {
     async function fetchData() {
       setLoading(true);
       try {
-        const [activitiesRes, mealsRes, dashboardRes] = await Promise.all([
+        const [activitiesRes, mealsRes, dashboardRes, streakRes] = await Promise.all([
           fetch("/api/activities", { credentials: 'include' }),
           fetch("/api/meals", { credentials: 'include' }),
           fetch("/api/dashboard", { credentials: 'include' }),
+          fetch("/api/streak", { credentials: 'include' }),
         ]);
         
         if (activitiesRes.ok) {
@@ -196,6 +200,11 @@ export default function HomePage() {
         if (dashboardRes.ok) {
           const data = await dashboardRes.json();
           setDashboardData(data);
+        }
+        
+        if (streakRes.ok) {
+          const data = await streakRes.json();
+          setStreakData(data.streak);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -469,6 +478,18 @@ export default function HomePage() {
           {/* Dashboard - Only show when authenticated */}
           {isAuthenticated && (
             <>
+              {/* Streak Banner */}
+              {streakData && (
+                <StreakBanner
+                  daysWithActivity={streakData.currentWeek.daysWithActivity}
+                  streakMessage={streakData.currentWeek.streakMessage}
+                  hasStreak={streakData.currentWeek.hasStreak}
+                  totalActivities={streakData.currentWeek.totalActivities}
+                  totalDuration={streakData.currentWeek.totalDuration}
+                  totalCalories={streakData.currentWeek.totalCalories}
+                />
+              )}
+              
               {/* Summary Stats */}
               <Card className="p-6">
                 <h2 className="text-xl font-bold mb-4 text-fitfest-text dark:text-fitfest-subtle">
