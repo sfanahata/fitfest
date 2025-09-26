@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="58" failures="12" errors="0" time="9.709">
+<testsuites name="jest tests" tests="58" failures="12" errors="0" time="9.715">
   <testsuite name="Button" errors="0" failures="0" skipped="0" timestamp="2025-09-17T18:28:34" time="0.581" tests="3">
-    <testcase classname="Button" name="renders with text" time="0.016">
+    <testcase classname="Button renders with text" name="Button renders with text" time="0.016">
     </testcase>
-    <testcase classname="Button" name="calls onClick when clicked" time="0.004">
+    <testcase classname="Button calls onClick when clicked" name="Button calls onClick when clicked" time="0.004">
     </testcase>
-    <testcase classname="Button" name="is disabled when disabled prop is set" time="0.003">
+    <testcase classname="Button is disabled when disabled prop is set" name="Button is disabled when disabled prop is set" time="0.003">
     </testcase>
   </testsuite>
   <testsuite name="Flaky Test Examples for Codecov Test Analytics" errors="0" failures="0" skipped="0" timestamp="2025-09-17T18:28:34" time="0.631" tests="7">
-    <testcase classname="Flaky Test Examples for Codecov Test Analytics" name="should sometimes fail due to timing issues" time="0.002">
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should sometimes fail due to timing issues" name="Flaky Test Examples for Codecov Test Analytics should sometimes fail due to timing issues" time="0.002">
     </testcase>
-    <testcase classname="Flaky Test Examples for Codecov Test Analytics" name="should fail when environment variables are missing" time="0">
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should fail when environment variables are missing" name="Flaky Test Examples for Codecov Test Analytics should fail when environment variables are missing" time="0">
     </testcase>
-    <testcase classname="Flaky Test Examples for Codecov Test Analytics" name="should handle async operations that might timeout" time="0.044">
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should handle async operations that might timeout" name="Flaky Test Examples for Codecov Test Analytics should handle async operations that might timeout" time="0.044">
     </testcase>
-    <testcase classname="Flaky Test Examples for Codecov Test Analytics" name="should validate button component with strict assertions" time="0.022">
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should validate button component with strict assertions" name="Flaky Test Examples for Codecov Test Analytics should validate button component with strict assertions" time="0.022">
     </testcase>
-    <testcase classname="Flaky Test Examples for Codecov Test Analytics" name="should test dark mode functionality" time="0.002">
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should test dark mode functionality" name="Flaky Test Examples for Codecov Test Analytics should test dark mode functionality" time="0.002">
     </testcase>
-    <testcase classname="Flaky Test Examples for Codecov Test Analytics" name="should handle network requests successfully" time="0.001">
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should handle network requests successfully" name="Flaky Test Examples for Codecov Test Analytics should handle network requests successfully" time="0.001">
     </testcase>
-    <testcase classname="Flaky Test Examples for Codecov Test Analytics" name="should validate form validation logic" time="0">
+    <testcase classname="Flaky Test Examples for Codecov Test Analytics should validate form validation logic" name="Flaky Test Examples for Codecov Test Analytics should validate form validation logic" time="0">
     </testcase>
   </testsuite>
   <testsuite name="ActivitiesPage" errors="0" failures="0" skipped="0" timestamp="2025-09-17T18:28:34" time="0.878" tests="9">
-    <testcase classname="ActivitiesPage" name="renders loading state initially" time="0.033">
+    <testcase classname="ActivitiesPage renders loading state initially" name="ActivitiesPage renders loading state initially" time="0.033">
     </testcase>
-    <testcase classname="ActivitiesPage" name="renders empty state when no activities" time="0.017">
+    <testcase classname="ActivitiesPage renders empty state when no activities" name="ActivitiesPage renders empty state when no activities" time="0.017">
     </testcase>
-    <testcase classname="ActivitiesPage" name="renders activities list" time="0.037">
+    <testcase classname="ActivitiesPage renders activities list" name="ActivitiesPage renders activities list" time="0.037">
     </testcase>
-    <testcase classname="ActivitiesPage" name="handles delete activity" time="0.014">
+    <testcase classname="ActivitiesPage handles delete activity" name="ActivitiesPage handles delete activity" time="0.014">
     </testcase>
-    <testcase classname="ActivitiesPage" name="handles network errors gracefully" time="0.01">
+    <testcase classname="ActivitiesPage handles network errors gracefully" name="ActivitiesPage handles network errors gracefully" time="0.01">
     </testcase>
-    <testcase classname="ActivitiesPage" name="navigates to edit page when edit button is clicked" time="0.006">
+    <testcase classname="ActivitiesPage navigates to edit page when edit button is clicked" name="ActivitiesPage navigates to edit page when edit button is clicked" time="0.006">
     </testcase>
-    <testcase classname="ActivitiesPage" name="displays activity details correctly" time="0.006">
+    <testcase classname="ActivitiesPage displays activity details correctly" name="ActivitiesPage displays activity details correctly" time="0.006">
     </testcase>
-    <testcase classname="simulateNetworkDelay utility" name="resolves after a random delay" time="0.077">
+    <testcase classname="simulateNetworkDelay utility resolves after a random delay" name="simulateNetworkDelay utility resolves after a random delay" time="0.077">
     </testcase>
-    <testcase classname="simulateNetworkDelay utility" name="can be flaky due to random timing" time="0.101">
+    <testcase classname="simulateNetworkDelay utility can be flaky due to random timing" name="simulateNetworkDelay utility can be flaky due to random timing" time="0.101">
     </testcase>
   </testsuite>
   <testsuite name="MealLogForm" errors="0" failures="4" skipped="0" timestamp="2025-09-17T18:28:34" time="3.965" tests="20">
-    <testcase classname="MealLogForm › Authentication" name="should redirect to sign-in when not authenticated" time="0.013">
+    <testcase classname="MealLogForm Authentication should redirect to sign-in when not authenticated" name="MealLogForm Authentication should redirect to sign-in when not authenticated" time="0.013">
     </testcase>
-    <testcase classname="MealLogForm › Authentication" name="should show loading state initially" time="0.008">
+    <testcase classname="MealLogForm Authentication should show loading state initially" name="MealLogForm Authentication should show loading state initially" time="0.008">
     </testcase>
-    <testcase classname="MealLogForm › Authentication" name="should render form when authenticated" time="0.02">
+    <testcase classname="MealLogForm Authentication should render form when authenticated" name="MealLogForm Authentication should render form when authenticated" time="0.02">
     </testcase>
-    <testcase classname="MealLogForm › Form Fields" name="should have all required form fields" time="0.009">
+    <testcase classname="MealLogForm Form Fields should have all required form fields" name="MealLogForm Form Fields should have all required form fields" time="0.009">
     </testcase>
-    <testcase classname="MealLogForm › Form Fields" name="should default to today&apos;s date" time="0.007">
+    <testcase classname="MealLogForm Form Fields should default to today&apos;s date" name="MealLogForm Form Fields should default to today&apos;s date" time="0.007">
     </testcase>
-    <testcase classname="MealLogForm › Form Fields" name="should allow date selection" time="0.008">
+    <testcase classname="MealLogForm Form Fields should allow date selection" name="MealLogForm Form Fields should allow date selection" time="0.008">
     </testcase>
-    <testcase classname="MealLogForm › Form Fields" name="should handle input changes correctly" time="0.008">
+    <testcase classname="MealLogForm Form Fields should handle input changes correctly" name="MealLogForm Form Fields should handle input changes correctly" time="0.008">
     </testcase>
-    <testcase classname="MealLogForm › Form Submission" name="should submit form with correct data" time="1.013">
+    <testcase classname="MealLogForm Form Submission should submit form with correct data" name="MealLogForm Form Submission should submit form with correct data" time="1.013">
       <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
 
 Expected: &quot;/api/meals&quot;, {&quot;body&quot;: &quot;{\&quot;name\&quot;:\&quot;Chicken Salad\&quot;,\&quot;type\&quot;:\&quot;lunch\&quot;,\&quot;date\&quot;:{\&quot;inverse\&quot;:false},\&quot;calories\&quot;:\&quot;350\&quot;,\&quot;protein\&quot;:\&quot;\&quot;,\&quot;carbs\&quot;:\&quot;\&quot;,\&quot;fat\&quot;:\&quot;\&quot;}&quot;, &quot;headers&quot;: {&quot;Content-Type&quot;: &quot;application/json&quot;}, &quot;method&quot;: &quot;POST&quot;}
@@ -288,23 +288,23 @@ Ignored nodes: comments, script, style
     at listOnTimeout (node:internal/timers:611:17)
     at processTimers (node:internal/timers:546:7)</failure>
     </testcase>
-    <testcase classname="MealLogForm › Form Submission" name="should handle submission errors gracefully" time="0.013">
+    <testcase classname="MealLogForm Form Submission should handle submission errors gracefully" name="MealLogForm Form Submission should handle submission errors gracefully" time="0.013">
     </testcase>
-    <testcase classname="MealLogForm › Form Submission" name="should show loading state during submission" time="0.008">
+    <testcase classname="MealLogForm Form Submission should show loading state during submission" name="MealLogForm Form Submission should show loading state during submission" time="0.008">
     </testcase>
-    <testcase classname="MealLogForm › Navigation" name="should navigate back when cancel button is clicked" time="0.006">
+    <testcase classname="MealLogForm Navigation should navigate back when cancel button is clicked" name="MealLogForm Navigation should navigate back when cancel button is clicked" time="0.006">
     </testcase>
-    <testcase classname="MealLogForm › Navigation" name="should navigate back when back arrow is clicked" time="0.023">
+    <testcase classname="MealLogForm Navigation should navigate back when back arrow is clicked" name="MealLogForm Navigation should navigate back when back arrow is clicked" time="0.023">
     </testcase>
-    <testcase classname="MealLogForm › Meal Type Handling" name="should handle different meal types correctly" time="0.006">
+    <testcase classname="MealLogForm Meal Type Handling should handle different meal types correctly" name="MealLogForm Meal Type Handling should handle different meal types correctly" time="0.006">
     </testcase>
-    <testcase classname="MealLogForm › Meal Type Handling" name="should map meal types to correct database values" time="0.007">
+    <testcase classname="MealLogForm Meal Type Handling should map meal types to correct database values" name="MealLogForm Meal Type Handling should map meal types to correct database values" time="0.007">
     </testcase>
-    <testcase classname="MealLogForm › Flaky Tests for Analytics Demo" name="should sometimes fail due to race conditions" time="0.046">
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should sometimes fail due to race conditions" name="MealLogForm Flaky Tests for Analytics Demo should sometimes fail due to race conditions" time="0.046">
       <failure>Error: Race condition detected in form handling
     at Object.&lt;anonymous&gt; (/Users/shannonanahata/fitfest/app/src/tests/MealLogForm.test.tsx:335:15)</failure>
     </testcase>
-    <testcase classname="MealLogForm › Flaky Tests for Analytics Demo" name="should fail when form validation is too strict" time="1.004">
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should fail when form validation is too strict" name="MealLogForm Flaky Tests for Analytics Demo should fail when form validation is too strict" time="1.004">
       <failure>Error: Form validation too strict for short names
 
 Ignored nodes: comments, script, style
@@ -507,9 +507,9 @@ Ignored nodes: comments, script, style
     at listOnTimeout (node:internal/timers:611:17)
     at processTimers (node:internal/timers:546:7)</failure>
     </testcase>
-    <testcase classname="MealLogForm › Flaky Tests for Analytics Demo" name="should handle network timeouts gracefully" time="0.011">
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should handle network timeouts gracefully" name="MealLogForm Flaky Tests for Analytics Demo should handle network timeouts gracefully" time="0.011">
     </testcase>
-    <testcase classname="MealLogForm › Flaky Tests for Analytics Demo" name="should validate numeric inputs correctly" time="1.004">
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should validate numeric inputs correctly" name="MealLogForm Flaky Tests for Analytics Demo should validate numeric inputs correctly" time="1.004">
       <failure>Error: Unable to find a label with the text of: Calories
 
 Ignored nodes: comments, script, style
@@ -533,19 +533,19 @@ Ignored nodes: comments, script, style
     at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
     at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="MealLogForm › Flaky Tests for Analytics Demo" name="should handle concurrent form submissions" time="0.01">
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should handle concurrent form submissions" name="MealLogForm Flaky Tests for Analytics Demo should handle concurrent form submissions" time="0.01">
     </testcase>
-    <testcase classname="MealLogForm › Flaky Tests for Analytics Demo" name="should maintain form state during navigation" time="0.007">
+    <testcase classname="MealLogForm Flaky Tests for Analytics Demo should maintain form state during navigation" name="MealLogForm Flaky Tests for Analytics Demo should maintain form state during navigation" time="0.007">
     </testcase>
   </testsuite>
   <testsuite name="NutritionPage" errors="0" failures="8" skipped="0" timestamp="2025-09-17T18:28:34" time="9.099" tests="19">
-    <testcase classname="NutritionPage › Authentication" name="should redirect to sign-in when not authenticated" time="0.015">
+    <testcase classname="NutritionPage Authentication should redirect to sign-in when not authenticated" name="NutritionPage Authentication should redirect to sign-in when not authenticated" time="0.015">
     </testcase>
-    <testcase classname="NutritionPage › Authentication" name="should show loading state initially" time="0.009">
+    <testcase classname="NutritionPage Authentication should show loading state initially" name="NutritionPage Authentication should show loading state initially" time="0.009">
     </testcase>
-    <testcase classname="NutritionPage › Authentication" name="should render nutrition page when authenticated" time="0.033">
+    <testcase classname="NutritionPage Authentication should render nutrition page when authenticated" name="NutritionPage Authentication should render nutrition page when authenticated" time="0.033">
     </testcase>
-    <testcase classname="NutritionPage › Date Selection" name="should display current date by default" time="1.014">
+    <testcase classname="NutritionPage Date Selection should display current date by default" name="NutritionPage Date Selection should display current date by default" time="1.014">
       <failure>Error: Unable to find an element with the text: Wednesday. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
 
 Ignored nodes: comments, script, style
@@ -707,9 +707,9 @@ Ignored nodes: comments, script, style
     at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
     at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="NutritionPage › Date Selection" name="should allow date selection from week view" time="0.046">
+    <testcase classname="NutritionPage Date Selection should allow date selection from week view" name="NutritionPage Date Selection should allow date selection from week view" time="0.046">
     </testcase>
-    <testcase classname="NutritionPage › Date Selection" name="should fetch meals for selected date" time="1.009">
+    <testcase classname="NutritionPage Date Selection should fetch meals for selected date" name="NutritionPage Date Selection should fetch meals for selected date" time="1.009">
       <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
 
 Expected: StringContaining &quot;/api/meals?date=&quot;, Any&lt;Object&gt;
@@ -861,7 +861,7 @@ Ignored nodes: comments, script, style
     at listOnTimeout (node:internal/timers:611:17)
     at processTimers (node:internal/timers:546:7)</failure>
     </testcase>
-    <testcase classname="NutritionPage › Meal Display" name="should display total calories correctly" time="1.005">
+    <testcase classname="NutritionPage Meal Display should display total calories correctly" name="NutritionPage Meal Display should display total calories correctly" time="1.005">
       <failure>Error: Unable to find an element with the text: 550. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
 
 Ignored nodes: comments, script, style
@@ -1020,7 +1020,7 @@ Ignored nodes: comments, script, style
     at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
     at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="NutritionPage › Meal Display" name="should display macro totals correctly" time="1.005">
+    <testcase classname="NutritionPage Meal Display should display macro totals correctly" name="NutritionPage Meal Display should display macro totals correctly" time="1.005">
       <failure>Error: Unable to find an element with the text: 33. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
 
 Ignored nodes: comments, script, style
@@ -1179,7 +1179,7 @@ Ignored nodes: comments, script, style
     at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
     at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="NutritionPage › Meal Display" name="should display individual meals in correct categories" time="1.005">
+    <testcase classname="NutritionPage Meal Display should display individual meals in correct categories" name="NutritionPage Meal Display should display individual meals in correct categories" time="1.005">
       <failure>Error: Unable to find an element with the text: Chicken Salad. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
 
 Ignored nodes: comments, script, style
@@ -1338,7 +1338,7 @@ Ignored nodes: comments, script, style
     at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
     at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="NutritionPage › Meal Display" name="should display snacks in the Snacks section" time="1.008">
+    <testcase classname="NutritionPage Meal Display should display snacks in the Snacks section" name="NutritionPage Meal Display should display snacks in the Snacks section" time="1.008">
       <failure>Error: Unable to find an element with the text: Apple. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
 
 Ignored nodes: comments, script, style
@@ -1497,19 +1497,19 @@ Ignored nodes: comments, script, style
     at runTest (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/runTest.js:444:34)
     at Object.worker (/Users/shannonanahata/fitfest/app/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
     </testcase>
-    <testcase classname="NutritionPage › Navigation" name="should have log buttons for each meal type" time="0.012">
+    <testcase classname="NutritionPage Navigation should have log buttons for each meal type" name="NutritionPage Navigation should have log buttons for each meal type" time="0.012">
     </testcase>
-    <testcase classname="NutritionPage › Navigation" name="should navigate to correct meal log pages" time="0.01">
+    <testcase classname="NutritionPage Navigation should navigate to correct meal log pages" name="NutritionPage Navigation should navigate to correct meal log pages" time="0.01">
     </testcase>
-    <testcase classname="NutritionPage › Flaky Tests for Analytics Demo" name="should sometimes fail due to timing issues" time="0.07">
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should sometimes fail due to timing issues" name="NutritionPage Flaky Tests for Analytics Demo should sometimes fail due to timing issues" time="0.07">
     </testcase>
-    <testcase classname="NutritionPage › Flaky Tests for Analytics Demo" name="should fail when environment variables are missing" time="0.001">
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should fail when environment variables are missing" name="NutritionPage Flaky Tests for Analytics Demo should fail when environment variables are missing" time="0.001">
     </testcase>
-    <testcase classname="NutritionPage › Flaky Tests for Analytics Demo" name="should handle async operations that might timeout" time="0.01">
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should handle async operations that might timeout" name="NutritionPage Flaky Tests for Analytics Demo should handle async operations that might timeout" time="0.01">
     </testcase>
-    <testcase classname="NutritionPage › Flaky Tests for Analytics Demo" name="should validate button component with strict assertions" time="0.09">
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should validate button component with strict assertions" name="NutritionPage Flaky Tests for Analytics Demo should validate button component with strict assertions" time="0.09">
     </testcase>
-    <testcase classname="NutritionPage › Flaky Tests for Analytics Demo" name="should test dark mode functionality" time="1.004">
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should test dark mode functionality" name="NutritionPage Flaky Tests for Analytics Demo should test dark mode functionality" time="1.004">
       <failure>Error: expect(element).toHaveClass(&quot;dark:bg-fitfest-dark-secondary&quot;)
 
 Expected the element to have class:
@@ -1658,9 +1658,9 @@ Ignored nodes: comments, script, style
     at listOnTimeout (node:internal/timers:611:17)
     at processTimers (node:internal/timers:546:7)</failure>
     </testcase>
-    <testcase classname="NutritionPage › Flaky Tests for Analytics Demo" name="should handle network requests successfully" time="0.004">
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should handle network requests successfully" name="NutritionPage Flaky Tests for Analytics Demo should handle network requests successfully" time="0.004">
     </testcase>
-    <testcase classname="NutritionPage › Flaky Tests for Analytics Demo" name="should validate form validation logic" time="1.006">
+    <testcase classname="NutritionPage Flaky Tests for Analytics Demo should validate form validation logic" name="NutritionPage Flaky Tests for Analytics Demo should validate form validation logic" time="1.006">
       <failure>Error: Found multiple elements with the text: 0
 
 Here are the matching elements:
