@@ -171,15 +171,15 @@ export default function NutritionPage() {
           const profile = data.profile;
           
           // Update targets from profile
-          if (profile?.targetCalories) {
+          if (profile?.targetCalories != null) {
             setTargetCalories(profile.targetCalories);
           }
           
           // Initialize macro targets with profile data (or defaults if no profile)
           setMacros([
-            { name: 'Protein', current: 0, target: profile?.targetProtein || 98, unit: 'g', color: 'bg-fitfest-deep' },
-            { name: 'Carbs', current: 0, target: profile?.targetCarbs || 244, unit: 'g', color: 'bg-fitfest-bright' },
-            { name: 'Fat', current: 0, target: profile?.targetFat || 68, unit: 'g', color: 'bg-fitfest-success' },
+            { name: 'Protein', current: 0, target: profile?.targetProtein ?? 98, unit: 'g', color: 'bg-fitfest-deep' },
+            { name: 'Carbs', current: 0, target: profile?.targetCarbs ?? 244, unit: 'g', color: 'bg-fitfest-bright' },
+            { name: 'Fat', current: 0, target: profile?.targetFat ?? 68, unit: 'g', color: 'bg-fitfest-success' },
           ]);
           
           setProfileLoaded(true);

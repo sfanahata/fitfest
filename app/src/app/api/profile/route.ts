@@ -61,13 +61,13 @@ export async function POST(req: NextRequest) {
     
     // Helper function to safely parse numbers
     const safeParseFloat = (value: any) => {
-      if (!value || value === '') return null;
+      if (value === null || value === undefined || value === '') return null;
       const parsed = parseFloat(value);
       return isNaN(parsed) ? null : parsed;
     };
 
     const safeParseInt = (value: any) => {
-      if (!value || value === '') return null;
+      if (value === null || value === undefined || value === '') return null;
       const parsed = parseInt(value);
       return isNaN(parsed) ? null : parsed;
     };
