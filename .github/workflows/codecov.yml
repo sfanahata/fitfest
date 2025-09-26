@@ -34,6 +34,8 @@ jobs:
         uses: getsentry/prevent-action
         with:
           token: ${{ secrets.SENTRY_PREVENT_TOKEN }}
+          report-type: test-results
+          files: ./test-results.junit.xml
       # - name: Upload coverage reports to Codecov
       #   uses: codecov/codecov-action@v5
       #   with:
