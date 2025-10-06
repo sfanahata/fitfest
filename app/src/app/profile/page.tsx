@@ -3,6 +3,7 @@ import Card from "@/components/Card";
 import Button from "@/components/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import * as Sentry from "@sentry/nextjs";
 
 interface Profile {
   weight: number | null;
@@ -54,7 +55,7 @@ export default function ProfilePage() {
           setSession(sessionData);
         }
       } catch (error) {
-        console.log('Session fetch failed:', error);
+        Sentry.captureException(error);
       }
     }
     
@@ -73,7 +74,6 @@ export default function ProfilePage() {
         return res.json();
       })
       .then((data) => {
-        console.log('Profile data loaded:', data);
         setProfile({
           weight: data.profile?.weight ?? null,
           height: data.profile?.height ?? null,
@@ -86,7 +86,7 @@ export default function ProfilePage() {
         setError('');
       })
       .catch((error) => {
-        console.error('Profile load error:', error);
+        Sentry.captureException(error);
         setError("Could not load profile data.");
       })
       .finally(() => setLoading(false));
@@ -111,12 +111,10 @@ export default function ProfilePage() {
       
       if (!res.ok) {
         const errorText = await res.text();
-        console.error('Profile save error:', errorText);
         throw new Error(errorText);
       }
       
       const result = await res.json();
-      console.log('Profile save success:', result);
       setSuccess("Profile updated!");
       
       // Reload profile data
@@ -125,7 +123,6 @@ export default function ProfilePage() {
       });
       if (profileRes.ok) {
         const data = await profileRes.json();
-        console.log('Reloaded profile data:', data);
         setProfile({
           weight: data.profile?.weight ?? null,
           height: data.profile?.height ?? null,
@@ -137,7 +134,7 @@ export default function ProfilePage() {
         });
       }
     } catch (error) {
-      console.error('Profile save failed:', error);
+      Sentry.captureException(error);
       setError("Failed to save changes.");
     } finally {
       setSaving(false);

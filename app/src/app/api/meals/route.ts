@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth.config';
 import { PrismaClient } from '@prisma/client';
+import * as Sentry from "@sentry/nextjs";
 
 const prisma = new PrismaClient();
 
@@ -58,7 +59,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, meal });
   } catch (error) {
-    console.error('Error creating meal:', error);
+    Sentry.captureException(error);
     return NextResponse.json(
       { error: 'Failed to create meal' },
       { status: 500 }
@@ -131,7 +132,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ success: true, meals });
   } catch (error) {
-    console.error('Error fetching meals:', error);
+    Sentry.captureException(error);
     return NextResponse.json(
       { error: 'Failed to fetch meals' },
       { status: 500 }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth.config";
 import { PrismaClient, ActivityType, EffortLevel } from "@prisma/client";
+import * as Sentry from "@sentry/nextjs";
 
 const prisma = new PrismaClient();
 
@@ -34,89 +35,157 @@ function calculateCalories({
   return Math.round((duration * met * weight) / 200);
 }
 
-export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session || !session.user?.email) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  return Sentry.startSpan({ name: "activity.create", op: "db.operation" }, async (span): Promise<NextResponse> => {
+      const session = await getServerSession(authOptions);
+      if (!session || !session.user?.email) {
+        span.setStatus({ code: 1, message: "Unauthorized" });
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
 
-  const body = await req.json();
-  const { type, effort, date, duration, distance, notes } = body;
+      span.setAttributes({
+        "user.email": session.user!.email || "unknown",
+        "activity.operation": "create"
+      });
 
-  // Get user and weight
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
-    include: { profile: true },
-  });
-  if (!user) {
-    return NextResponse.json({ error: "User not found" }, { status: 404 });
-  }
-  const weight = user.profile?.weight || 70; // default to 70kg if not set
+      const body = await req.json();
+      const { type, effort, date, duration, distance, notes } = body;
 
-  // Calculate calories
-  const calories = calculateCalories({
-    type,
-    effort,
-    duration: Number(duration),
-    weight,
-  });
+      span.setAttributes({
+        "activity.type": type,
+        "activity.effort": effort || "default",
+        "activity.duration": duration || 0,
+        "activity.distance": distance || 0
+      });
 
-  // Save activity
-  // Parse date as local date to avoid timezone offset issues
-  let parsedDate: Date;
-  if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    const [year, month, day] = date.split("-").map(Number);
-    parsedDate = new Date(year, month - 1, day);
-  } else {
-    parsedDate = new Date(date);
-  }
+      // Get user and weight
+      const user = await Sentry.startSpan({ name: "user.lookup", op: "db.query" }, async (userSpan) => {
+        const user = await prisma.user.findUnique({
+          where: { email: session.user!.email! },
+          include: { profile: true },
+        });
+        userSpan.setAttributes({
+          "user.email": session.user!.email || "unknown",
+          "user.found": !!user,
+          "user.has_profile": !!user?.profile
+        });
+        return user;
+      });
 
-  const activity = await prisma.activity.create({
-    data: {
-      userId: user.id,
-      type,
-      effort,
-      date: parsedDate,
-      duration: Number(duration),
-      distance: distance ? Number(distance) : null,
-      notes,
-      calories,
-    },
-  });
+      if (!user) {
+        span.setStatus({ code: 1, message: "User not found" });
+        return NextResponse.json({ error: "User not found" }, { status: 404 });
+      }
+      const weight = user.profile?.weight || 70; // default to 70kg if not set
 
-  return NextResponse.json({ activity });
+      // Calculate calories
+      const calories = await Sentry.startSpan({ name: "calories.calculate", op: "compute" }, async (calSpan) => {
+        const calories = calculateCalories({
+          type,
+          effort,
+          duration: Number(duration),
+          weight,
+        });
+        calSpan.setAttributes({
+          "calories.calculated": calories,
+          "calories.weight_used": weight,
+          "calories.met_value": 4 // Simplified for span attributes
+        });
+        return calories;
+      });
+
+      // Save activity
+      // Parse date as local date to avoid timezone offset issues
+      let parsedDate: Date;
+      if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        const [year, month, day] = date.split("-").map(Number);
+        parsedDate = new Date(year, month - 1, day);
+      } else {
+        parsedDate = new Date(date);
+      }
+
+      const activity = await Sentry.startSpan({ name: "activity.save", op: "db.insert" }, async (saveSpan) => {
+        const activity = await prisma.activity.create({
+          data: {
+            userId: user.id,
+            type,
+            effort,
+            date: parsedDate,
+            duration: Number(duration),
+            distance: distance ? Number(distance) : null,
+            notes,
+            calories,
+          },
+        });
+        saveSpan.setAttributes({
+          "activity.id": activity.id,
+          "activity.calories": activity.calories || 0,
+          "activity.duration": activity.duration || 0
+        });
+        return activity;
+      });
+
+      span.setStatus({ code: 0, message: "Success" });
+      return NextResponse.json({ activity });
+    });
 }
 
-export async function GET() {
-  try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+export async function GET(): Promise<NextResponse> {
+  return Sentry.startSpan({ name: "activity.list", op: "db.query" }, async (span): Promise<NextResponse> => {
+      try {
+        const session = await getServerSession(authOptions);
+        if (!session?.user?.email) {
+          span.setStatus({ code: 1, message: "Unauthorized" });
+          return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
 
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
+        span.setAttributes({
+          "user.email": session.user!.email || "unknown",
+          "activity.operation": "list"
+        });
+
+        const user = await Sentry.startSpan({ name: "user.lookup", op: "db.query" }, async (userSpan) => {
+          const user = await prisma.user.findUnique({
+            where: { email: session.user!.email! },
+          });
+          userSpan.setAttributes({
+            "user.email": session.user!.email || "unknown",
+            "user.found": !!user
+          });
+          return user;
+        });
+
+        if (!user) {
+          span.setAttributes({ "activities.count": 0 });
+          return NextResponse.json({ activities: [] });
+        }
+
+        const activities = await Sentry.startSpan({ name: "activities.fetch", op: "db.query" }, async (fetchSpan) => {
+          const activities = await prisma.activity.findMany({
+            where: {
+              userId: user.id,
+            },
+            orderBy: {
+              date: "desc",
+            },
+          });
+          fetchSpan.setAttributes({
+            "activities.count": activities.length,
+            "activities.user_id": user.id || "unknown"
+          });
+          return activities;
+        });
+
+        span.setAttributes({ "activities.count": activities.length });
+        span.setStatus({ code: 0, message: "Success" });
+        return NextResponse.json(activities);
+      } catch (error) {
+        span.setStatus({ code: 2, message: "Internal Server Error" });
+        Sentry.captureException(error);
+        return NextResponse.json(
+          { error: "Internal Server Error" },
+          { status: 500 }
+        );
+      }
     });
-
-    if (!user) {
-      return NextResponse.json({ activities: [] });
-    }
-
-    const activities = await prisma.activity.findMany({
-      where: {
-        userId: user.id,
-      },
-      orderBy: {
-        date: "desc",
-      },
-    });
-
-    return NextResponse.json(activities);
-  } catch (error) {
-    console.error("Error fetching activities:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
 } 
