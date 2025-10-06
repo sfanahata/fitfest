@@ -20,6 +20,7 @@ import {
   Legend,
   Filler,
 } from "chart.js";
+import * as Sentry from "@sentry/nextjs";
 
 ChartJS.register(
   CategoryScale,
@@ -110,40 +111,49 @@ export default function HomePage() {
   // Check authentication status using cookies
   useEffect(() => {
     async function checkAuth() {
-      try {
-        console.log('Checking authentication...');
-        console.log('Cookies:', document.cookie);
-        
-        // Check if we have a NextAuth session cookie (database sessions use different names)
-        const hasSessionCookie = document.cookie.includes('next-auth.session-token') || 
-                                document.cookie.includes('__Secure-next-auth.session-token') ||
-                                document.cookie.includes('next-auth.csrf-token') ||
-                                document.cookie.includes('__Secure-next-auth.csrf-token');
-        
-        console.log('Has session cookie:', hasSessionCookie);
-        
-        // Always try to fetch session data (server-side session might work even without client cookies)
-        const response = await fetch('/api/auth/session', {
-          credentials: 'include',
-          headers: {
-            'Cache-Control': 'no-cache'
+      return Sentry.startSpan({ name: "auth.check", op: "auth.session" }, async (span) => {
+          try {
+            // Check if we have a NextAuth session cookie (database sessions use different names)
+            const hasSessionCookie = document.cookie.includes('next-auth.session-token') || 
+                                    document.cookie.includes('__Secure-next-auth.session-token') ||
+                                    document.cookie.includes('next-auth.csrf-token') ||
+                                    document.cookie.includes('__Secure-next-auth.csrf-token');
+            
+            span.setAttributes({ "auth.has_cookie": hasSessionCookie });
+            
+            // Always try to fetch session data (server-side session might work even without client cookies)
+            const response = await Sentry.startSpan({ name: "auth.session_fetch", op: "http.client" }, async (fetchSpan) => {
+              const response = await fetch('/api/auth/session', {
+                credentials: 'include',
+                headers: {
+                  'Cache-Control': 'no-cache'
+                }
+              });
+              fetchSpan.setAttributes({ "auth.response_status": response.status });
+              return response;
+            });
+            
+            if (response.ok) {
+              const session = await response.json();
+              const isAuth = !!session.user;
+              setIsAuthenticated(isAuth);
+              span.setAttributes({ 
+                "auth.authenticated": isAuth,
+                "auth.user_email": session.user?.email || "none"
+              });
+              span.setStatus({ code: 0, message: "Success" });
+            } else {
+              setIsAuthenticated(false);
+              span.setAttributes({ "auth.authenticated": false });
+              span.setStatus({ code: 1, message: "Session not valid" });
+            }
+          } catch (error) {
+            setIsAuthenticated(false);
+            span.setAttributes({ "auth.authenticated": false });
+            span.setStatus({ code: 2, message: "Error" });
+            Sentry.captureException(error);
           }
         });
-        
-        console.log('Session response status:', response.status);
-        
-        if (response.ok) {
-          const session = await response.json();
-          console.log('Session data:', session);
-          setIsAuthenticated(!!session.user);
-        } else {
-          console.log('Session response not ok');
-          setIsAuthenticated(false);
-        }
-      } catch (error) {
-        console.log('Auth check failed:', error);
-        setIsAuthenticated(false);
-      }
     }
     
     checkAuth();
@@ -166,51 +176,77 @@ export default function HomePage() {
     if (!isAuthenticated) return;
     
     async function fetchData() {
-      setLoading(true);
-      try {
-        const [activitiesRes, mealsRes, dashboardRes, streakRes] = await Promise.all([
-          fetch("/api/activities", { credentials: 'include' }),
-          fetch("/api/meals", { credentials: 'include' }),
-          fetch("/api/dashboard", { credentials: 'include' }),
-          fetch("/api/streak", { credentials: 'include' }),
-        ]);
-        
-        if (activitiesRes.ok) {
-          const data = await activitiesRes.json();
-          const now = new Date();
-          const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
-          const thisWeekActivities = data.filter((activity: Activity) => 
-            new Date(activity.date) >= startOfWeek
-          );
-          setActivities(thisWeekActivities);
-        }
-        
-        if (mealsRes.ok) {
-          const data = await mealsRes.json();
-          console.log('Meals API response:', data);
-          const now = new Date();
-          const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
-          const thisWeekMeals = data.meals.filter((meal: Meal) => 
-            new Date(meal.date) >= startOfWeek
-          );
-          console.log('This week meals:', thisWeekMeals);
-          setMeals(thisWeekMeals);
-        }
-        
-        if (dashboardRes.ok) {
-          const data = await dashboardRes.json();
-          setDashboardData(data);
-        }
-        
-        if (streakRes.ok) {
-          const data = await streakRes.json();
-          setStreakData(data.streak);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
+      return Sentry.startSpan({ name: "dashboard.client_load", op: "ui.dashboard" }, async (span) => {
+          setLoading(true);
+          span.setAttributes({
+            "dashboard.operation": "client_load",
+            "dashboard.authenticated": true
+          });
+          
+          try {
+            const [activitiesRes, mealsRes, dashboardRes, streakRes] = await Sentry.startSpan({ name: "dashboard.api_calls", op: "http.client" }, async (apiSpan) => {
+              const responses = await Promise.all([
+                fetch("/api/activities", { credentials: 'include' }),
+                fetch("/api/meals", { credentials: 'include' }),
+                fetch("/api/dashboard", { credentials: 'include' }),
+                fetch("/api/streak", { credentials: 'include' }),
+              ]);
+              
+              apiSpan.setAttributes({
+                "api.activities.status": responses[0].status,
+                "api.meals.status": responses[1].status,
+                "api.dashboard.status": responses[2].status,
+                "api.streak.status": responses[3].status
+              });
+              
+              return responses;
+            });
+            
+            if (activitiesRes.ok) {
+              const data = await activitiesRes.json();
+              const now = new Date();
+              const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+              const thisWeekActivities = data.filter((activity: Activity) => 
+                new Date(activity.date) >= startOfWeek
+              );
+              setActivities(thisWeekActivities);
+              span.setAttributes({ "dashboard.activities_count": thisWeekActivities.length });
+            }
+            
+            if (mealsRes.ok) {
+              const data = await mealsRes.json();
+              const now = new Date();
+              const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+              const thisWeekMeals = data.meals.filter((meal: Meal) => 
+                new Date(meal.date) >= startOfWeek
+              );
+              setMeals(thisWeekMeals);
+              span.setAttributes({ "dashboard.meals_count": thisWeekMeals.length });
+            }
+            
+            if (dashboardRes.ok) {
+              const data = await dashboardRes.json();
+              setDashboardData(data);
+              span.setAttributes({ 
+                "dashboard.this_week_calories": data.thisWeek?.totalCalories || 0,
+                "dashboard.last_week_calories": data.lastWeek?.totalCalories || 0
+              });
+            }
+            
+            if (streakRes.ok) {
+              const data = await streakRes.json();
+              setStreakData(data.streak);
+              span.setAttributes({ "dashboard.streak_days": data.streak?.currentWeek?.daysWithActivity || 0 });
+            }
+            
+            span.setStatus({ code: 0, message: "Success" });
+          } catch (error) {
+            span.setStatus({ code: 2, message: "Error" });
+            Sentry.captureException(error);
+          } finally {
+            setLoading(false);
+          }
+        });
     }
     
     fetchData();

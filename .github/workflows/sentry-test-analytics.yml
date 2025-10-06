@@ -40,6 +40,14 @@ jobs:
           NODE_ENV: test
         continue-on-error: true  # Allow flaky tests to not fail the build
       
+      - name: Build application with source maps
+        run: npm run build:production
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        continue-on-error: true  # Don't fail CI if source map upload fails
+      
       - name: Upload test results to Sentry
         if: ${{ !cancelled() }}
-        uses: getsentry/prevent-action
+        uses: getsentry/prevent-action@v0
+        with:
+          token: ${{ secrets.SENTRY_PREVENT_TOKEN }}

@@ -26,8 +26,8 @@ module.exports = withSentryConfig(nextConfig, {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
 
-  org: "fitfest-a9",
-  project: "javascript-nextjs",
+  org: "cooking-with-code",
+  project: "fitfest",
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
@@ -38,11 +38,11 @@ module.exports = withSentryConfig(nextConfig, {
   // Upload a larger set of source maps for prettier stack traces (increases build time)
   widenClientFileUpload: true,
 
-  // Uncomment to route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
+  // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
   // This can increase your server load as well as your hosting bill.
   // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
   // side errors will fail.
-  // tunnelRoute: "/monitoring",
+  tunnelRoute: "/monitoring",
 
   // Hides source maps from generated client bundles
   hideSourceMaps: true,
@@ -55,4 +55,14 @@ module.exports = withSentryConfig(nextConfig, {
   // https://docs.sentry.io/product/crons/
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/features/crons/
   automaticVercelMonitors: true,
+
+  // Source map configuration for better error tracking
+  sourcemaps: {
+    // Include source maps for all files
+    include: ["./src/**/*", "./app/**/*"],
+    // Ignore node_modules and other unnecessary files
+    ignore: ["node_modules/**", ".next/**", "coverage/**"],
+    // Set the URL prefix for source maps
+    urlPrefix: "~/_next/",
+  },
 }); 

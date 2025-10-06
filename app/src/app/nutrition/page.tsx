@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronLeftIcon, PlusIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import * as Sentry from "@sentry/nextjs";
 
 interface MacroData {
   name: string;
@@ -70,7 +71,7 @@ export default function NutritionPage() {
           setStatus('unauthenticated');
         }
       } catch (error) {
-        console.log('Auth check failed:', error);
+        Sentry.captureException(error);
         setStatus('unauthenticated');
       }
     }
@@ -101,11 +102,10 @@ export default function NutritionPage() {
         const data = await response.json();
         setMeals(data.meals || []);
       } else {
-        console.error('Failed to fetch meals');
         setMeals([]);
       }
     } catch (error) {
-      console.error('Error fetching meals:', error);
+      Sentry.captureException(error);
       setMeals([]);
     } finally {
       setLoading(false);
@@ -185,7 +185,7 @@ export default function NutritionPage() {
           setProfileLoaded(true);
         }
       } catch (error) {
-        console.error('Error fetching profile:', error);
+        Sentry.captureException(error);
         // Set defaults if profile fetch fails
         setMacros([
           { name: 'Protein', current: 0, target: 98, unit: 'g', color: 'bg-fitfest-deep' },

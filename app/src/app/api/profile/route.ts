@@ -2,39 +2,58 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth.config';
 import { PrismaClient } from '@prisma/client';
+import * as Sentry from "@sentry/nextjs";
 
 const prisma = new PrismaClient();
 
 // GET: Fetch current user's profile
-export async function GET() {
-  const session = await getServerSession(authOptions);
-  console.log('Session in GET:', JSON.stringify(session, null, 2));
-  
-  if (!session?.user?.email) {
-    console.log('No session or email found');
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-  
-  const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
-    include: { profile: true },
-  });
-  
-  if (!user) {
-    console.log('No user found for email:', session.user.email);
-    return NextResponse.json({ error: 'User not found' }, { status: 404 });
-  }
-  
-  return NextResponse.json({ 
-    profile: user.profile, 
-    name: user.name 
-  });
+export async function GET(): Promise<NextResponse> {
+  return Sentry.startSpan({ name: "profile.get", op: "db.query" }, async (span): Promise<NextResponse> => {
+      const session = await getServerSession(authOptions);
+      
+      if (!session?.user?.email) {
+        span.setStatus({ code: 1, message: "Unauthorized" });
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+
+      span.setAttributes({
+        "user.email": session.user!.email || "unknown",
+        "profile.operation": "get"
+      });
+      
+      const user = await Sentry.startSpan({ name: "user.lookup", op: "db.query" }, async (userSpan) => {
+        const user = await prisma.user.findUnique({
+          where: { email: session.user!.email! },
+          include: { profile: true },
+        });
+        userSpan.setAttributes({
+          "user.email": session.user!.email || "unknown",
+          "user.found": !!user,
+          "user.has_profile": !!user?.profile
+        });
+        return user;
+      });
+      
+      if (!user) {
+        span.setStatus({ code: 1, message: "User not found" });
+        return NextResponse.json({ error: 'User not found' }, { status: 404 });
+      }
+
+      span.setAttributes({
+        "profile.has_weight": !!user.profile?.weight,
+        "profile.has_height": !!user.profile?.height
+      });
+      span.setStatus({ code: 0, message: "Success" });
+      return NextResponse.json({ 
+        profile: user.profile, 
+        name: user.name 
+      });
+    });
 }
 
 // POST: Create profile (if not exists)
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  console.log('Session in POST:', JSON.stringify(session, null, 2));
   
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -94,10 +113,9 @@ export async function POST(req: NextRequest) {
       },
     });
     
-    console.log('Profile saved successfully:', profile);
     return NextResponse.json({ profile, success: true });
   } catch (error) {
-    console.error('Profile save error:', error);
+    Sentry.captureException(error);
     return NextResponse.json(
       { error: 'Failed to save profile', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
@@ -108,7 +126,6 @@ export async function POST(req: NextRequest) {
 // PUT: Update current user's profile
 export async function PUT(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  console.log('Session in PUT:', JSON.stringify(session, null, 2));
   
   if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -143,7 +160,7 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json(profile, { status: 201 });
     }
   } catch (error: unknown) {
-    console.error('Profile update/create error:', error);
+    Sentry.captureException(error);
     const message = error instanceof Error ? error.message : 'Unknown error occurred';
     return NextResponse.json({ error: message }, { status: 400 });
   }
