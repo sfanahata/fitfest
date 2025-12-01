@@ -17,7 +17,7 @@ A modern fitness tracking application built with Next.js 14, TypeScript, and Tai
 - **Styling:** Tailwind CSS
 - **Database:** PostgreSQL (Vercel Postgres)
 - **ORM:** Prisma
-- **Authentication:** NextAuth.js
+- **Authentication:** NextAuth.js / sendgrid for magic login
 - **Monitoring:** Sentry
 - **Testing:** Jest, React Testing Library
 - **Code Coverage:** Codecov
